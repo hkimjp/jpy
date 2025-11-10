@@ -39,9 +39,9 @@
 
   (ds/pl 1)
 
-  (ds/qq '[:find ?num ?problem
+  (ds/qq '[:find ?problem
            :where
-           [?e :num ?num]
+           [?e :num 19]
            [?e :problem ?problem]])
 
   (ds/qq '[:find ?e

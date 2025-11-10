@@ -2,4 +2,7 @@
   (:require [hkimjp.jpy.view :refer [page]]))
 
 (defn index [_request]
-  (page [:div "scoreboard"]))
+  (page
+   [:div.m-4
+    [:div.text-2xl.font-medium "scoreboard"]
+    [:div "under constuction"]]))

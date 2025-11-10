@@ -8,12 +8,24 @@
    [hkimjp.jpy.view :refer [page]]))
 
 (def current-q
-  '[:find [?num ?problem]
+  '[:find ?num
     :where
     [?e :current ?num]
-    [?num :problem ?problem]])
+    [?num]])
 
-; (ds/qq current-q)
+(comment
+  (ds/qq current-q)
+  (ds/qq '[:find ?problem
+           :in $ ?e
+           :where
+           [?e :problem ?problem]]
+         18)
+  (ds/qq '[:find ?num
+           :where
+           [?e :current ?num]
+           [?num :problem]])
+  (ds/pl 18)
+  :rcf)
 
 (defn index [request]
   (let [[num problem] (ds/qq current-q)]
