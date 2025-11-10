@@ -6,6 +6,11 @@
 :problem text
 :datetime java-time
 
+# current problem
+
+:db/id id
+:current problem/num
+
 # answers
 
 :db/id id

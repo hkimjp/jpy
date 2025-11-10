@@ -51,6 +51,14 @@
       resp/response
       (resp/header "Content-Type" "text/html")))
 
+(defn error-page
+  [content]
+  (t/log! :debug (str "error-page"))
+  (str (h/html
+        (h/raw "<!DOCTYPE html>")
+        [:h1.text-red Error]
+        [:p content])))
+
 (defn redirect [uri]
   (resp/redirect uri))
 
