@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [test])
   (:require [clojure.tools.build.api :as b]))
 
-(def lib 'net.clojars.hkimjp/jpy)
+(def lib 'io.github.hkimjp/jpy)
 (def version "0.1.0-SNAPSHOT")
 (def main 'hkimjp.jpy)
 (def class-dir "target/classes")

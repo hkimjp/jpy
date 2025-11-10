@@ -45,9 +45,9 @@ build:
  clojure -T:build ci
 
 deploy: minify build
-  scp target/io.github.hkimjp/konpy2-*.jar ${DEST}:konpy2/konpy.jar
-  ssh ${DEST} 'sudo systemctl restart konpy'
-  ssh ${DEST} 'systemctl status konpy'
+  scp target/io.github.hkimjp/jpy-*.jar ${DEST}:jpy/jpy.jar
+  ssh ${DEST} 'sudo systemctl restart jpy'
+  ssh ${DEST} 'systemctl status jpy'
 
 update: upgrade
 upgrade: force
