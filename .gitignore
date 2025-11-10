@@ -28,5 +28,7 @@
 /classes
 /target
 
+.env
+/resources/public/assets/css/oputput.css
 /storage/*
 !/storage/.keep
