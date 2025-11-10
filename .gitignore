@@ -29,6 +29,11 @@
 /target
 
 .env
+<<<<<<< HEAD
 /resources/public/assets/css/oputput.css
+=======
+/log
+>>>>>>> refs/remotes/origin/develop
 /storage/*
 !/storage/.keep
+

@@ -5,7 +5,6 @@
    [taoensso.telemere :as t]
    [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.admin :as admin]
-   ;[hkimjp.jpy.answers :as answers]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.scoreboard :as scoreboard]
@@ -18,9 +17,9 @@
     ["help"   {:get help}]]
    ["/admin/" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ; ["new"        {:get admin/new  :post admin/upsert!}]
+    ["create"     {:post admin/create!}]
     ; ["update/:e"  {:get admin/edit :post admin/upsert!}]
-    ; ["find"       {:post admin/eid}]
+    ; ["list-all"   {:get admin/list-all}]
     ; ["delete"     {:post admin/delete!}]
     ]
    ["/workspace/" {:middleware [m/wrap-users]}
@@ -51,3 +50,4 @@
     (handler request)))
 
 ; (root-handler {:uri "/admin/eid" :request-method "post"})
+

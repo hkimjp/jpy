@@ -1,8 +1,8 @@
 # problems
 
 :db/id id
-:problem/avail string
 :num int
+:avail "yes"
 :problem text
 :datetime java-time
 

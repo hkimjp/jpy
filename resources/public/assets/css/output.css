@@ -189,6 +189,12 @@
   .flex {
     display: flex;
   }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
+  .w-full {
+    width: 100%;
+  }
   .resize {
     resize: both;
   }
