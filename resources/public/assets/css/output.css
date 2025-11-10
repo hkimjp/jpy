@@ -186,11 +186,20 @@
   .mx-4 {
     margin-inline: calc(var(--spacing) * 4);
   }
+  .my-4 {
+    margin-block: calc(var(--spacing) * 4);
+  }
   .flex {
     display: flex;
   }
+  .hidden {
+    display: none;
+  }
   .h-20 {
     height: calc(var(--spacing) * 20);
+  }
+  .h-80 {
+    height: calc(var(--spacing) * 80);
   }
   .w-full {
     width: 100%;

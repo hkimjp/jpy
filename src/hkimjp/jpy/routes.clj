@@ -23,7 +23,7 @@
     ; ["delete"     {:post admin/delete!}]
     ]
    ["/workspace/" {:middleware [m/wrap-users]}
-    ["" {:get workspace/index}]]
+    ["" {:get workspace/index :post workspace/upload!}]]
    ["/scoreboard/" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]])
 

@@ -31,14 +31,24 @@
             :avail "yes"
             :datetime (jt/local-date-time)})
 
+  (ds/put! {:current 0})
+
+  (ds/qq '[:find ?e ?num
+           :where
+           [?e :current ?num]])
+
   (ds/pl 1)
 
   (ds/qq '[:find ?num ?problem
            :where
            [?e :num ?num]
            [?e :problem ?problem]])
+
   (ds/qq '[:find ?e
            :where
            [?e _ _]])
+
+  (ds/pl 5)
+
   :rcf)
 
