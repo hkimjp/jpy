@@ -5,6 +5,7 @@
    [hiccup2.core :as h]
    [java-time.api :as jt]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
+   [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page]]))
@@ -21,7 +22,7 @@
     (h/raw (anti-forgery-field))
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
     [:button {:class btn
-              :hx-post   "/admin/create!"
+              :hx-post   "/admin/create"
               :hx-target "#list-all"
               :hx-swap   "afterbegin"} "new"]]])
 
@@ -33,10 +34,17 @@
 ; (-> (ds/qq find-max-q) first)
 
 (defn create! [{{:keys [problem]} :params}]
-  (ds/put! {:num (-> (ds/qq find-max-q) inc)
-            :avail "yes"
-            :probem problem
-            :datetime (jt/local-date-time)}))
+  (tel/log! {:level :info :id "create!" :msg problem})
+  (try
+    (ds/put! {:num (-> (ds/qq find-max-q) inc)
+              :avail "yes"
+              :probem problem
+              :datetime (jt/local-date-time)})
+    [:div [:span num] [:span problem]]
+    (catch Exception e
+      (tel/log! {:level :warn
+                 :id "create!"
+                 :msg (:getMessage e)}))))
 
 (def problems-q
   '[:find ?num ?problem

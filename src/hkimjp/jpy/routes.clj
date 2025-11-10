@@ -17,7 +17,7 @@
     ["help"   {:get help}]]
    ["/admin/" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ; ["new"        {:get admin/new :post admin/create!}]
+    ["create"     {:post admin/create!}]
     ; ["update/:e"  {:get admin/edit :post admin/upsert!}]
     ; ["list-all"   {:get admin/list-all}]
     ; ["delete"     {:post admin/delete!}]

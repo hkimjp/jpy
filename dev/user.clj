@@ -37,6 +37,8 @@
            :where
            [?e :num ?num]
            [?e :problem ?problem]])
-
+  (ds/qq '[:find ?e
+           :where
+           [?e _ _]])
   :rcf)
 
