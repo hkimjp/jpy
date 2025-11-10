@@ -4,7 +4,7 @@
 
 (def lib 'io.github.hkimjp/jpy)
 (def version "0.1.0-SNAPSHOT")
-(def main 'hkimjp.jpy)
+(def main 'hkimjp.jpy.main)
 (def class-dir "target/classes")
 
 (defn test "Run all the tests." [opts]

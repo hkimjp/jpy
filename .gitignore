@@ -28,5 +28,6 @@
 /classes
 /target
 
+.env
 /storage/*
 !/storage/.keep
