@@ -5,7 +5,6 @@
    [taoensso.telemere :as t]
    [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.admin :as admin]
-   ;[hkimjp.jpy.answers :as answers]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.scoreboard :as scoreboard]
@@ -18,7 +17,7 @@
     ["help"   {:get help}]]
    ["/admin/" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ["new"        {:get admin/new  :post admin/create!}]
+    ; ["new"        {:get admin/new :post admin/create!}]
     ; ["update/:e"  {:get admin/edit :post admin/upsert!}]
     ; ["list-all"   {:get admin/list-all}]
     ; ["delete"     {:post admin/delete!}]
@@ -37,11 +36,7 @@
          (rr/routes
           (rr/create-resource-handler {:path "/"})
           (rr/create-default-handler
-           {:forbidden
-            (constantly {:status 403
-                         :headers {"Content-type" "text/html"}
-                         :body "<h1>FORBIDDEN</h1>"})
-            :not-found
+           {:not-found
             (constantly {:status 404
                          :headers {"Content-Type" "text/html"}
                          :body "<h1>ERROR</h1><p>not found</p>"})

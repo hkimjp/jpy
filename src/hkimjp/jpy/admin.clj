@@ -59,10 +59,9 @@
 
 (defn admin [_request]
   (page
-   [:div.m-4 [:div.text-2xl.font-medium "Admin"]]
-   ;; new
-   ;;(list-all)
-   ;;env-vrs
-   ))
+   [:div.m-4 [:div.text-2xl.font-medium "Admin"]
+    new
+    (list-all)
+    env-vars]))
 
 
