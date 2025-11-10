@@ -30,13 +30,16 @@
 ; (-> (ds/qq find-max-q) first inc)
 
 (def ^:private current-q
-  '[:find [?e ?num]
+  '[:find ?num
     :where
-    [?e :current ?num]])
+    [?e :current ?num]
+    [?e :avail "yes"]])
 
-(defn update-current [c]
-  (let [[e num] (ds/qq current-q)]
-    (ds/put! {:db/id e :current c})))
+; (ds/qq current-q)
+
+(defn upsert-current [c]
+  (let [[cur] (ds/qq current-q)]
+    (ds/put! {:db/id cur :current c})))
 
 (defn create! [{{:keys [problem]} :params}]
   (let [num (-> (ds/qq find-max-q) first inc)]
@@ -46,7 +49,7 @@
                 :avail "yes"
                 :problem problem
                 :datetime (jt/local-date-time)})
-      (update-current num)
+      (upsert-current num)
       (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
       (catch Exception e
         (tel/log! {:level :warn
