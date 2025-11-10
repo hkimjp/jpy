@@ -31,12 +31,13 @@
             :avail "yes"
             :datetime (jt/local-date-time)})
 
-  (ds/pl 1)
+  (ds/pl 3)
 
   (ds/qq '[:find ?num ?problem
            :where
            [?e :num ?num]
            [?e :problem ?problem]])
+
   (ds/qq '[:find ?e
            :where
            [?e _ _]])

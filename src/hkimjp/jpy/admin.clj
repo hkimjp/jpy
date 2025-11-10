@@ -8,7 +8,7 @@
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :refer [btn]]
-   [hkimjp.jpy.view :refer [page]]))
+   [hkimjp.jpy.view :refer [page hx]]))
 
 (def env-vars
   [:div
@@ -35,16 +35,17 @@
 
 (defn create! [{{:keys [problem]} :params}]
   (tel/log! {:level :info :id "create!" :msg problem})
-  (try
-    (ds/put! {:num (-> (ds/qq find-max-q) first inc)
-              :avail "yes"
-              :probem problem
-              :datetime (jt/local-date-time)})
-    [:div [:span num] [:span problem]]
-    (catch Exception e
-      (tel/log! {:level :warn
-                 :id "create!"
-                 :msg (:getMessage e)}))))
+  (let [num (-> (ds/qq find-max-q) first inc)]
+    (try
+      (ds/put! {:num num
+                :avail "yes"
+                :probem problem
+                :datetime (jt/local-date-time)})
+      (hx [:div.gap-x-4 [:span (str num)] [:span problem]])
+      (catch Exception e
+        (tel/log! {:level :warn
+                   :id "create!"
+                   :msg (:getMessage e)})))))
 
 (def problems-q
   '[:find ?num ?problem
