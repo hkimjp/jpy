@@ -18,9 +18,9 @@
     ["help"   {:get help}]]
    ["/admin/" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ; ["new"        {:get admin/new  :post admin/upsert!}]
+    ["new"        {:get admin/new  :post admin/create!}]
     ; ["update/:e"  {:get admin/edit :post admin/upsert!}]
-    ; ["find"       {:post admin/eid}]
+    ; ["list-all"   {:get admin/list-all}]
     ; ["delete"     {:post admin/delete!}]
     ]
    ["/workspace/" {:middleware [m/wrap-users]}
@@ -37,7 +37,11 @@
          (rr/routes
           (rr/create-resource-handler {:path "/"})
           (rr/create-default-handler
-           {:not-found
+           {:forbidden
+            (constantly {:status 403
+                         :headers {"Content-type" "text/html"}
+                         :body "<h1>FORBIDDEN</h1>"})
+            :not-found
             (constantly {:status 404
                          :headers {"Content-Type" "text/html"}
                          :body "<h1>ERROR</h1><p>not found</p>"})
@@ -51,3 +55,4 @@
     (handler request)))
 
 ; (root-handler {:uri "/admin/eid" :request-method "post"})
+

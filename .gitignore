@@ -29,5 +29,7 @@
 /target
 
 .env
+/log
 /storage/*
 !/storage/.keep
+

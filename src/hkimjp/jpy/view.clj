@@ -11,8 +11,8 @@
 (defn navbar []
   [:div.flex.bg-orange-600.items-baseline.gap-x-4
    [:div.text-2xl.font-medium.text-white "J.PY"]
-   [:div {:class menu} [:a {:href "/workspace"}  "workspace"]]
-   [:div {:class menu} [:a {:href "/scoreboard"} "scoreboard"]]
+   [:div {:class menu} [:a {:href "/workspace/"}  "workspace"]]
+   [:div {:class menu} [:a {:href "/scoreboard/"} "scoreboard"]]
    [:div {:class menu} [:a {:href "/logout"}   "logout"]]
    [:div {:class menu} [:a {:href "/help"}     "HELP"]]
    [:div {:class menu} [:a {:href "/admin/"}   "admin"]]])
