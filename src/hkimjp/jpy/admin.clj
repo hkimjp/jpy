@@ -16,27 +16,27 @@
    (for [e [:develop :port :auth :admin :datascript]]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])
 
-(def new
-  [:div
-   [:form {:method "post"}
-    (h/raw (anti-forgery-field))
-    [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
-    [:button {:class btn
-              :hx-post   "/admin/create"
-              :hx-target "#list-all"
-              :hx-swap   "afterbegin"} "new"]]])
+(defn new-problem []
+  [:form {:method "post"}
+   (h/raw (anti-forgery-field))
+   [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
+   [:button {:class btn
+             :hx-post   "/admin/create"
+             :hx-target "#list-all"
+             :hx-swap   "afterbegin"}
+    "create"]])
 
 (def find-max-q
   '[:find [(max ?num)]
     :where
     [?e :num ?num]])
 
-; (-> (ds/qq find-max-q) first)
+; (-> (ds/qq find-max-q) first inc)
 
 (defn create! [{{:keys [problem]} :params}]
   (tel/log! {:level :info :id "create!" :msg problem})
   (try
-    (ds/put! {:num (-> (ds/qq find-max-q) inc)
+    (ds/put! {:num (-> (ds/qq find-max-q) first inc)
               :avail "yes"
               :probem problem
               :datetime (jt/local-date-time)})
@@ -68,7 +68,7 @@
 (defn admin [_request]
   (page
    [:div.m-4 [:div.text-2xl.font-medium "Admin"]
-    new
+    (new-problem)
     (list-all)
     env-vars]))
 
