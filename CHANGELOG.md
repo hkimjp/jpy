@@ -1,5 +1,9 @@
 # On Class Python
 
+# 0.3.0 (2025-11-11)
+
+* display answers
+- bump-version-local.sh
 
 # 0.2.2 (2025-11-11)
 
