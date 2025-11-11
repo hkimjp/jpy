@@ -8,16 +8,35 @@
    [hkimjp.jpy.util :refer [btn user]]
    [hkimjp.jpy.view :refer [page error-page]]))
 
-(def ^:private current-problem
-  '[:find [?num ?problem]
+(def ^:private current-problem-id
+  '[:find ?e ?current
     :where
-    [?e :current ?num]
-    [?num :problem ?problem]])
+    [?e :current ?current]])
+
+(comment
+  (ds/qq current-problem-id)
+  (apply max-key first (ds/qq current-problem-id))
+  (ds/qq '[:find [?e ?num ?problem]
+           :in $ ?num
+           :where
+           [?e :num ?num]
+           [?e :problem ?problem]]
+         4)
+  (ds/pl 9) (ds/qq '[:find ?e
+                     :where
+                     [?e :num 4]])
+  :rcf)
 
 (defn index [request]
   (let [author (user request)
-        [num problem] (ds/qq current-problem)]
-    (tel/log! {:level :info :id "index" :data {:num num :author author}})
+        [_ id] (apply max-key first (ds/qq current-problem-id))
+        [e num problem] (ds/qq '[:find [?e ?num ?problem]
+                                 :in $ ?num
+                                 :where
+                                 [?e :num ?num]
+                                 [?e :problem ?problem]]
+                               id)]
+    (tel/log! {:level :info :id "index" :data {:e e :num num :p problem}})
     (page
      [:div.m-4
       [:div.text-2xl.font-medium "workspace"]
