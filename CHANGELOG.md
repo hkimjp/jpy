@@ -2,7 +2,9 @@
 
 # 0.2.2-SNAPSHOT
 
-- redis
+- redis? no, datascript.
+- workspace
+- admin
 
 # 0.2.1 (2025-11-10)
 
