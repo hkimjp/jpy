@@ -10,10 +10,10 @@
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page hx]]))
 
-(def env-vars
+(defn env-vars []
   [:div
    [:div.font-bold "Env Vars"]
-   (for [e [:develop :port :auth :admin :datascript]]
+   (for [e [:develop :port :auth :admin :datascript :redis]]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])
 
 (defn new-problem []
@@ -41,12 +41,6 @@
     [?e :current ?num]
     [?e :avail "yes"]])
 
-; (ds/qq current-q)
-
-(defn upsert-current [c]
-  (let [[cur] (ds/qq current-q)]
-    (ds/put! {:db/id cur :current c})))
-
 (defn create! [{{:keys [problem]} :params}]
   (let [num (-> (ds/qq find-max-q) first inc)]
     (tel/log! {:level :info :id "create!" :data {:num num :problem problem}})
@@ -55,7 +49,7 @@
                 :avail "yes"
                 :problem problem
                 :datetime (jt/local-date-time)})
-      (upsert-current num)
+      (ds/put! {:current num})
       (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
       (catch Exception e
         (tel/log! {:level :warn
@@ -78,12 +72,6 @@
     [:div#list-all.mx-4
      (for [p (->> (ds/qq problems-q) (sort-by :num) reverse)]
        [:div.flex.gap-x-4 [:div (:num p)] [:div (:problem p)]])])])
-
-(defn env-vars []
-  [:div.my-4
-   [:div.font-bold "Env Vars"]
-   (for [e [:develop :port :auth :admin :datascript]]
-     [:div.mx-4 (-> e symbol str str/upper-case) ": " (env e)])])
 
 (defn admin [_request]
   (page
