@@ -1,6 +1,7 @@
 # On Class Python
 
-# 0.2.2-SNAPSHOT
+
+# 0.2.2 (2025-11-11)
 
 - redis? no, datascript.
 - workspace
