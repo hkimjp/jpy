@@ -31,3 +31,4 @@
 .env
 /storage/*
 !/storage/.keep
+/resources/public/assets/css/output.css
