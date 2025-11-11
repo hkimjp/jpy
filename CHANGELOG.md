@@ -4,7 +4,7 @@
 
 - initialize in production
 - share get /problems
-- SSE
+* SSE
 - dividing today's problem from others
 
 
@@ -13,7 +13,7 @@
 
 # 0.3.0 (2025-11-11)
 
-* display answers
+* display answers - share the functions?
 - bump-version-local.sh
 
 # 0.2.2 (2025-11-11)
