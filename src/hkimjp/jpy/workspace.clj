@@ -6,7 +6,11 @@
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :refer [btn user]]
-   [hkimjp.jpy.view :refer [page error-page]]))
+   [hkimjp.jpy.view :refer [page error-page hx redirect]]))
+
+(defn answer [{{:keys [e]} :path-params}]
+  (tel/log! {:level :info :id "answer" :msg e})
+  (hx [:pre (:answer (ds/pl (parse-long e)))]))
 
 (def list-answers-q
   '[:find ?e ?num
@@ -15,15 +19,17 @@
     [?e :login ?author]
     [?e :p/num ?num]])
 
-(defn list-answers [author]
-  (into
-   [:div.flex.gap-x-4]
-   (for [[e num] (ds/qq list-answers-q author)]
-     [:span (str num)])))
+(defn list-answers-by [author]
+  [:div
+   [:div.font-bold "answers"]
+   (into
+    [:div.flex.gap-x-4]
+    (for [[e num] (->> (ds/qq list-answers-q author) (sort-by first))]
+      [:a.underline {:hx-get (format "/workspace/answer/%d" e)
+                     :hx-target "#answer"} num]))
+   [:div#answer.my-4]])
 
-(comment
-  (list-answers "hkimura")
-  :rcf)
+;(list-answers-by "hkimura")
 
 (def ^:private current-problem-id
   '[:find ?e ?current
@@ -37,12 +43,6 @@
     [?e :num ?num]
     [?e :problem ?problem]])
 
-(comment
-  (ds/qq current-problem-id)
-  (apply max-key first (ds/qq current-problem-id))
-  (ds/qq current-problem 4)
-  :rcf)
-
 (defn index [request]
   (let [author (user request)
         [_ id] (apply max-key first (ds/qq current-problem-id))
@@ -51,17 +51,17 @@
     (page
      [:div.m-4
       [:div.text-2xl.font-medium "workspace"]
-      [:div.flex.gap-x-4 [:div (str num)] [:div problem]]
+      [:div.flex.gap-x-4 [:div num] [:div problem]]
       [:form {:method "post"}
        (h/raw (anti-forgery-field))
        [:input {:type "hidden" :name "login" :value author}]
        [:input {:type "hidden" :name "num" :value num}]
-       [:textarea.w-full.h-80.border-1
-        {:name "answer" :placeholder "your answer, please."}]
+       [:textarea {:class "w-full h-64 border-1 p-2"
+                   :name "answer"
+                   :placeholder "your answer, please."}]
        [:button {:class btn} "submit"]]
       [:br]
-      [:div.font-bold "answers"]
-      (list-answers author)])))
+      (list-answers-by author)])))
 
 (defn upload! [{{:keys [login num answer]} :params :as request}]
   (tel/log! {:level :info
@@ -69,8 +69,7 @@
              :data (dissoc (:params request) :__anti-forgery-token)})
   (try
     (ds/put! {:login login :p/num num :answer answer :datetime (jt/local-date-time)})
-    (page
-     [:div "upload success. " login ", " num])
+    (redirect "/workspace/")
     (catch Exception e
       (error-page (.getMessage e)))))
 

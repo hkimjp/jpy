@@ -1,5 +1,16 @@
 # On Class Python
 
+# Unreleased
+
+- initialize in production
+- share get /problems
+- SSE
+- dividing today's problem from others
+
+
+# 0.3.1-SNAPSHOT
+
+
 # 0.3.0 (2025-11-11)
 
 * display answers
