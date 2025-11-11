@@ -8,34 +8,45 @@
    [hkimjp.jpy.util :refer [btn user]]
    [hkimjp.jpy.view :refer [page error-page]]))
 
+(def list-answers-q
+  '[:find ?e ?num
+    :in $ ?author
+    :where
+    [?e :login ?author]
+    [?e :p/num ?num]])
+
+(defn list-answers [author]
+  (into
+   [:div.flex.gap-x-4]
+   (for [[e num] (ds/qq list-answers-q author)]
+     [:span (str num)])))
+
+(comment
+  (list-answers "hkimura")
+  :rcf)
+
 (def ^:private current-problem-id
   '[:find ?e ?current
     :where
     [?e :current ?current]])
 
+(def ^:private current-problem
+  '[:find [?e ?num ?problem]
+    :in $ ?num
+    :where
+    [?e :num ?num]
+    [?e :problem ?problem]])
+
 (comment
   (ds/qq current-problem-id)
   (apply max-key first (ds/qq current-problem-id))
-  (ds/qq '[:find [?e ?num ?problem]
-           :in $ ?num
-           :where
-           [?e :num ?num]
-           [?e :problem ?problem]]
-         4)
-  (ds/pl 9) (ds/qq '[:find ?e
-                     :where
-                     [?e :num 4]])
+  (ds/qq current-problem 4)
   :rcf)
 
 (defn index [request]
   (let [author (user request)
         [_ id] (apply max-key first (ds/qq current-problem-id))
-        [e num problem] (ds/qq '[:find [?e ?num ?problem]
-                                 :in $ ?num
-                                 :where
-                                 [?e :num ?num]
-                                 [?e :problem ?problem]]
-                               id)]
+        [e num problem] (ds/qq current-problem id)]
     (tel/log! {:level :info :id "index" :data {:e e :num num :p problem}})
     (page
      [:div.m-4
@@ -49,7 +60,8 @@
         {:name "answer" :placeholder "your answer, please."}]
        [:button {:class btn} "submit"]]
       [:br]
-      [:div.font-bold "answers"]])))
+      [:div.font-bold "answers"]
+      (list-answers author)])))
 
 (defn upload! [{{:keys [login num answer]} :params :as request}]
   (tel/log! {:level :info
