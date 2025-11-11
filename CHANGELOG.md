@@ -1,5 +1,9 @@
 # On Class Python
 
+# 0.2.2-SNAPSHOT
+
+- redis
+
 # 0.2.1 (2025-11-10)
 
 - checked ignore list

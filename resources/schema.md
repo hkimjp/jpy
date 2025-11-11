@@ -6,22 +6,22 @@
 :problem text
 :datetime java-time
 
-# current problem
+# current problem/redis? use max?
 
 :db/id id
-:current problem/num
+:p/num int
 
 # answers
 
 :db/id id
 :login string
 :answer text
-:p/num init
+:p/num int
 :datetime java-time
 
 # scores
 
 :db/id id
 :login string
-:p/num init
+:p/num int
 :datetime java-time
