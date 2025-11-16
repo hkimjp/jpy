@@ -69,7 +69,7 @@
              :data (dissoc (:params request) :__anti-forgery-token)})
   (try
     (ds/put! {:login login :p/num num :answer answer :datetime (jt/local-date-time)})
-    (redirect "/workspace/")
+    (redirect "/workspace")
     (catch Exception e
       (error-page (.getMessage e)))))
 

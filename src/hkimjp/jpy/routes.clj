@@ -28,34 +28,23 @@
    ["/scoreboard" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]])
 
-#_(defn root-handler
-    [request]
-  ; これをやりたいために。
-    (t/log! :info (str (:request-method request) " - " (:uri request)))
-    (let [handler
-          (ring/ring-handler
-           (ring/router routes)
-           (ring/routes
-            (ring/create-resource-handler {:path "/"})
-            (ring/create-default-handler
-             {:not-found (constantly {:status 404,
-                                      :body "<h1>ERROR</h1><p>not found</p>"})
-              :method-not-allowed (constantly {:status 405
-                                               :body "not allowed"})
-              :not-acceptable (constantly {:status 406
-                                           :body "not acceptable"})}))
-           {:middleware [[wrap-defaults site-defaults]]})]
-      (handler request)))
+(defn root-handler
+  [{:keys [request-method uri] :as request}]
+  (t/log! {:level :debug
+           :data {:request-method request-method :uri uri}})
+  (let [handler
+        (ring/ring-handler
+         (ring/router routes)
+         (ring/routes
+          (ring/create-resource-handler {:path "/"})
+          (ring/create-default-handler
+           {:not-found
+            (constantly (error-page [:p "not found, check uri"]))
+            :method-not-allowed
+            (constantly (error-page [:p "not allowed"]))
+            :not-acceptable
+            (constantly (error-page [:p "not acceptable"]))}))
+         {:middleware [[wrap-defaults site-defaults]]})]
+    (handler request)))
 
-(def root-handler
-  (ring/ring-handler
-   (ring/router routes)
-   (ring/routes
-    (ring/create-resource-handler {:path "/"})
-    (ring/create-default-handler
-     {:not-found (constantly (error-page [:p "not found, check uri"]))
-      :method-not-allowed (constantly {:status 405, :body "not allowed"})
-      :not-acceptable (constantly {:status 406, :body "not acceptable"})}))
-   {:middleware [[wrap-defaults site-defaults]]}))
-
-
+;(root-handler {:request-method :get, :uri "/abc"})
