@@ -3,30 +3,29 @@
    [reitit.ring :as rr]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
    [taoensso.telemere :as t]
-   [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.admin :as admin]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
+   [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.scoreboard :as scoreboard]
    [hkimjp.jpy.workspace :as workspace]))
 
 (defn routes []
-  [["/" {:middleware []}
-    ["" {:get login :post login!}]
-    ["logout" logout!]
-    ["help"   {:get help}]]
-   ["/admin/" {:middleware [m/wrap-admin]}
-    [""           {:get admin/admin}]
-    ["create"     {:post admin/create!}]
-    ; ["update/:e"  {:get admin/edit :post admin/upsert!}]
-    ; ["list-all"   {:get admin/list-all}]
-    ; ["delete"     {:post admin/delete!}]
+  [["/"      {:get login :post login!}]
+   ["/logout" logout!]
+   ["help"   {:get help}]
+   ["/admin" {:middleware [m/wrap-admin]}
+    ["/"           {:get admin/admin}]
+    ["/create"     {:post admin/create!}]
+    ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
+    ; ["/list-all"   {:get admin/list-all}]
+    ; ["/delete"     {:post admin/delete!}]
     ]
-   ["/workspace/" {:middleware [m/wrap-users]}
-    ["" {:get workspace/index :post workspace/upload!}]
-    ["answer/:e" {:get workspace/answer}]]
-   ["/scoreboard/" {:middleware [m/wrap-users]}
-    ["" {:get scoreboard/index}]]])
+   ["/workspace" {:middleware [m/wrap-users]}
+    ["/" {:get workspace/index :post workspace/upload!}]
+    ["/answer/:e" {:get workspace/answer}]]
+   ["/scoreboard" {:middleware [m/wrap-users]}
+    ["/" {:get scoreboard/index}]]])
 
 (defn root-handler
   [request]
