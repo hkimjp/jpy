@@ -11,11 +11,11 @@
 (defn navbar []
   [:div.flex.bg-orange-600.items-baseline.gap-x-4
    [:div.text-2xl.font-medium.text-white "J.PY"]
-   [:div {:class menu} [:a {:href "/workspace/"}  "workspace"]]
-   [:div {:class menu} [:a {:href "/scoreboard/"} "scoreboard"]]
-   [:div {:class menu} [:a {:href "/logout"}   "logout"]]
-   [:div {:class menu} [:a {:href "/help"}     "HELP"]]
-   [:div {:class menu} [:a {:href "/admin/"}   "admin"]]])
+   [:div {:class menu} [:a {:href "/workspace"}  "workspace"]]
+   [:div {:class menu} [:a {:href "/scoreboard"} "scoreboard"]]
+   [:div {:class menu} [:a {:href "/logout"}     "logout"]]
+   [:div {:class menu} [:a {:href "/help"}       "HELP"]]
+   [:div {:class menu} [:a {:href "/admin"}      "admin"]]])
 
 (def footer
   [:div.text-base
@@ -56,7 +56,7 @@
   (t/log! :debug (str "error-page"))
   (-> (str (h/html (h/raw "<!DOCTYPE html>")
                    (base [:div
-                          [:h1.text-red Error]
+                          [:h1.text-red "Error"]
                           [:p content]])))
       resp/response
       (resp/header "Content-Type" "text/html")))

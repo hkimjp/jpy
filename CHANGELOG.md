@@ -6,6 +6,7 @@
 - share get /problems
 * SSE
 - dividing today's problem from others
+- redis or algorithm?
 
 
 # 0.3.1-SNAPSHOT

@@ -1,6 +1,6 @@
 (ns hkimjp.jpy.routes
   (:require
-   [reitit.ring :as rr]
+   [reitit.ring :as ring]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
    [taoensso.telemere :as t]
    [hkimjp.jpy.admin :as admin]
@@ -8,46 +8,43 @@
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.scoreboard :as scoreboard]
+   [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
 
-(defn routes []
+(def routes
   [["/"      {:get login :post login!}]
    ["/logout" logout!]
    ["help"   {:get help}]
    ["/admin" {:middleware [m/wrap-admin]}
-    ["/"           {:get admin/admin}]
+    [""           {:get admin/admin}]
     ["/create"     {:post admin/create!}]
     ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
     ; ["/list-all"   {:get admin/list-all}]
     ; ["/delete"     {:post admin/delete!}]
     ]
    ["/workspace" {:middleware [m/wrap-users]}
-    ["/" {:get workspace/index :post workspace/upload!}]
+    ["" {:get workspace/index :post workspace/upload!}]
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
-    ["/" {:get scoreboard/index}]]])
+    ["" {:get scoreboard/index}]]])
 
 (defn root-handler
-  [request]
-  (t/log! :info (str (:request-method request) " - " (:uri request)))
+  [{:keys [request-method uri] :as request}]
+  (t/log! {:level :debug
+           :data {:request-method request-method :uri uri}})
   (let [handler
-        (rr/ring-handler
-         (rr/router (routes))
-         (rr/routes
-          (rr/create-resource-handler {:path "/"})
-          (rr/create-default-handler
+        (ring/ring-handler
+         (ring/router routes)
+         (ring/routes
+          (ring/create-resource-handler {:path "/"})
+          (ring/create-default-handler
            {:not-found
-            (constantly {:status 404
-                         :headers {"Content-Type" "text/html"}
-                         :body "<h1>ERROR</h1><p>not found</p>"})
+            (constantly (error-page [:p "not found, check uri"]))
             :method-not-allowed
-            (constantly {:status 405
-                         :body "not allowed"})
+            (constantly (error-page [:p "not allowed"]))
             :not-acceptable
-            (constantly {:status 406
-                         :body "not acceptable"})}))
+            (constantly (error-page [:p "not acceptable"]))}))
          {:middleware [[wrap-defaults site-defaults]]})]
     (handler request)))
 
-; (root-handler {:uri "/admin/eid" :request-method "post"})
-
+;(root-handler {:request-method :get, :uri "/abc"})
