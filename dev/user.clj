@@ -26,13 +26,16 @@
 
 ; -------------------------
 (comment
+  ;; initialize
   (ds/put! {:num 0
             :problem "dummy problem"
-            :avail "yes"
+            :stat "ok"
             :datetime (jt/local-date-time)})
 
   (ds/put! {:current 0})
+  :rcf)
 
+(comment
   (ds/qq '[:find ?e ?num
            :where
            [?e :current ?num]])

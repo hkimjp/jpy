@@ -3,11 +3,12 @@
 # Unreleased
 
 - initialize in production
-- share get /problems
-* SSE
+- share `get /problems` between /admin and /workspace
+* SSE - session
 - dividing today's problem from others
-- redis or algorithm?
+- redis or logic? - logic.
 
+# 0.4.0-SNAPSHOT
 
 # 0.3.1 (2025-11-16)
 
