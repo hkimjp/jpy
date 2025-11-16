@@ -28,5 +28,10 @@
 /classes
 /target
 
+.env
+/resources/public/assets/css/output.css
+/log
 /storage/*
 !/storage/.keep
+
+

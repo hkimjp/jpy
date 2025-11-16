@@ -4,7 +4,7 @@
    [ring.util.response :as resp]
    [taoensso.telemere :as t]))
 
-(def version "0.1.0-SNAPSHO")
+(def version "0.3.1")
 
 (def ^:private menu "text-xl font-medium text-white px-1 hover:bg-orange-500")
 
@@ -13,9 +13,9 @@
    [:div.text-2xl.font-medium.text-white "J.PY"]
    [:div {:class menu} [:a {:href "/workspace"}  "workspace"]]
    [:div {:class menu} [:a {:href "/scoreboard"} "scoreboard"]]
-   [:div {:class menu} [:a {:href "/logout"}   "logout"]]
-   [:div {:class menu} [:a {:href "/help"}     "HELP"]]
-   [:div {:class menu} [:a {:href "/admin/"}   "admin"]]])
+   [:div {:class menu} [:a {:href "/logout"}     "logout"]]
+   [:div {:class menu} [:a {:href "/help"}       "HELP"]]
+   [:div {:class menu} [:a {:href "/admin"}      "admin"]]])
 
 (def footer
   [:div.text-base
@@ -51,6 +51,16 @@
       resp/response
       (resp/header "Content-Type" "text/html")))
 
+(defn error-page
+  [content]
+  (t/log! :debug (str "error-page"))
+  (-> (str (h/html (h/raw "<!DOCTYPE html>")
+                   (base [:div
+                          [:h1.text-red "Error"]
+                          [:p content]])))
+      resp/response
+      (resp/header "Content-Type" "text/html")))
+
 (defn redirect [uri]
   (resp/redirect uri))
 
@@ -62,4 +72,3 @@
       str
       resp/response
       (resp/content-type "text/html")))
-
