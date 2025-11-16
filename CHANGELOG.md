@@ -9,7 +9,7 @@
 - redis or algorithm?
 
 
-# 0.3.1-SNAPSHOT
+# 0.3.1 (2025-11-16)
 
 - learn reitit
 
