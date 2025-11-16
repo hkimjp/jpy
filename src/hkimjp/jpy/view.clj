@@ -56,8 +56,8 @@
   (t/log! :debug (str "error-page"))
   (-> (str (h/html (h/raw "<!DOCTYPE html>")
                    (base [:div
-                          [:h1.text-red "Error"]
-                          [:p content]])))
+                          [:h1.text-red-600 "Error"]
+                          content])))
       resp/response
       (resp/header "Content-Type" "text/html")))
 
