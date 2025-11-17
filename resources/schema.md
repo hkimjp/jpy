@@ -2,20 +2,20 @@
 :num int
 :valid true|false
 :problem text
-:datetime java-time
+
 
 # current problem/redis? use max?
-:current int
-:datetime java-time
+:current num
+
 
 # answers
 :author string
 :answer text
-:p/num int
-:datetime java-time
+:p/num num
+
 
 # scores
 :author string
-:p/num int
+:p/num num
 :score int
-:datetime java-time
+

@@ -11,13 +11,6 @@
                [?e :num ?num]])
       first))
 
-(comment
-  (ds/qq '[:find ?num
-           :where
-           [?e :num ?num]])
-  (max-num)
-  :rcf)
-
 (defn update-current [num]
   (let [[e _] (ds/qq '[:find [?e ?num]
                        :where
@@ -50,7 +43,8 @@
                 :problem problem
                 :datetime (jt/local-date-time)})
       (update-current num)
-      (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
+      #_(hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
+      (redirect "/admin")
       (catch Exception e
         (tel/log! {:level :warn :id "create!"
                    :msg (:getMessage e)})))))
