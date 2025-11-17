@@ -15,10 +15,10 @@ minify:
 #   clj -X:dev:plus
 
 nrepl:
-  just watch &
   clj -M:dev:nrepl
 
 dev:
+  just watch &
   just nrepl
 
 # container-nrepl:

@@ -29,6 +29,9 @@
 /target
 
 .env
+/resources/public/assets/css/output.css
+/log
 /storage/*
 !/storage/.keep
-/resources/public/assets/css/output.css
+
+

@@ -1,22 +1,21 @@
 # problems
-
-:db/id id
-:problem/avail string
 :num int
+:valid true|false
 :problem text
-:datetime java-time
+
+
+# current problem/redis? use max?
+:current num
+
 
 # answers
-
-:db/id id
-:login string
+:author string
 :answer text
-:p/num init
-:datetime java-time
+:p/num num
+
 
 # scores
+:author string
+:p/num num
+:score int
 
-:db/id id
-:login string
-:p/num init
-:datetime java-time
