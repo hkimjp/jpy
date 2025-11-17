@@ -12,12 +12,12 @@
       first))
 
 (defn create!
-  [{{:keys [problem]} :params :as params}]
-  (tel/log! {:level :info :id "create!" :data {:params params}})
+  [{{:keys [problem]} :params}]
+  (tel/log! {:level :info :id "create!" :data {:problem problem}})
   (let [num (-> (max-id) inc)]
     (try
       (ds/put! {:num num
-                :avail true
+                :valid true
                 :problem problem
                 :datetime (jt/local-date-time)})
       (ds/put! {:current num})
@@ -29,11 +29,10 @@
 #_(defn update! [])
 
 (def problems-all
-  '[:find ?e ?valid ?num ?problem
-    :keys e  valid  num  problem
+  '[:find ?e  ?num ?problem
+    :keys e   num  problem
     :where
     [?e :num ?num]
-    [?e :valid ?valid]
     [?e :problem ?problem]])
 
 (defn problems

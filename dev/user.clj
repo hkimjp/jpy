@@ -31,7 +31,6 @@
             :problem "dummy problem"
             :stat "ok"
             :datetime (jt/local-date-time)})
-
   (ds/put! {:current 0})
   :rcf)
 
