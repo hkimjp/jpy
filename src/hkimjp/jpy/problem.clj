@@ -24,20 +24,18 @@
        second))
 
 (defn create!
-  [{{:keys [problem]} :params}]
-  (tel/log! {:level :info :id "create!" :data {:problem problem}})
-  (let [num (-> (max-num) inc)]
-    (try
-      (ds/put! {:num num
-                :valid true
-                :problem problem
-                :datetime (jt/local-date-time)})
-      (update-current num)
-      #_(hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
-      (redirect "/admin")
-      (catch Exception e
-        (tel/log! {:level :warn :id "create!"
-                   :msg (:getMessage e)})))))
+  [{{:keys [group problem]} :params}]
+  (tel/log! {:level :info :id "create!" :data {:group group :problem problem}})
+  (try
+    (let [ret (ds/put! {:valid true
+                        :group group
+                        :problem problem})
+          id ((:tempids ret) -1)]
+      (update-current id)
+      (redirect "/admin"))
+    (catch Exception e
+      (tel/log! {:level :warn :id "create!"
+                 :msg (:getMessage e)}))))
 
 (def problems-all
   '[:find ?e ?valid ?num ?problem

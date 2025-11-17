@@ -1,19 +1,20 @@
 # problems
 :valid true|false
 :problem text
-:week int
-:num int
+
 
 # answers
 :author string
-:answer text
 :p/id id
+:answer text
 :datetime jt
 
+
 # scores
+:score int
 :author string
 :p/id id
-:score int
+
 
 # current
 :current id

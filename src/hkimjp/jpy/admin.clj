@@ -20,6 +20,8 @@
    [:div.font-bold "new problem"]
    [:form.m-4 {:method "post" :action "/problem/create"}
     (h/raw (anti-forgery-field))
+    [:div.my-4.flex
+     [:div.font-bold "week(group): "] [:input.border-1.px-2.w-16 {:name "week"}]]
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
     [:button {:class btn :type "submit"} "create"]]])
 
