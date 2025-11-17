@@ -8,7 +8,7 @@
 - dividing today's problem from others
 - redis or logic? - logic.
 
-# 0.4.1-SNAPSHOT
+# 0.4.1 (2025-11-17)
 
 - change `current`
 
