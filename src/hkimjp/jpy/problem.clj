@@ -3,7 +3,7 @@
    [java-time.api :as jt]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
-   [hkimjp.jpy.view :refer [hx]]))
+   [hkimjp.jpy.view :refer [page redirect hx]]))
 
 (defn max-id []
   (-> (ds/qq '[:find [(max ?num)]
@@ -26,13 +26,19 @@
         (tel/log! {:level :warn :id "create!"
                    :msg (:getMessage e)})))))
 
-#_(defn update! [])
+(defn current-num []
+  (->> (ds/qq '[:find ?e ?num
+                :where
+                [?e :current ?num]])
+       (apply max-key first)
+       second))
 
 (def problems-all
-  '[:find ?e  ?num ?problem
-    :keys e   num  problem
+  '[:find ?e ?valid ?num ?problem
+    :keys e  valid  num  problem
     :where
     [?e :num ?num]
+    [?e :valid ?valid]
     [?e :problem ?problem]])
 
 (defn problems
@@ -42,4 +48,10 @@
        (sort-by :num)
        reverse))
 
-; (problems)
+#_(problems)
+
+(defn current! [{{:keys [current]} :params}]
+  (let [current (parse-long current)]
+    (tel/log! {:level :info :id "current!" :msg (str "current:" current)})
+    (ds/put! {:current current})
+    (redirect "/admin")))
