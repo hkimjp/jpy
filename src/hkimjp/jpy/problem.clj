@@ -3,7 +3,7 @@
    [java-time.api :as jt]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
-   [hkimjp.jpy.view :refer [hx]]))
+   [hkimjp.jpy.view :refer [page redirect hx]]))
 
 (defn max-id []
   (-> (ds/qq '[:find [(max ?num)]
@@ -12,12 +12,12 @@
       first))
 
 (defn create!
-  [{{:keys [problem]} :params :as params}]
-  (tel/log! {:level :info :id "create!" :data {:params params}})
+  [{{:keys [problem]} :params}]
+  (tel/log! {:level :info :id "create!" :data {:problem problem}})
   (let [num (-> (max-id) inc)]
     (try
       (ds/put! {:num num
-                :avail true
+                :valid true
                 :problem problem
                 :datetime (jt/local-date-time)})
       (ds/put! {:current num})
@@ -26,7 +26,12 @@
         (tel/log! {:level :warn :id "create!"
                    :msg (:getMessage e)})))))
 
-#_(defn update! [])
+(defn current-num []
+  (->> (ds/qq '[:find ?e ?num
+                :where
+                [?e :current ?num]])
+       (apply max-key first)
+       second))
 
 (def problems-all
   '[:find ?e ?valid ?num ?problem
@@ -43,4 +48,10 @@
        (sort-by :num)
        reverse))
 
-; (problems)
+#_(problems)
+
+(defn current! [{{:keys [current]} :params}]
+  (let [current (parse-long current)]
+    (tel/log! {:level :info :id "current!" :msg (str "current:" current)})
+    (ds/put! {:current current})
+    (redirect "/admin")))

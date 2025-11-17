@@ -18,7 +18,6 @@
    ["/help"   {:get help}]
    ["/admin" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ; ["/create"     {:post admin/create!}]
     ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
     ; ["/list-all"   {:get admin/list-all}]
     ; ["/delete"     {:post admin/delete!}]
@@ -30,7 +29,9 @@
     ["" {:get scoreboard/index}]]
    ["/problem"
     ["/create" {:post {:middleware [m/wrap-admin]
-                       :handler problem/create!}}]]
+                       :handler problem/create!}}]
+    ["/current" {:post {:middleware [m/wrap-admin]
+                        :handler problem/current!}}]]
    ["/answer"]
    ["/hx"]])
 

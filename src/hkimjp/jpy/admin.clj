@@ -29,40 +29,23 @@
               :hx-swap   "afterbegin"}
      "create"]]])
 
-#_(def ^:private find-max-q
-    '[:find [(max ?num)]
-      :where
-      [?e :num ?num]])
-
-; (-> (ds/qq find-max-q) first inc)
-
-#_(def ^:private current-q
-    '[:find ?num
-      :where
-      [?e :current ?num]
-      [?e :avail "yes"]])
-
-#_(defn create! [{{:keys [problem]} :params}]
-    (let [num (-> (ds/qq find-max-q) first inc)]
-      (tel/log! {:level :info :id "create!" :data {:num num :problem problem}})
-      (try
-        (ds/put! {:num num
-                  :avail true
-                  :problem problem
-                  :datetime (jt/local-date-time)})
-        (ds/put! {:current num})
-        (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
-        (catch Exception e
-          (tel/log! {:level :warn :id "create!"
-                     :msg (:getMessage e)})))))
-
 (defn problems-section []
-  [:div
-   [:div.font-bold "problems"]
-   (into
-    [:div#list-all.mx-4
-     (for [p (problem/problems)]
-       [:div.flex.gap-x-4 [:div (:num p)] [:div (:problem p)]])])])
+  (let [current (problem/current-num)]
+    [:div
+     [:div.font-bold "problems"]
+     (into
+      [:div#list-all.mx-4
+       [:form {:method "post" :action "/problem/current"}
+        (h/raw (anti-forgery-field))
+        (for [{:keys [e valid num problem]} (problem/problems)]
+          [:div.flex.gap-x-4
+           [:button {:class btn :name "current" :value e}
+            (if (= current num) "✔️" "⬜️")]
+           [:div e] [:div (str valid)] [:div num] [:div problem]])]])]))
+
+(comment
+  (problem/current-num)
+  :rcf)
 
 (defn admin [_request]
   (tel/log! :info "admin")
