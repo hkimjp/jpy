@@ -23,16 +23,6 @@
                 [?e :current ?num]])
        second))
 
-(comment
-  (ds/qq '[:find ?e ?num
-           :where
-           [?e :current ?num]])
-
-  (update-current 3)
-  (current-num)
-  (ds/pl 3)
-  :rcf)
-
 (defn create!
   [{{:keys [problem]} :params}]
   (tel/log! {:level :info :id "create!" :data {:problem problem}})
@@ -63,8 +53,6 @@
   (->> (ds/qq problems-all)
        (sort-by :num)
        reverse))
-
-#_(problems)
 
 (defn current! [{{:keys [current]} :params}]
   (let [current (parse-long current)]

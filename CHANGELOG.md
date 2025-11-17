@@ -5,7 +5,11 @@
 - initialize in production
 - share `get /problems` between /admin and /workspace
 * SSE - session
-- dividing today's problem from others
+
+
+# 0.5.0-SNAPSHOT
+
+* group-id - use week?
 
 
 # 0.4.1 (2025-11-17)

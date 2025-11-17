@@ -1,20 +1,19 @@
 # problems
 :valid true|false
 :problem text
-:group str
-
-# current problem/redis? use max?
-:current eid
-
+:week int
+:num int
 
 # answers
 :author string
 :answer text
-:p/id eid
+:p/id id
 :datetime jt
 
 # scores
 :author string
-:p/id eid
+:p/id id
 :score int
 
+# current
+:current id
