@@ -39,7 +39,7 @@
         (h/raw (anti-forgery-field))
         (for [{:keys [e valid num problem]} (problem/problems)]
           [:div.flex.gap-x-4
-           [:button {:class btn :name "current" :value e}
+           [:button {:class btn :name "current" :value num}
             (if (= current num) "✔️" "⬜️")]
            [:div e] [:div (str valid)] [:div num] [:div problem]])]])]))
 
