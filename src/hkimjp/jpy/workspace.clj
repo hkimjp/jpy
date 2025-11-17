@@ -13,7 +13,7 @@
   (hx [:pre (:answer (ds/pl (parse-long e)))]))
 
 (def list-answers-q
-  '[:find ?num ?e
+  '[:find ?e ?num
     :in $ ?author
     :where
     [?e :login ?author]
@@ -31,10 +31,10 @@
                      :hx-target "#answer"} num]))
    [:div#answer.my-4]])
 
-;(list-answers-by "hkimura")
+; (answers-section "hkimura")
 
 (def ^:private current-problem
-  '[:find [?e ?problem]
+  '[:find [?id ?problem]
     :where
     [?e :current ?id]
     [?id :problem ?problem]])
@@ -57,7 +57,7 @@
                    :placeholder "your answer, please."}]
        [:button {:class btn} "submit"]]
       [:br]
-      #_(answers-section author)])))
+      (answers-section author)])))
 
 ; (index {})
 
