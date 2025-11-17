@@ -7,16 +7,17 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
+   [hkimjp.jpy.problem :as problem]
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page hx]]))
 
-(defn env-vars []
+(defn env-vars-section []
   [:div
    [:div.font-bold "Env Vars"]
    (for [e [:develop :port :auth :admin :datascript :redis]]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])
 
-(defn new-problem []
+(defn new-problem-section []
   [:div
    [:div.font-bold "new problem"]
    [:form.m-4 {:method "post"}
@@ -56,28 +57,19 @@
                    :id "create!"
                    :msg (:getMessage e)})))))
 
-(def problems-q
-  '[:find ?num ?problem
-    :keys num problem
-    :where
-    [?e :num ?num]
-    [?e :problem ?problem]])
-
-; (ds/qq problems-q)
-
-(defn problems []
+(defn problems-section []
   [:div
    [:div.font-bold "problems"]
    (into
     [:div#list-all.mx-4
-     (for [p (->> (ds/qq problems-q) (sort-by :num) reverse)]
+     (for [p (problem/problems)]
        [:div.flex.gap-x-4 [:div (:num p)] [:div (:problem p)]])])])
 
 (defn admin [_request]
   (page
    [:div.m-4 [:div.text-2xl.font-medium "Admin"]
-    (new-problem)
-    (problems)
-    (env-vars)]))
+    (new-problem-section)
+    (problems-section)
+    (env-vars-section)]))
 
 

@@ -26,7 +26,12 @@
     ["" {:get workspace/index :post workspace/upload!}]
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
-    ["" {:get scoreboard/index}]]])
+    ["" {:get scoreboard/index}]]
+
+   ["/problem"
+    ["/create" {:post problem/create1!}]]
+   ["/answer"]
+   ["/hx"]])
 
 (defn root-handler
   [{:keys [request-method uri] :as request}]
