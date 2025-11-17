@@ -9,19 +9,11 @@
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page]]))
 
-(defn env-vars-section []
-  [:div
-   [:div.font-bold "Env Vars"]
-   (for [e [:develop :port :auth :admin :datascript :redis]]
-     [:div (-> e symbol str str/upper-case) ": " (env e)])])
-
 (defn new-problem-section []
   [:div
    [:div.font-bold "new problem"]
    [:form.m-4 {:method "post" :action "/problem/create"}
     (h/raw (anti-forgery-field))
-    [:div.my-4.flex
-     [:div.font-bold "week(group): "] [:input.border-1.px-2.w-16 {:name "week"}]]
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
     [:button {:class btn :type "submit"} "create"]]])
 
@@ -33,11 +25,17 @@
       [:div#list-all.mx-4
        [:form {:method "post" :action "/problem/current"}
         (h/raw (anti-forgery-field))
-        (for [{:keys [e valid num problem]} (problem/problems)]
+        (for [{:keys [e valid problem]} (problem/problems)]
           [:div.flex.gap-x-4
-           [:button {:class btn :name "current" :value num}
-            (if (= current num) "✔️" "⬜️")]
-           [:div e] [:div (str valid)] [:div num] [:div problem]])]])]))
+           [:button {:class btn :name "current" :value e}
+            (if (= current e) "✔️" "⬜️")]
+           [:div e] [:div (str valid)] [:div problem]])]])]))
+
+(defn env-vars-section []
+  [:div
+   [:div.font-bold "Env Vars"]
+   (for [e [:develop :port :auth :admin :datascript :redis]]
+     [:div (-> e symbol str str/upper-case) ": " (env e)])])
 
 (defn admin [_request]
   (tel/log! :info "admin")
