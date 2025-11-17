@@ -2,6 +2,11 @@
   (:require
    [hkimjp.datascript :as ds]))
 
+(defn max-id []
+  (ds/qq '[:find [(max ?num)]
+           :where
+           [?e :num ?num]]))
+
 (defn create! [])
 
 (defn update! [])
@@ -20,4 +25,4 @@
        (sort-by :num)
        reverse))
 
-(problems)
+; (problems)

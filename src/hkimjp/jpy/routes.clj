@@ -9,15 +9,16 @@
    [hkimjp.jpy.middleware :as m]
    [hkimjp.jpy.scoreboard :as scoreboard]
    [hkimjp.jpy.view :refer [error-page]]
+   [hkimjp.jpy.problem :as problem]
    [hkimjp.jpy.workspace :as workspace]))
 
 (def routes
   [["/"      {:get login :post login!}]
    ["/logout" logout!]
-   ["help"   {:get help}]
+   ["/help"   {:get help}]
    ["/admin" {:middleware [m/wrap-admin]}
     [""           {:get admin/admin}]
-    ["/create"     {:post admin/create!}]
+    ; ["/create"     {:post admin/create!}]
     ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
     ; ["/list-all"   {:get admin/list-all}]
     ; ["/delete"     {:post admin/delete!}]
@@ -27,9 +28,9 @@
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]
-
    ["/problem"
-    ["/create" {:post problem/create1!}]]
+    ["/create" {:post {:middleware [m/wrap-admin]
+                       :handler problem/create!}}]]
    ["/answer"]
    ["/hx"]])
 

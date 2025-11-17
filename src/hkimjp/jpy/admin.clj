@@ -3,13 +3,13 @@
    [clojure.string :as str]
    [environ.core :refer [env]]
    [hiccup2.core :as h]
-   [java-time.api :as jt]
+   #_[java-time.api :as jt]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
-   [hkimjp.datascript :as ds]
+   #_[hkimjp.datascript :as ds]
    [hkimjp.jpy.problem :as problem]
    [hkimjp.jpy.util :refer [btn]]
-   [hkimjp.jpy.view :refer [page hx]]))
+   [hkimjp.jpy.view :refer [page]]))
 
 (defn env-vars-section []
   [:div
@@ -29,33 +29,32 @@
               :hx-swap   "afterbegin"}
      "create"]]])
 
-(def ^:private find-max-q
-  '[:find [(max ?num)]
-    :where
-    [?e :num ?num]])
+#_(def ^:private find-max-q
+    '[:find [(max ?num)]
+      :where
+      [?e :num ?num]])
 
 ; (-> (ds/qq find-max-q) first inc)
 
-(def ^:private current-q
-  '[:find ?num
-    :where
-    [?e :current ?num]
-    [?e :avail "yes"]])
+#_(def ^:private current-q
+    '[:find ?num
+      :where
+      [?e :current ?num]
+      [?e :avail "yes"]])
 
-(defn create! [{{:keys [problem]} :params}]
-  (let [num (-> (ds/qq find-max-q) first inc)]
-    (tel/log! {:level :info :id "create!" :data {:num num :problem problem}})
-    (try
-      (ds/put! {:num num
-                :avail "yes"
-                :problem problem
-                :datetime (jt/local-date-time)})
-      (ds/put! {:current num})
-      (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
-      (catch Exception e
-        (tel/log! {:level :warn
-                   :id "create!"
-                   :msg (:getMessage e)})))))
+#_(defn create! [{{:keys [problem]} :params}]
+    (let [num (-> (ds/qq find-max-q) first inc)]
+      (tel/log! {:level :info :id "create!" :data {:num num :problem problem}})
+      (try
+        (ds/put! {:num num
+                  :avail true
+                  :problem problem
+                  :datetime (jt/local-date-time)})
+        (ds/put! {:current num})
+        (hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
+        (catch Exception e
+          (tel/log! {:level :warn :id "create!"
+                     :msg (:getMessage e)})))))
 
 (defn problems-section []
   [:div
@@ -66,6 +65,7 @@
        [:div.flex.gap-x-4 [:div (:num p)] [:div (:problem p)]])])])
 
 (defn admin [_request]
+  (tel/log! :info "admin")
   (page
    [:div.m-4 [:div.text-2xl.font-medium "Admin"]
     (new-problem-section)
