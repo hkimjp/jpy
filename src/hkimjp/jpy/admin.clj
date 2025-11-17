@@ -24,7 +24,7 @@
     (h/raw (anti-forgery-field))
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
     [:button {:class     btn
-              :hx-post   "/admin/create"
+              :hx-post   "/problem/create"
               :hx-target "#list-all"
               :hx-swap   "afterbegin"}
      "create"]]])

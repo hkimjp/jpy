@@ -53,7 +53,7 @@
 
 (defn error-page
   [content]
-  (t/log! :debug (str "error-page"))
+  (t/log! :debug (str "error-page" content))
   (-> (str (h/html (h/raw "<!DOCTYPE html>")
                    (base [:div
                           [:h1.text-red-600 "Error"]
@@ -65,6 +65,7 @@
   (resp/redirect uri))
 
 ;; htmx requires html response.
+;; here, namespace appropriate?
 (defn hx [content]
   (t/log! {:level :debug :id "hx"})
   (-> content
