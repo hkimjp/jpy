@@ -3,10 +3,8 @@
    [clojure.string :as str]
    [environ.core :refer [env]]
    [hiccup2.core :as h]
-   #_[java-time.api :as jt]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
-   #_[hkimjp.datascript :as ds]
    [hkimjp.jpy.problem :as problem]
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page]]))
@@ -20,14 +18,10 @@
 (defn new-problem-section []
   [:div
    [:div.font-bold "new problem"]
-   [:form.m-4 {:method "post"}
+   [:form.m-4 {:method "post" :action "/problem/create"}
     (h/raw (anti-forgery-field))
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
-    [:button {:class     btn
-              :hx-post   "/problem/create"
-              :hx-target "#list-all"
-              :hx-swap   "afterbegin"}
-     "create"]]])
+    [:button {:class btn :type "submit"} "create"]]])
 
 (defn problems-section []
   (let [current (problem/current-num)]
@@ -39,13 +33,9 @@
         (h/raw (anti-forgery-field))
         (for [{:keys [e valid num problem]} (problem/problems)]
           [:div.flex.gap-x-4
-           [:button {:class btn :name "current" :value e}
+           [:button {:class btn :name "current" :value num}
             (if (= current num) "✔️" "⬜️")]
            [:div e] [:div (str valid)] [:div num] [:div problem]])]])]))
-
-(comment
-  (problem/current-num)
-  :rcf)
 
 (defn admin [_request]
   (tel/log! :info "admin")

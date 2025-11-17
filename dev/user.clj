@@ -20,7 +20,7 @@
 
 ; (reload/reload)
 
-(tel/set-min-level! :debug)
+(tel/set-min-level! :info)
 
 (start-system)
 
@@ -31,6 +31,7 @@
             :problem "dummy problem"
             :stat "ok"
             :datetime (jt/local-date-time)})
+
   (ds/put! {:current 0})
   :rcf)
 
