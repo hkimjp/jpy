@@ -1,4 +1,4 @@
-(ns hkimjp.jpy.problem
+(ns hkimjp.jpy.problems
   (:require
    [java-time.api :as jt]
    [taoensso.telemere :as tel]

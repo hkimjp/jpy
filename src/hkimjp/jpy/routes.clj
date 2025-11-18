@@ -7,7 +7,7 @@
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.middleware :as m]
-   [hkimjp.jpy.problem :as problem]
+   [hkimjp.jpy.problems :as problems]
    [hkimjp.jpy.scoreboard :as scoreboard]
    [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
@@ -27,11 +27,11 @@
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]
-   ["/problem"
+   ["/problems"
     ["/create" {:post {:middleware [m/wrap-admin]
-                       :handler problem/create!}}]
+                       :handler problems/create!}}]
     ["/current" {:post {:middleware [m/wrap-admin]
-                        :handler problem/current!}}]]
+                        :handler problems/current!}}]]
    ["/answer"]
    ["/hx"]])
 
