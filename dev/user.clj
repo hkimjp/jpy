@@ -31,6 +31,7 @@
             :stat "ok"
             :datetime (jt/local-date-time)})
   (ds/put! {:current 0})
+  ;;
   (ds/qq '[:find ?e
            :where
            [?e _ _]])
