@@ -7,7 +7,7 @@
 * SSE - session
 
 
-# 0.5.1-SNAPSHOT
+# 0.5.1 (2025-11-18)
 
 - changed: problem.clj -> problems.clj
 
