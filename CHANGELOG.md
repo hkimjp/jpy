@@ -7,9 +7,9 @@
 * SSE - session
 
 
-# 0.5.0-SNAPSHOT
+# 0.5.0 (2025-11-18)
 
-* group-id - use week?
+- refactor, no use `num`.
 
 
 # 0.4.1 (2025-11-17)
