@@ -20,10 +20,10 @@
     (tel/log! :info (str "current is at " e))
     (ds/put! {:db/id e :current id})))
 
-(defn current-num []
-  (->> (ds/qq '[:find [?e ?num]
+(defn current-id []
+  (->> (ds/qq '[:find [?e ?pid]
                 :where
-                [?e :current ?num]])
+                [?e :current ?pid]])
        second))
 
 (defn create!

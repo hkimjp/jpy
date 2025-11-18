@@ -18,7 +18,7 @@
     [:button {:class btn :type "submit"} "create"]]])
 
 (defn problems-section []
-  (let [current (problem/current-num)]
+  (let [current (problem/current-id)]
     [:div
      [:div.font-bold "problems"]
      (into
