@@ -5,33 +5,36 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
+   [hkimjp.jpy.answers :as answers]
    [hkimjp.jpy.util :refer [btn user]]
    [hkimjp.jpy.view :refer [page error-page hx redirect]]))
 
-(defn answer [{{:keys [e]} :path-params}]
+(defn answer
+  "called from answers-section, returns hx response"
+  [{{:keys [e]} :path-params}]
   (tel/log! {:level :info :id "answer" :msg e})
-  (hx [:pre (:answer (ds/pl (parse-long e)))]))
+  (let [{:keys [answer p/id]} (ds/pl (parse-long e))
+        {:keys [problem]} (ds/pl id)]
+    (hx [:div
+         [:p problem]
+         [:pre answer]])))
 
-(def list-answers-q
-  '[:find ?e ?num
-    :in $ ?author
-    :where
-    [?e :login ?author]
-    [?e :p/id ?num]])
-
-; (ds/qq list-answers-q "hkimura")
+(comment
+  (let [{:keys [answer p/id]} (ds/pl 4)]
+    id)
+  (ds/pl 4)
+  (ds/pl 3)
+  :rcf)
 
 (defn answers-section [author]
   [:div
    [:div.font-bold "answers"]
    (into
     [:div.flex.gap-x-4]
-    (for [[e num] (->> (ds/qq list-answers-q author) (sort-by first))]
+    (for [[e num] (->> (answers/list-answers author) (sort-by first))]
       [:a.underline {:hx-get (format "/workspace/answer/%d" e)
                      :hx-target "#answer"} num]))
    [:div#answer.my-4]])
-
-; (answers-section "hkimura")
 
 (def ^:private current-problem
   '[:find [?id ?problem]
