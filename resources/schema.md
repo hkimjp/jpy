@@ -1,21 +1,20 @@
 # problems
-:num int
 :valid true|false
 :problem text
 
 
-# current problem/redis? use max?
-:current num
-
-
 # answers
 :author string
+:p/id id
 :answer text
-:p/num num
+:datetime jt
 
 
 # scores
-:author string
-:p/num num
 :score int
+:author string
+:p/id id
 
+
+# current
+:current id

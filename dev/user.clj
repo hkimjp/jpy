@@ -27,12 +27,18 @@
 ; -------------------------
 (comment
   ;; initialize
-  (ds/put! {:num 0
-            :problem "dummy problem"
+  (ds/put! {:problem "dummy problem"
             :stat "ok"
             :datetime (jt/local-date-time)})
-
   (ds/put! {:current 0})
+  (ds/qq '[:find ?e
+           :where
+           [?e _ _]])
+  (ds/pl 1)
+  (ds/pl 2)
+  (ds/pl 3)
+  (ds/pl 4)
+  (ds/pl 5)
   :rcf)
 
 (comment

@@ -11,49 +11,38 @@
                [?e :num ?num]])
       first))
 
-(defn update-current [num]
-  (let [[e _] (ds/qq '[:find [?e ?num]
+(defn- update-current!
+  "datom [?e :current ?id] is only one"
+  [id]
+  (let [[e _] (ds/qq '[:find [?e ?id]
                        :where
-                       [?e :current ?num]])]
-    (ds/put! {:db/id e :current num})))
+                       [?e :current ?id]])]
+    (tel/log! :info (str "current is at " e))
+    (ds/put! {:db/id e :current id})))
 
-(defn current-num []
-  (->> (ds/qq '[:find [?e ?num]
+(defn current-id []
+  (->> (ds/qq '[:find [?e ?pid]
                 :where
-                [?e :current ?num]])
+                [?e :current ?pid]])
        second))
-
-(comment
-  (ds/qq '[:find ?e ?num
-           :where
-           [?e :current ?num]])
-
-  (update-current 3)
-  (current-num)
-  (ds/pl 3)
-  :rcf)
 
 (defn create!
   [{{:keys [problem]} :params}]
   (tel/log! {:level :info :id "create!" :data {:problem problem}})
-  (let [num (-> (max-num) inc)]
-    (try
-      (ds/put! {:num num
-                :valid true
-                :problem problem
-                :datetime (jt/local-date-time)})
-      (update-current num)
-      #_(hx [:div.flex.gap-x-4 [:div (str num)] [:div problem]])
-      (redirect "/admin")
-      (catch Exception e
-        (tel/log! {:level :warn :id "create!"
-                   :msg (:getMessage e)})))))
+  (try
+    (let [ret (ds/put! {:valid true
+                        :problem problem})
+          id ((:tempids ret) -1)]
+      (update-current! id)
+      (redirect "/admin"))
+    (catch Exception e
+      (tel/log! {:level :warn :id "create!"
+                 :msg (:getMessage e)}))))
 
 (def problems-all
-  '[:find ?e ?valid ?num ?problem
-    :keys e  valid  num  problem
+  '[:find ?e ?valid ?problem
+    :keys e  valid  problem
     :where
-    [?e :num ?num]
     [?e :valid ?valid]
     [?e :problem ?problem]])
 
@@ -61,13 +50,11 @@
   "list available problemslist available problems"
   []
   (->> (ds/qq problems-all)
-       (sort-by :num)
+       (sort-by :e)
        reverse))
-
-#_(problems)
 
 (defn current! [{{:keys [current]} :params}]
   (let [current (parse-long current)]
     (tel/log! {:level :info :id "current!" :msg (str "current:" current)})
-    (update-current current)
+    (update-current! current)
     (redirect "/admin")))
