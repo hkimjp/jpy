@@ -5,7 +5,7 @@ Description=On class Python assignments.
 User=ubuntu
 Type=simple
 WorkingDirectory=/home/ubuntu/jpy
-EnvironmentFile=/home/ubuntu/jpy/jpy.env
+EnvironmentFile=/home/ubuntu/jpy/.env
 ExecStart=/bin/sh start.sh
 ExecStop=/bin/sh stop.sh
 
