@@ -2,7 +2,6 @@
   (:require
    [reitit.ring :as ring]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-   #_[taoensso.telemere :as t]
    [hkimjp.jpy.admin :as admin]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
@@ -36,6 +35,7 @@
    ["/hx"]])
 
 ;; setup for development
+#_(require '[taoensso.telemere :as t])
 #_(defn root-handler
     [{:keys [request-method uri] :as request}]
     (t/log! {:level :debug

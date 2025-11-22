@@ -1,8 +1,7 @@
 (ns hkimjp.jpy.system
   (:require
    [environ.core :refer [env]]
-   [ring.adapter.jetty :as jetty]
-   [ring.middleware.reload :refer [wrap-reload]]
+   [ring.adapter.jetty :refer [run-jetty]]
    [taoensso.telemere :as t]
    [hkimjp.jpy.routes :refer [root-handler]]
    [hkimjp.datascript :as ds]))
@@ -11,14 +10,11 @@
 
 (defn start-jetty
   []
-  (let [port (parse-long (or (env :port) "3000"))
-        handler (if (some? (env :develop))
-                  (wrap-reload #'root-handler)
-                  root-handler)]
-    (reset! server (jetty/run-jetty handler {:port port :join? false}))
+  (let [port (parse-long (or (env :port) "3000"))]
+    (reset! server (run-jetty root-handler {:port port :join? false}))
     (t/log! :info (str "server started at port " port))))
 
-(defn stop-server []
+(defn stop-jetty []
   (when @server
     (.stop @server)
     (t/log! :info "server stopped.")))
@@ -36,5 +32,5 @@
       (System/exit 0))))
 
 (defn stop-system []
-  (stop-server)
+  (stop-jetty)
   (ds/stop))

@@ -6,9 +6,11 @@
 - share `get /problems` between /admin and /workspace
 * SSE 
 
-# 0.6.0-SNAPSHOT
+# 0.6.0-SNAPSHOT (2025-11-22)
 
-- storage/fetch.sh - copied from konpy2
+- ring-devel - copied contents of `system.clj` into `user.clj`
+- added storage/fetch.sh - copied from konpy2
+- added systemd
 
 # 0.5.1 (2025-11-18)
 

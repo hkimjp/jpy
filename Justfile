@@ -49,6 +49,12 @@ deploy: minify build
   ssh ${DEST} 'sudo systemctl restart jpy'
   ssh ${DEST} 'systemctl status jpy'
 
+
+eq: minify build
+  scp target/io.github.hkimjp/jpy-*.jar eq.local:jpy/jpy.jar
+  ssh eq.local 'sudo systemctl restart jpy'
+  ssh eq.local 'systemctl status jpy'
+
 update: upgrade
 upgrade: force
 force:

@@ -1,0 +1,13 @@
+[Unit]
+Description=On class Python assignments.
+
+[Service]
+User=ubuntu
+Type=simple
+WorkingDirectory=/home/ubuntu/jpy
+EnvironmentFile=/home/ubuntu/jpy/jpy.env
+ExecStart=/bin/sh start.sh
+ExecStop=/bin/sh stop.sh
+
+[Install]
+WantedBy=multi-user.target
