@@ -11,6 +11,9 @@
    [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
 
+(defn under-construction [request]
+  (error-page [:div (str "under construction " (:uri request))]))
+
 (def routes
   [["/"      {:get login :post login!}]
    ["/logout" logout!]
@@ -26,13 +29,11 @@
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]
-   ["/problems"
-    ["/create" {:post {:middleware [m/wrap-admin]
-                       :handler problems/create!}}]
-    ["/current" {:post {:middleware [m/wrap-admin]
-                        :handler problems/current!}}]]
-   ["/answer"]
-   ["/hx"]])
+   ["/problems" {:middleware [m/wrap-admin]}
+    ["/create"  {:post {:handler problems/create!}}]
+    ["/current" {:post {:handler problems/current!}}]]
+   ["/answer" under-construction]
+   ["/hx" under-construction]])
 
 ;; setup for development
 #_(require '[taoensso.telemere :as t])

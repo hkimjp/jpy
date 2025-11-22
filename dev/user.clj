@@ -10,6 +10,7 @@
    [hkimjp.jpy.routes :refer [root-handler]]))
 
 ;--------------------------
+; ring-devel
 (defonce server (atom nil))
 
 (defn start-jetty
@@ -44,8 +45,9 @@
 (start-system)
 
 ;---------------------------
+; clj-reload
 (reload/init
- {:dirs ["src" "dev" "test"]
+ {:dirs ["src" "test"]
   :no-reload '#{user}
   :unload-hook 'before-unload
   :after-reload 'start-system})
@@ -57,45 +59,4 @@
   (start-system))
 
 ; (reload/reload)
-
-; -------------------------
-
-; -------------------------
-
-(comment
-  ;; initialize
-  (ds/put! {:problem "dummy problem"
-            :stat "ok"
-            :datetime (jt/local-date-time)})
-  (ds/put! {:current 0})
-  ;;
-  (ds/qq '[:find ?e
-           :where
-           [?e _ _]])
-  (ds/pl 1)
-  (ds/pl 2)
-  (ds/pl 3)
-  (ds/pl 4)
-  (ds/pl 5)
-  :rcf)
-
-(comment
-  (ds/qq '[:find ?e ?num
-           :where
-           [?e :current ?num]])
-
-  (ds/pl 1)
-
-  (ds/qq '[:find ?problem
-           :where
-           [?e :num 19]
-           [?e :problem ?problem]])
-
-  (ds/qq '[:find ?e
-           :where
-           [?e _ _]])
-
-  (ds/pl 5)
-
-  :rcf)
 
