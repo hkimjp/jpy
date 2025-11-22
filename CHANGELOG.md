@@ -4,8 +4,11 @@
 
 - initialize in production
 - share `get /problems` between /admin and /workspace
-* SSE - session
+* SSE 
 
+# 0.6.0-SNAPSHOT
+
+- storage/fetch.sh - copied from konpy2
 
 # 0.5.1 (2025-11-18)
 
