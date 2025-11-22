@@ -5,27 +5,27 @@
    [hiccup2.core :as h]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
-   [hkimjp.jpy.problem :as problem]
+   [hkimjp.jpy.problems :as problems]
    [hkimjp.jpy.util :refer [btn]]
    [hkimjp.jpy.view :refer [page]]))
 
 (defn new-problem-section []
   [:div
    [:div.font-bold "new problem"]
-   [:form.m-4 {:method "post" :action "/problem/create"}
+   [:form.m-4 {:method "post" :action "/problems/create"}
     (h/raw (anti-forgery-field))
     [:textarea {:class "w-full h-20 p-2 border-1" :name "problem"}]
     [:button {:class btn :type "submit"} "create"]]])
 
 (defn problems-section []
-  (let [current (problem/current-num)]
+  (let [current (problems/current-id)]
     [:div
      [:div.font-bold "problems"]
      (into
       [:div#list-all.mx-4
-       [:form {:method "post" :action "/problem/current"}
+       [:form {:method "post" :action "/problems/current"}
         (h/raw (anti-forgery-field))
-        (for [{:keys [e valid problem]} (problem/problems)]
+        (for [{:keys [e valid problem]} (problems/problems)]
           [:div.flex.gap-x-4
            [:button {:class btn :name "current" :value e}
             (if (= current e) "✔️" "⬜️")]
