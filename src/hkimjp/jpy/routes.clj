@@ -35,9 +35,8 @@
    ["/answer"]
    ["/hx"]])
 
+;; setup for development
 #_(defn root-handler
-    "
-     "
     [{:keys [request-method uri] :as request}]
     (t/log! {:level :debug
              :data {:request-method request-method :uri uri}})

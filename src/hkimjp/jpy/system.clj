@@ -2,8 +2,9 @@
   (:require
    [environ.core :refer [env]]
    [ring.adapter.jetty :as jetty]
+   [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as t]
-   [hkimjp.jpy.routes :as routes]
+   [hkimjp.jpy.routes :refer [root-handler]]
    [hkimjp.datascript :as ds]))
 
 (defonce server (atom nil))
@@ -12,8 +13,8 @@
   []
   (let [port (parse-long (or (env :port) "3000"))
         handler (if (some? (env :develop))
-                  #'routes/root-handler
-                  routes/root-handler)]
+                  (wrap-reload #'root-handler)
+                  root-handler)]
     (reset! server (jetty/run-jetty handler {:port port :join? false}))
     (t/log! :info (str "server started at port " port))))
 
