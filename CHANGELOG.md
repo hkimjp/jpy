@@ -6,8 +6,9 @@
 - share `get /problems` between /admin and /workspace
 * SSE 
 
-# 0.6.0-SNAPSHOT (2025-11-22)
+# 0.6.0-SNAPSHOT
 
+- http-kit
 - ring-devel - copied contents of `system.clj` into `user.clj`
 - added storage/fetch.sh - copied from konpy2
 - added systemd

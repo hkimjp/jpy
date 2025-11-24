@@ -2,28 +2,25 @@
   (:require
    [clj-reload.core :as reload]
    [environ.core :refer [env]]
-   ;;[java-time.api :as jt]
-   [ring.adapter.jetty :refer [run-jetty]]
+   [org.httpkit.server :as hk]
    [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as t]
-   [hkimjp.datascript :as ds]
-   [hkimjp.jpy.routes :refer [root-handler]]))
+   [hkimjp.jpy.routes :refer [root-handler]]
+   [hkimjp.datascript :as ds]))
 
 ;--------------------------
 ; ring-devel
 (defonce server (atom nil))
 
-(defn start-jetty
-  []
-  (let [port (parse-long (or (env :port) "3000"))
-        handler (wrap-reload #'root-handler)]
-    (reset! server (run-jetty handler {:port port :join? false}))
-    (t/log! :info (str "server started at port " port))))
+(defn start-server []
+  (let [handler (wrap-reload #'root-handler)]
+    (let [port (parse-long (or (env :port) "3000"))]
+      (reset! server (hk/run-server handler {:port port}))
+      (println (str "http-kit started at port " port)))))
 
-(defn stop-jetty []
-  (when @server
-    (.stop @server)
-    (t/log! :info "server stopped.")))
+(defn stop-server []
+  (@server)
+  (reset! server nil))
 
 (defn start-system []
   (t/log! {:level :info
@@ -32,17 +29,17 @@
            :data {:datascript (env :datascript)}})
   (try
     (ds/start-or-restore {:url (env :datascript)})
-    (start-jetty)
+    (start-server)
     (catch Exception e
       (t/log! :fatal (.getMessage e))
       (System/exit 0))))
 
 (defn stop-system []
-  (stop-jetty)
+  (stop-server)
   (ds/stop))
 
-(t/set-min-level! :debug)
 (start-system)
+; (stop-system)
 
 ;---------------------------
 ; clj-reload
