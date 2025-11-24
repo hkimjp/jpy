@@ -4,9 +4,25 @@
 
 - initialize in production
 - share `get /problems` between /admin and /workspace
-* SSE - session
-- dividing today's problem from others
-- redis or logic? - logic.
+* SSE 
+
+# 0.6.0-SNAPSHOT
+
+- jar 45MB->40MB
+- `org.httpkit.client` - replaced hato, added `charredcom.cnuernber/charred`
+- `org.httpkit.server` - replaced jetty
+- ring-devel - copied contents of `system.clj` into `user.clj`
+- added storage/fetch.sh - copied from konpy2
+- added systemd
+
+# 0.5.1 (2025-11-18)
+
+- changed: problem.clj -> problems.clj
+
+# 0.5.0 (2025-11-18)
+
+- refactor, no use `num`.
+
 
 # 0.4.1 (2025-11-17)
 

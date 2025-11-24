@@ -2,15 +2,17 @@
   (:require
    [reitit.ring :as ring]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-   #_[taoensso.telemere :as t]
    [hkimjp.jpy.admin :as admin]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.middleware :as m]
-   [hkimjp.jpy.problem :as problem]
+   [hkimjp.jpy.problems :as problems]
    [hkimjp.jpy.scoreboard :as scoreboard]
    [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
+
+(defn under-construction [request]
+  (error-page [:div (str "under construction " (:uri request))]))
 
 (def routes
   [["/"      {:get login :post login!}]
@@ -27,17 +29,15 @@
     ["/answer/:e" {:get workspace/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
     ["" {:get scoreboard/index}]]
-   ["/problem"
-    ["/create" {:post {:middleware [m/wrap-admin]
-                       :handler problem/create!}}]
-    ["/current" {:post {:middleware [m/wrap-admin]
-                        :handler problem/current!}}]]
-   ["/answer"]
-   ["/hx"]])
+   ["/problems" {:middleware [m/wrap-admin]}
+    ["/create"  {:post {:handler problems/create!}}]
+    ["/current" {:post {:handler problems/current!}}]]
+   ["/answer" under-construction]
+   ["/hx" under-construction]])
 
+;; setup for development
+#_(require '[taoensso.telemere :as t])
 #_(defn root-handler
-    "
-     "
     [{:keys [request-method uri] :as request}]
     (t/log! {:level :debug
              :data {:request-method request-method :uri uri}})

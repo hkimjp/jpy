@@ -1,8 +1,10 @@
 (ns hkimjp.jpy.login
   (:require
    [buddy.hashers :as hashers]
+   [charred.api :as charred]
    [environ.core :refer [env]]
-   [hato.client :as hc]
+   [org.httpkit.client :as hk-client]
+   ; [hato.client :as hc]
    [hiccup2.core :as h]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [ring.util.response :as resp]
@@ -30,6 +32,21 @@
       [:button {:class btn} "LOGIN"]]]
     [:br]]))
 
+(comment
+  (:body (hc/get (str l22 "/api/user/hkimura") {:timeout 3000 :as :json}))
+
+  (hc/get (str l22 "/api/user/hkimura"))
+
+  (def resp (hk-client/get (str l22 "/api/user/hkimura")))
+  ((charred/read-json (:body @resp)) "password")
+
+  (-> (hk-client/get (str l22 "/api/user/hkimura"))
+      deref
+      :body
+      charred/read-json
+      (get "password"))
+  :rcf)
+
 (defn login!
   [{{:keys [login password]} :params}]
   (t/log! {:level :debug :id "login!" :msg (str login " " password)})
@@ -39,8 +56,12 @@
       (-> (resp/redirect "/workspace")
           (assoc-in [:session :identity] login)))
     (try
-      (let [resp (hc/get (str l22 "/api/user/" login) {:timeout 3000 :as :json})]
-        (if (and (some? resp) (hashers/check password (get-in resp [:body :password])))
+      (let [pw (-> (hk-client/get (str l22 "/api/user/" login))
+                   deref
+                   :body
+                   charred/read-json
+                   (get "password"))]
+        (if (hashers/check password pw)
           (do
             (t/log! :info (str "login success: " login))
             (-> (resp/redirect "/workspace")
@@ -49,7 +70,6 @@
             (t/log! :info (str "login failed: " login))
             (-> (resp/redirect "/")
                 (assoc :session {} :flash "login failed")))))
-      ;; maybe auth server error
       (catch Exception e
         (t/log! :warn (.getMessage e))
         (-> (resp/redirect "/")
