@@ -8,7 +8,9 @@
 
 # 0.6.0-SNAPSHOT
 
-- http-kit
+- jar 45MB->40MB
+- `org.httpkit.client` - replaced hato, added `charredcom.cnuernber/charred`
+- `org.httpkit.server` - replaced jetty
 - ring-devel - copied contents of `system.clj` into `user.clj`
 - added storage/fetch.sh - copied from konpy2
 - added systemd
