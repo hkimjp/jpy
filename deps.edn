@@ -8,6 +8,7 @@
   clojure.java-time/clojure.java-time {:mvn/version "1.4.3"}
   environ/environ                {:mvn/version "1.2.0"}
   com.taoensso/telemere          {:mvn/version "1.1.0"}
+  com.cnuernber/charred          {:mvn/version "1.037"}
   ;; markdown
   io.github.nextjournal/markdown {:mvn/version "0.7.196"}
   ;; ring
@@ -21,7 +22,7 @@
   ;; hiccup
   hiccup/hiccup                  {:mvn/version "2.0.0"}
   ;; http client
-  hato/hato                      {:mvn/version "1.0.0"}
+  ; hato/hato                      {:mvn/version "1.0.0"}
   ;; database
   io.github.hkimjp/datascript-storage-javatime
   {:git/tag "0.7.6" :git/sha "815ae05"}}
