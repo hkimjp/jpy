@@ -3,6 +3,7 @@
  :deps
  {org.clojure/clojure            {:mvn/version "1.12.3"}
   org.slf4j/slf4j-nop            {:mvn/version "2.0.17"}
+  io.github.tonsky/clj-reload {:mvn/version "1.0.0"}
   ;;
   buddy/buddy-hashers            {:mvn/version "2.0.167"}
   clojure.java-time/clojure.java-time {:mvn/version "1.4.3"}
