@@ -6,7 +6,7 @@
 * show uploaded timestamp
 * scoreboard
 
-# 0.6.1-SNAPSHOT
+# 0.6.1 (2025-11-27)
 
 - can upload answers
 - show initial problem
