@@ -9,15 +9,15 @@
    [hkimjp.jpy.util :as util :refer [btn user]]
    [hkimjp.jpy.view :refer [page error-page hx redirect]]))
 
-(defn answer
-  "called from answers-section, returns hx response"
-  [{{:keys [e]} :path-params}]
-  (tel/log! {:level :info :id "answer" :msg e})
-  (let [{:keys [answer p/id]} (ds/pl (parse-long e))
-        {:keys [problem]} (ds/pl id)]
-    (hx [:div
-         [:p problem]
-         [:pre answer]])))
+#_(defn answer
+    "called from answers-section, returns hx response"
+    [{{:keys [e]} :path-params}]
+    (tel/log! {:level :info :id "answer" :msg e})
+    (let [{:keys [answer p/id]} (ds/pl (parse-long e))
+          {:keys [problem]} (ds/pl id)]
+      (hx [:div
+           [:p problem]
+           [:pre answer]])))
 
 (defn answers-section [author]
   [:div.my-4
@@ -25,7 +25,7 @@
    (into
     [:div.flex.gap-x-4]
     (for [[e num] (->> (answers/list-answers author) (sort-by first))]
-      [:a.underline {:hx-get (format "/workspace/answer/%d" e)
+      [:a.underline {:hx-get (format "/answers/answer/%d" e)
                      :hx-target "#answer"} num]))
    [:div#answer.my-4]])
 

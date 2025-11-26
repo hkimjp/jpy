@@ -3,9 +3,13 @@
    [environ.core :refer [env]]
    [java-time.api :as jt]))
 
+; pseudo class
+
 (def btn "mx-1 px-1 text-white bg-sky-500 hover:bg-sky-700 active:bg-red-500 rounded")
 
 (def input-box "px-1 border-1 rounded")
+
+; queries
 
 (def current-problem
   '[:find [?id ?problem]

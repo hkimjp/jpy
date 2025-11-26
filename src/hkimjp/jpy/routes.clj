@@ -19,24 +19,24 @@
   (error-page [:div (str "under construction " (:uri request))]))
 
 (def routes
-  [["/"      {:get login :post login!}]
+  [["/"       {:get login :post login!}]
    ["/logout" logout!]
    ["/help"   {:get help}]
-   ["/admin" {:middleware [m/wrap-admin]}
-    [""           {:get admin/admin}]]
-   ["/workspace" {:middleware [m/wrap-users]}
-    ["" {:get workspace/index}]
-    ["/answer/:e" {:get workspace/answer}]]
+   ["/admin"  {:middleware [m/wrap-admin]}
+    [""       {:get admin/admin}]]
+   ["/workspace"  {:middleware [m/wrap-users]}
+    [""           {:get workspace/index}]
+    ["/answer/:e" {:get answers/answer}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
-    ["" {:get scoreboard/index}]]
+    [""           {:get scoreboard/index}]]
    ["/problems" {:middleware [m/wrap-admin]}
     ["/create"  {:post {:handler problems/create!}}]
     ["/current" {:post {:handler problems/current!}}]]
    ["/answers" {:middleware [m/wrap-users]}
     ["/upload" {:post answers/upload!}]]
    ["/event"
-    ["" {:get {:handler event/event}}]
-    ["/broadcat" {:get {:handler event/broadcast!}}]]
+    [""           {:get  {:handler event/event}}]
+    ["/broadcast" {:post {:handler event/broadcast!}}]]
    ["/hx" under-construction]])
 
 (def root-handler

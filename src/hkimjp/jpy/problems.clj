@@ -3,6 +3,7 @@
    [java-time.api :as jt]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
+   [hkimjp.jpy.event :refer [broadcast-message-to-connected-clients!]]
    [hkimjp.jpy.view :refer [page redirect hx]]))
 
 (defn max-num []
@@ -18,7 +19,8 @@
                        :where
                        [?e :current ?id]])]
     (tel/log! :info (str "current is at " e))
-    (ds/put! {:db/id e :current id})))
+    (ds/put! {:db/id e :current id})
+    (broadcast-message-to-connected-clients! "boardcat from server")))
 
 (defn current-id []
   (->> (ds/qq '[:find [?e ?pid]
@@ -47,7 +49,7 @@
     [?e :problem ?problem]])
 
 (defn problems
-  "list available problemslist available problems"
+  "list available problems"
   []
   (->> (ds/qq problems-all)
        (sort-by :e)
