@@ -3,6 +3,8 @@
    [reitit.ring :as ring]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
    [hkimjp.jpy.admin :as admin]
+   [hkimjp.jpy.answers :as answers]
+   [hkimjp.jpy.event :as event]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.middleware :as m]
@@ -11,50 +13,31 @@
    [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
 
-(defn under-construction [request]
+(defn under-construction
+  [{{:keys [identity]} :session :as request}]
+  (println "identity: " identity)
   (error-page [:div (str "under construction " (:uri request))]))
 
 (def routes
-  [["/"      {:get login :post login!}]
+  [["/"       {:get login :post login!}]
    ["/logout" logout!]
    ["/help"   {:get help}]
-   ["/admin" {:middleware [m/wrap-admin]}
-    [""           {:get admin/admin}]
-    ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
-    ; ["/list-all"   {:get admin/list-all}]
-    ; ["/delete"     {:post admin/delete!}]
-    ]
-   ["/workspace" {:middleware [m/wrap-users]}
-    ["" {:get workspace/index :post workspace/upload!}]
-    ["/answer/:e" {:get workspace/answer}]]
+   ["/admin"  {:middleware [m/wrap-admin]}
+    [""       {:get admin/admin}]]
+   ["/workspace"  {:middleware [m/wrap-users]}
+    [""           {:get workspace/index}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
-    ["" {:get scoreboard/index}]]
+    [""           {:get scoreboard/index}]]
    ["/problems" {:middleware [m/wrap-admin]}
     ["/create"  {:post {:handler problems/create!}}]
     ["/current" {:post {:handler problems/current!}}]]
-   ["/answer" under-construction]
+   ["/answers" {:middleware [m/wrap-users]}
+    ["/answer/:e" {:get answers/answer}]
+    ["/upload" {:post answers/upload!}]]
+   ["/event"
+    [""           {:get  {:handler event/event}}]
+    ["/broadcast" {:post {:handler event/broadcast!}}]]
    ["/hx" under-construction]])
-
-;; setup for development
-#_(require '[taoensso.telemere :as t])
-#_(defn root-handler
-    [{:keys [request-method uri] :as request}]
-    (t/log! {:level :debug
-             :data {:request-method request-method :uri uri}})
-    (let [handler
-          (ring/ring-handler
-           (ring/router routes)
-           (ring/routes
-            (ring/create-resource-handler {:path "/"})
-            (ring/create-default-handler
-             {:not-found
-              (constantly (error-page [:p "not found, check uri"]))
-              :method-not-allowed
-              (constantly (error-page [:p "not allowed"]))
-              :not-acceptable
-              (constantly (error-page [:p "not acceptable"]))}))
-           {:middleware [[wrap-defaults site-defaults]]})]
-      (handler request)))
 
 (def root-handler
   (ring/ring-handler

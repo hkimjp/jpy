@@ -4,7 +4,7 @@
    [ring.util.response :as resp]
    [taoensso.telemere :as t]))
 
-(def version "0.6.0")
+(def version "0.6.1")
 
 (def ^:private menu "text-xl font-medium text-white px-1 hover:bg-orange-500")
 
@@ -37,6 +37,9 @@
     [:script {:type "text/javascript"
               :src  "/assets/js/htmx.min.js"
               :defer true}]
+    [:script {:type "text/javascript"
+              :src  "/assets/js/htmx-ext-sse.js"
+              :defer true}]
     [:title "J.PY"]]
    [:body {:hx-boost "true"}
     [:div
@@ -53,7 +56,7 @@
 
 (defn error-page
   [content]
-  (t/log! :debug (str "error-page" content))
+  (t/log! :debug (str "error-page " content))
   (-> (str (h/html (h/raw "<!DOCTYPE html>")
                    (base [:div
                           [:h1.text-red-600 "Error"]

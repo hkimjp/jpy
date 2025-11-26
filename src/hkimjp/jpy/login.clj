@@ -4,7 +4,6 @@
    [charred.api :as charred]
    [environ.core :refer [env]]
    [org.httpkit.client :as hk-client]
-   ; [hato.client :as hc]
    [hiccup2.core :as h]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [ring.util.response :as resp]
@@ -31,21 +30,6 @@
        {:name "password" :type "password" :placeholder "password" :autocomplete "current-password"}]
       [:button {:class btn} "LOGIN"]]]
     [:br]]))
-
-(comment
-  (:body (hc/get (str l22 "/api/user/hkimura") {:timeout 3000 :as :json}))
-
-  (hc/get (str l22 "/api/user/hkimura"))
-
-  (def resp (hk-client/get (str l22 "/api/user/hkimura")))
-  ((charred/read-json (:body @resp)) "password")
-
-  (-> (hk-client/get (str l22 "/api/user/hkimura"))
-      deref
-      :body
-      charred/read-json
-      (get "password"))
-  :rcf)
 
 (defn login!
   [{{:keys [login password]} :params}]
