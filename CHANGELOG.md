@@ -8,6 +8,7 @@
 
 # 0.6.1-SNAPSHOT
 
+- added resources/public/assets/js/htmx-ext-sse.js
 - destructuring middleware.clj/wrap-users, wrap-admin
 
     * was: (let [user (get-in request [:session :identity])])
