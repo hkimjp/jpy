@@ -56,7 +56,7 @@
 
 (defn error-page
   [content]
-  (t/log! :debug (str "error-page" content))
+  (t/log! :debug (str "error-page " content))
   (-> (str (h/html (h/raw "<!DOCTYPE html>")
                    (base [:div
                           [:h1.text-red-600 "Error"]

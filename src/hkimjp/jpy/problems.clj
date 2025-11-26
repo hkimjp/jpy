@@ -1,32 +1,17 @@
 (ns hkimjp.jpy.problems
   (:require
-   [java-time.api :as jt]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.event :refer [broadcast-message-to-connected-clients!]]
-   [hkimjp.jpy.view :refer [page redirect hx]]))
-
-(defn max-num []
-  (-> (ds/qq '[:find [(max ?num)]
-               :where
-               [?e :num ?num]])
-      first))
+   [hkimjp.jpy.util :as util]))
 
 (defn- update-current!
-  "datom [?e :current ?id] is only one"
+  "datom [?e :current ?id] is an only one"
   [id]
-  (let [[e _] (ds/qq '[:find [?e ?id]
-                       :where
-                       [?e :current ?id]])]
+  (let [{:keys [e]} (util/current-problem)]
     (tel/log! :info (str "current is at " e))
     (ds/put! {:db/id e :current id})
-    (broadcast-message-to-connected-clients! "boardcat from server")))
-
-(defn current-id []
-  (->> (ds/qq '[:find [?e ?pid]
-                :where
-                [?e :current ?pid]])
-       second))
+    (broadcast-message-to-connected-clients! (:problem (util/current-problem)))))
 
 (defn create!
   [{{:keys [problem]} :params}]
@@ -41,17 +26,10 @@
       (tel/log! {:level :warn :id "create!"
                  :msg (:getMessage e)}))))
 
-(def problems-all
-  '[:find ?e ?valid ?problem
-    :keys e  valid  problem
-    :where
-    [?e :valid ?valid]
-    [?e :problem ?problem]])
-
 (defn problems
   "list available problems"
   []
-  (->> (ds/qq problems-all)
+  (->> (util/problems-all)
        (sort-by :e)
        reverse))
 

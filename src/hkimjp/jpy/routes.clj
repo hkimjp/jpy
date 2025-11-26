@@ -25,14 +25,14 @@
    ["/admin"  {:middleware [m/wrap-admin]}
     [""       {:get admin/admin}]]
    ["/workspace"  {:middleware [m/wrap-users]}
-    [""           {:get workspace/index}]
-    ["/answer/:e" {:get answers/answer}]]
+    [""           {:get workspace/index}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
     [""           {:get scoreboard/index}]]
    ["/problems" {:middleware [m/wrap-admin]}
     ["/create"  {:post {:handler problems/create!}}]
     ["/current" {:post {:handler problems/current!}}]]
    ["/answers" {:middleware [m/wrap-users]}
+    ["/answer/:e" {:get answers/answer}]
     ["/upload" {:post answers/upload!}]]
    ["/event"
     [""           {:get  {:handler event/event}}]

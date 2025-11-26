@@ -1,7 +1,8 @@
 (ns hkimjp.jpy.util
   (:require
-   [environ.core :refer [env]]
-   [java-time.api :as jt]))
+   ; [environ.core :refer [env]]
+   ; [java-time.api :as jt]
+   [hkimjp.datascript :as ds]))
 
 ; pseudo class
 
@@ -11,52 +12,27 @@
 
 ; queries
 
-(def current-problem
-  '[:find [?id ?problem]
-    :where
-    [?e :current ?id]
-    [?id :problem ?problem]])
+(defn current-problem []
+  (ds/qq '[:find [?e ?id ?problem]
+           :keys e   id   problem
+           :where
+           [?e :current ?id]
+           [?id :problem ?problem]]))
+
+(defn list-answers [author]
+  (ds/qq '[:find ?e ?num
+           :in $ ?author
+           :where
+           [?e :login ?author]
+           [?e :p/id ?num]]
+         author))
+
+(defn problems-all []
+  (ds/qq '[:find ?e ?valid ?problem
+           :keys e  valid  problem
+           :where
+           [?e :valid ?valid]
+           [?e :problem ?problem]]))
 
 (defn user [request]
   (get-in request [:session :identity]))
-
-; (defn abbrev
-;   "shorten string s for concise log."
-;   ([s] (abbrev s 80))
-;   ([s n] (let [pat (re-pattern (str "(^.{" n "}).*"))]
-;            (str/replace-first s pat "$1..."))))
-
-; (def start-day
-;   (if-let [d (env :start-day)]
-;     (let [[_ year month date] (re-find #"(\d{4})-(\d{2})-(\d{2})" d)]
-;       (jt/local-date (parse-long year)
-;                      (parse-long month)
-;                      (parse-long date)))
-;     (jt/local-date 2025 10 1))) ; production 2025 10 1
-
-; (defn week
-;   "Returns how many weeks have passed since the argument `date`.
-;    If no argument given, the `start`day` defnied above is used."
-;   ([] (week (jt/local-date)))
-;   ([date]
-;    (quot (jt/time-between start-day date :days) 7)))
-
-; ; not orthogonal
-; (defn today []
-;   (str (jt/local-date)))
-
-; (defn now []
-;   (jt/local-date-time))
-
-; ; this willl prefer?
-; (defn local-date []
-;   (str (jt/local-date)))
-
-; (defn local-date-time []
-;   (str (jt/local-date-time)))
-
-; ; awkward
-; (defn iso
-;   "(iso \"2025-09-17T21:32:01.360441\") -> \"2025-09-17 21:32:01\""
-;   [tm]
-;   (format "%s %s" (subs tm 0 10) (subs tm 11 19)))

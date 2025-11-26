@@ -6,7 +6,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.problems :as problems]
-   [hkimjp.jpy.util :refer [btn]]
+   [hkimjp.jpy.util :as util :refer [btn]]
    [hkimjp.jpy.view :refer [page]]))
 
 (defn new-problem-section []
@@ -18,7 +18,7 @@
     [:button {:class btn :type "submit"} "create"]]])
 
 (defn problems-section []
-  (let [current (problems/current-id)]
+  (let [current (:id (util/current-problem))]
     [:div
      [:div.font-bold "problems"]
      (into
@@ -44,5 +44,3 @@
     (new-problem-section)
     (problems-section)
     (env-vars-section)]))
-
-
