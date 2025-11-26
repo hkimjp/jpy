@@ -7,6 +7,12 @@
 
 (def input-box "px-1 border-1 rounded")
 
+(def current-problem
+  '[:find [?id ?problem]
+    :where
+    [?e :current ?id]
+    [?id :problem ?problem]])
+
 (defn user [request]
   (get-in request [:session :identity]))
 

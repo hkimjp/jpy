@@ -37,6 +37,9 @@
     [:script {:type "text/javascript"
               :src  "/assets/js/htmx.min.js"
               :defer true}]
+    [:script {:type "text/javascript"
+              :src  "/assets/js/htmx-ext-sse.js"
+              :defer true}]
     [:title "J.PY"]]
    [:body {:hx-boost "true"}
     [:div

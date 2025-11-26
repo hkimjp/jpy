@@ -2,11 +2,18 @@
 
 # Unreleased
 
-- initialize in production
-- share `get /problems` between /admin and /workspace
-* SSE 
+* SSE
+* todays group (symbol, sign, mark, icon)
 
-# 0.6.0-SNAPSHOT
+
+# 0.6.1-SNAPSHOT
+
+- destructuring middleware.clj/wrap-users, wrap-admin
+
+    * was: (let [user (get-in request [:session :identity])])
+    * now: [{{:keys [identity]} :session :as request}]
+
+# 0.6.0 (2025-11-24)
 
 - jar 45MB->40MB
 - `org.httpkit.client` - replaced hato, added `charredcom.cnuernber/charred`
