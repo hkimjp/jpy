@@ -1,6 +1,9 @@
 (ns hkimjp.jpy.answers
   (:require
-   [hkimjp.datascript :as ds]))
+   [java-time.api :as jt]
+   [taoensso.telemere :as tel]
+   [hkimjp.datascript :as ds]
+   [hkimjp.jpy.view :refer [error-page redirect]]))
 
 (def list-answers-q
   '[:find ?e ?num
@@ -13,3 +16,16 @@
   (ds/qq list-answers-q author))
 
 ; (list-answers "hkimura")
+
+(defn upload! [{{:keys [login id answer]} :params :as request}]
+  (tel/log! {:level :info
+             :id "upload!"
+             :data (dissoc (:params request) :__anti-forgery-token)})
+  (try
+    (ds/put! {:login login
+              :p/id (parse-long id) ; <- ask ds
+              :answer answer
+              :datetime (jt/local-date-time)})
+    (redirect "/workspace")
+    (catch Exception e
+      (error-page (.getMessage e)))))
