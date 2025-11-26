@@ -11,11 +11,10 @@
 
 (defn send! [ch message]
   (hk/send! ch
-            {:status 200
-             :headers
-             {"Content-Type"      "text/event-stream"
-              "Cache-Control"     "no-cache, no-store"}
-             :body   (format-event message)}
+            {:status  200
+             :headers {"Content-Type"  "text/event-stream"
+                       "Cache-Control" "no-cache, no-store"}
+             :body    (format-event message)}
             false))
 
 (defn event [req]

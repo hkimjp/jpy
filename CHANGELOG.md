@@ -2,12 +2,15 @@
 
 # Unreleased
 
-* SSE
 * todays group (symbol, sign, mark, icon)
-
+* show uploaded timestamp
+* scoreboard
 
 # 0.6.1-SNAPSHOT
 
+- can upload answers
+- show initial problem
+- broadcast current problem
 - added resources/public/assets/js/htmx-ext-sse.js
 - destructuring middleware.clj/wrap-users, wrap-admin
 
