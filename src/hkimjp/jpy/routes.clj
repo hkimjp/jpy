@@ -56,5 +56,3 @@
 ; (root-handler {:request-method :get, :uri "/"})
 ; (root-handler {:request-method :get, :uri "/not"})
 ; (root-handler {:request-method :get, :uri "/favicon.ico"})
-
-
