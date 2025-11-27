@@ -2,11 +2,11 @@
 
 # Unreleased
 
-* scoreboard
-* padding pre
+development environment, wrap-reload?
 
-# 0.6.3-SNAPSHOT
+# 0.6.3 (2025-11-27)
 
+- scoreboard
 - resources/users.{json,txt}
 - refactored workspace.clj
 - added system/restart-system - (stop-system) (start-system) is better than clj-reload(?)
