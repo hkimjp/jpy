@@ -1,19 +1,27 @@
 (ns hkimjp.jpy.workspace
   (:require
    [hiccup2.core :as h]
+   [java-time.api :as jt]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.util :as util :refer [btn user]]
    [hkimjp.jpy.view :refer [page]]))
+
+(defn- shorten- [datetime]
+  (let [[mm dd] (jt/as datetime :month-of-year :day-of-month)]
+    (str mm "-" dd)))
+
+; (shorten- (jt/local-date-time))
+;(->> (util/list-answers "hkimura") (sort-by first))
 
 (defn answers-section [author]
   [:div.my-4
    [:div.font-bold "answers"]
    (into
     [:div.flex.gap-x-4]
-    (for [[e num] (->> (util/list-answers author) (sort-by first))]
-      [:a.underline {:hx-get (format "/answers/answer/%d" e)
-                     :hx-target "#answer"} num]))
+    (for [[e num datetime] (->> (util/list-answers author) (sort-by first))]
+      [:a.underline {:hx-get (str "/answers/answer/" e)
+                     :hx-target "#answer"} (shorten- datetime)]))
    [:div#answer.my-4]])
 
 (defn index [request]

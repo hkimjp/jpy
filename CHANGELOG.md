@@ -2,9 +2,16 @@
 
 # Unreleased
 
-* todays group (symbol, sign, mark, icon)
-* show uploaded timestamp
 * scoreboard
+* padding pre
+
+
+# 0.6.2 (2025-11-27)
+
+- admin - no use `true`
+- changed answers list: showed eid -> showed 'yy-mm'
+- show uploaded timestamp
+- changed: ranamed `answers/answer` -> `answers/answer-hx`
 
 # 0.6.1 (2025-11-27)
 
