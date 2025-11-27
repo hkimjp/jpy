@@ -6,6 +6,12 @@
 * show uploaded timestamp
 * scoreboard
 
+
+
+# 0.6.2-SNAPSHOT
+
+- admin - no use `true`
+
 # 0.6.1 (2025-11-27)
 
 - can upload answers

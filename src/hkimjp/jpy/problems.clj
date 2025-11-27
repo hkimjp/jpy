@@ -3,7 +3,8 @@
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.event :refer [broadcast-message-to-connected-clients!]]
-   [hkimjp.jpy.util :as util]))
+   [hkimjp.jpy.util :as util]
+   [hkimjp.jpy.view :refer [redirect]]))
 
 (defn- update-current!
   "datom [?e :current ?id] is an only one"

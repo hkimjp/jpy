@@ -32,7 +32,7 @@
            [:div e] [:div (str valid)] [:div problem]])]])]))
 
 (defn env-vars-section []
-  [:div
+  [:div.p-4
    [:div.font-bold "Env Vars"]
    (for [e [:develop :port :auth :admin :datascript :redis]]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])
