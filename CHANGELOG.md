@@ -6,7 +6,7 @@
 * padding pre
 
 
-# 0.6.2-SNAPSHOT
+# 0.6.2 (2025-11-27)
 
 - admin - no use `true`
 - changed answers list: showed eid -> showed 'yy-mm'
