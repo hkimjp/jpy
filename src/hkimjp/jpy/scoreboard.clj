@@ -1,11 +1,11 @@
 (ns hkimjp.jpy.scoreboard
   (:require
-   [clojure.edn :refer [read-string]]
+   [clojure.edn :as edn]
    [clojure.java.io :as io]
    [hkimjp.jpy.util :refer [score]]
    [hkimjp.jpy.view :refer [page]]))
 
-(def users (read-string (slurp (io/resource "users.txt"))))
+(def users (edn/read-string (slurp (io/resource "users.txt"))))
 
 (def smile (constantly "😀"))
 
