@@ -2,7 +2,8 @@
 
 # Unreleased
 
-development environment, wrap-reload?
+* change scoreboard `smiles` weekly
+* development environment, wrap-reload?
 
 # 0.6.4-hotfix
 
