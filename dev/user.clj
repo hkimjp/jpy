@@ -3,6 +3,7 @@
    [clj-reload.core :as reload]
    [clojure.java.io :as io]
    [charred.api :as charred]
+   [environ.core :refer [env]]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :as util]
@@ -11,7 +12,7 @@
 ;--------------------------
 
 (comment
-
+  (env :develop)
   (defn score [user]
     (ds/qq '[:find ?datetime
              :in $ ?author

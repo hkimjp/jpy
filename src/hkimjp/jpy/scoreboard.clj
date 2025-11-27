@@ -15,7 +15,7 @@
 (defn index [{{:keys [identity]} :session}]
   (page
    [:div.m-4
-    [:div.text-2xl.font-medium "scoreboard " identity]
+    [:div.text-2xl.font-medium "scoreboard"]
     (for [user users]
       [:div.flex.gap-x-4
        [:div {:class "w-24"} user]
