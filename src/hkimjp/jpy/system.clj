@@ -2,6 +2,7 @@
   (:require
    [environ.core :refer [env]]
    [org.httpkit.server :as hk]
+   [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.routes :refer [root-handler]]
    [hkimjp.datascript :as ds]))
@@ -12,7 +13,9 @@
   (when-not @server
     (let [port (parse-long (or (env :port) "3000"))
           handler (if (env :develop)
-                    #'root-handler
+                    (do
+                      (tel/log! :debug "wrap-reload #'root-handler")
+                      (wrap-reload #'root-handler))
                     root-handler)]
       (reset! server (hk/run-server handler {:port port}))
       (tel/log! :info (str "server started at port " port)))))

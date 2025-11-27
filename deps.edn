@@ -9,6 +9,7 @@
   com.cnuernber/charred          {:mvn/version "1.037"}
   ; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
   ring/ring-core                 {:mvn/version "1.15.3"}
+  ring/ring-devel                {:mvn/version "1.15.3"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
   http-kit/http-kit              {:mvn/version "2.8.1"}
   metosin/reitit-ring            {:mvn/version "0.9.1"}
@@ -19,8 +20,7 @@
  :aliases
  {:dev
   {:extra-paths ["dev"]
-   :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "1.0.0"}
-                 ring/ring-devel             {:mvn/version "1.15.3"}}
+   :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "1.0.0"}}
 
    :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
                  "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
