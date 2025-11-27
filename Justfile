@@ -44,16 +44,20 @@ test:
 build:
  clojure -T:build ci
 
-deploy: minify build
-  scp target/io.github.hkimjp/jpy-*.jar ${DEST}:jpy/jpy.jar
-  ssh ${DEST} 'sudo systemctl restart jpy'
-  ssh ${DEST} 'systemctl status jpy'
+DEST := "ubuntu@app.melt.kyutech.ac.jp"
 
+deploy: minify build
+  scp target/io.github.hkimjp/jpy-*.jar {{DEST}}:jpy/jpy.jar
+  ssh {{DEST}} 'sudo systemctl restart jpy'
+  ssh {{DEST}} 'systemctl status jpy'
+
+
+EQ := "eq.local"
 
 eq: minify build
-  scp target/io.github.hkimjp/jpy-*.jar eq.local:jpy/jpy.jar
-  ssh eq.local 'sudo systemctl restart jpy'
-  ssh eq.local 'systemctl status jpy'
+  scp target/io.github.hkimjp/jpy-*.jar {{EQ}}:jpy/jpy.jar
+  ssh {{EQ}} 'sudo systemctl restart jpy'
+  ssh {{EQ}} 'systemctl status jpy'
 
 update: upgrade
 upgrade: force
