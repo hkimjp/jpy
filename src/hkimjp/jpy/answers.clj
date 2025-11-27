@@ -14,7 +14,7 @@
         {:keys [problem]} (ds/pl id)]
     (hx [:div
          [:p problem]
-         [:pre answer]
+         [:pre.p-2 answer]
          [:p datetime]])))
 
 (defn upload!
