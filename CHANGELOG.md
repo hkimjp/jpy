@@ -4,6 +4,11 @@
 
 development environment, wrap-reload?
 
+# 0.6.4-hotfix
+
+- can not deploy to app.melt
+- fixed `Justfile`
+
 # 0.6.3 (2025-11-27)
 
 - scoreboard
