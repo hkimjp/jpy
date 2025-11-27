@@ -9,16 +9,18 @@
 (defonce server (atom nil))
 
 (defn start-server []
-  (let [port (parse-long (or (env :port) "3000"))
-        handler (if (env :develop)
-                  #'root-handler
-                  root-handler)]
-    (reset! server (hk/run-server handler {:port port}))
-    (tel/log! :info (str "server started at port " port))))
+  (when-not @server
+    (let [port (parse-long (or (env :port) "3000"))
+          handler (if (env :develop)
+                    #'root-handler
+                    root-handler)]
+      (reset! server (hk/run-server handler {:port port}))
+      (tel/log! :info (str "server started at port " port)))))
 
 (defn stop-server []
-  (@server)
-  (reset! server nil))
+  (when (some? @server)
+    (@server)
+    (reset! server nil)))
 
 (defn start-system []
   (tel/log! {:level :info
@@ -35,3 +37,7 @@
 (defn stop-system []
   (stop-server)
   (ds/stop))
+
+(defn restart-system []
+  (stop-system)
+  (start-system))

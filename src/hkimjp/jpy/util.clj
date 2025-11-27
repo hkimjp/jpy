@@ -1,7 +1,7 @@
 (ns hkimjp.jpy.util
   (:require
    ; [environ.core :refer [env]]
-   ; [java-time.api :as jt]
+   [java-time.api :as jt]
    [hkimjp.datascript :as ds]))
 
 ; pseudo class
@@ -35,5 +35,18 @@
            [?e :valid ?valid]
            [?e :problem ?problem]]))
 
+(defn score [user]
+  (ds/qq '[:find ?datetime
+           :in $ ?author
+           :where
+           [?e :login ?author]
+           [?e :datetime ?datetime]]
+         user))
+
+;
 (defn user [request]
   (get-in request [:session :identity]))
+
+(defn mm-dd [datetime]
+  (let [[mm dd] (jt/as datetime :month-of-year :day-of-month)]
+    (str mm "-" dd)))
