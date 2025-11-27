@@ -6,17 +6,19 @@
    [hkimjp.jpy.util :as util]
    [hkimjp.jpy.view :refer [error-page redirect hx]]))
 
-(defn answer
+(defn answer-hx
   "called from answers-section, returns hx response"
   [{{:keys [e]} :path-params}]
   (tel/log! {:level :info :id "answer" :msg e})
-  (let [{:keys [answer p/id]} (ds/pl (parse-long e))
+  (let [{:keys [answer p/id datetime]} (ds/pl (parse-long e))
         {:keys [problem]} (ds/pl id)]
     (hx [:div
          [:p problem]
-         [:pre answer]])))
+         [:pre answer]
+         [:p datetime]])))
 
-(defn upload! [{{:keys [login answer]} :params :as request}]
+(defn upload!
+  [{{:keys [login answer]} :params :as request}]
   (let [{:keys [id]} (util/current-problem)]
     (tel/log! {:level :info
                :data {:login login :p/id id :answer answer}})

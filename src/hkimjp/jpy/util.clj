@@ -20,11 +20,12 @@
            [?id :problem ?problem]]))
 
 (defn list-answers [author]
-  (ds/qq '[:find ?e ?num
+  (ds/qq '[:find ?e ?num ?datetime
            :in $ ?author
            :where
            [?e :login ?author]
-           [?e :p/id ?num]]
+           [?e :p/id ?num]
+           [?e :datetime ?datetime]]
          author))
 
 (defn problems-all []

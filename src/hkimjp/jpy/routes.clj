@@ -32,7 +32,7 @@
     ["/create"  {:post {:handler problems/create!}}]
     ["/current" {:post {:handler problems/current!}}]]
    ["/answers" {:middleware [m/wrap-users]}
-    ["/answer/:e" {:get answers/answer}]
+    ["/answer/:e" {:get answers/answer-hx}]
     ["/upload" {:post answers/upload!}]]
    ["/event"
     [""           {:get  {:handler event/event}}]

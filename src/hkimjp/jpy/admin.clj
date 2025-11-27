@@ -29,10 +29,10 @@
           [:div.flex.gap-x-4
            [:button {:class btn :name "current" :value e}
             (if (= current e) "✔️" "⬜️")]
-           [:div e] [:div (str valid)] [:div problem]])]])]))
+           [:div e] [:div problem]])]])]))
 
 (defn env-vars-section []
-  [:div.p-4
+  [:div.my-4
    [:div.font-bold "Env Vars"]
    (for [e [:develop :port :auth :admin :datascript :redis]]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])

@@ -1,10 +1,10 @@
 # hkimjp/jpy
 
-授業中 Python
+On Class Python
 
 ## Installation
 
-Download from https://github.com/hkimjp/jpycd
+Download from https://github.com/hkimjp/jpy.git
 
 ## Usage
 
