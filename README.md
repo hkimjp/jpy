@@ -1,6 +1,8 @@
 # hkimjp/jpy
 
-On Class Python
+授業時間 Python.
+
+座ってるだけだと暇だろ。そして、何にもならんだろ。授業中の活性を高める。
 
 ## Installation
 
@@ -8,63 +10,25 @@ Download from https://github.com/hkimjp/jpy.git
 
 ## Usage
 
-FIXME: explanation
+### 回答する
 
-Run the project directly, via `:exec-fn`:
+1. ログインして workspace で待つ。
 
-    $ clojure -X:run-x
-    Hello, Clojure!
+2. 問題がページ上部に送られてくる。
 
-Run the project, overriding the name to be greeted:
+3. 自分の VScode/Python でその問題を解く。
 
-    $ clojure -X:run-x :name '"Someone"'
-    Hello, Someone!
+4. VScode で動作を確認後、そのコードをコピー、
 
-Run the project directly, via `:main-opts` (`-m hkimjp.jpy`):
+5. j.py の "your answer please." のテキストエリアにペースト、送信。
 
-    $ clojure -M:run-m
-    Hello, World!
 
-Run the project, overriding the name to be greeted:
+### 自分の回答を確認する
 
-    $ clojure -M:run-m Via-Main
-    Hello, Via-Main!
+workspace の answers の下に、回答した日時のリンクがあるので、それをクリック。
 
-Run the project's tests (they'll fail until you edit them):
+### 自分の授業時間スコア
 
-    $ clojure -T:build test
-
-Run the project's CI pipeline and build an uberjar (this will fail until you edit the tests to pass):
-
-    $ clojure -T:build ci
-
-This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
-directory inside `target/classes` and the uberjar in `target`. You can update the version (and SCM tag)
-information in generated `pom.xml` by updating `build.clj`.
-
-If you don't want the `pom.xml` file in your project, you can remove it. The `ci` task will
-still generate a minimal `pom.xml` as part of the `uber` task, unless you remove `version`
-from `build.clj`.
-
-Run that uberjar:
-
-    $ java -jar target/net.clojars.hkimjp/jpy-0.1.0-SNAPSHOT.jar
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
