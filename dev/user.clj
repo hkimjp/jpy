@@ -10,42 +10,16 @@
    [hkimjp.jpy.system :refer [start-system stop-system restart-system]]))
 
 ;--------------------------
-
-(comment
-  (env :develop)
-  (defn score [user]
-    (ds/qq '[:find ?datetime
-             :in $ ?author
-             :where
-             [?e :login ?author]
-             [?e :datetime ?datetime]]
-           user))
-
-  (map (fn [x] (-> x first util/mm-dd)) (score "hkimura"))
-
-  (score "hkimura")
-
-  (-> (group-by first scores)
-      first)
-
-  (ds/qq '[:find ?author ?datetime
-           :where
-           [?e :author ?author]
-           [?e :datetime ?datetime]])
-
-  (util/list-answers "hkimura")
-  :rcf)
-;--------------------------
 (tel/set-min-level! :debug)
+
 (restart-system)
 
 ; (start-system)
 ; (stop-system)
-; (restart-system)
 
 ;---------------------------
 ; clj-reload
-; hook does not work?
+; hooks do not work?
 
 (defn before-ns-unload []
   (println "called before-ns-unload"))

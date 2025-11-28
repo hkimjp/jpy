@@ -3,7 +3,14 @@
 # Unreleased
 
 * change scoreboard `smiles` weekly
-* development environment, wrap-reload?
+* disj clients - heartbeat?
+
+
+# 0.6.5-SNAPSHOT
+
+- remoted validate.clj
+- vertual thread
+- show number of current clients on admin page
 
 # 0.6.4-hotfix
 

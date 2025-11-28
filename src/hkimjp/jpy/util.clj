@@ -29,10 +29,9 @@
          author))
 
 (defn problems-all []
-  (ds/qq '[:find ?e ?valid ?problem
-           :keys e  valid  problem
+  (ds/qq '[:find ?e ?problem
+           :keys e  problem
            :where
-           [?e :valid ?valid]
            [?e :problem ?problem]]))
 
 (defn score [user]
@@ -48,5 +47,4 @@
   (get-in request [:session :identity]))
 
 (defn mm-dd [datetime]
-  (let [[mm dd] (jt/as datetime :month-of-year :day-of-month)]
-    (str mm "-" dd)))
+  (jt/format "MM/dd" datetime))

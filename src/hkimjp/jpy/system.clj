@@ -5,7 +5,8 @@
    [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.routes :refer [root-handler]]
-   [hkimjp.datascript :as ds]))
+   [hkimjp.datascript :as ds])
+  (:import (java.util.concurrent Executors)))
 
 (defonce server (atom nil))
 
@@ -17,7 +18,11 @@
                       (tel/log! :debug "wrap-reload #'root-handler")
                       (wrap-reload #'root-handler))
                     root-handler)]
-      (reset! server (hk/run-server handler {:port port}))
+      (reset! server
+              (hk/run-server
+               handler {:port port
+                        ;; virtual thread
+                        :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
       (tel/log! :info (str "server started at port " port)))))
 
 (defn stop-server []
