@@ -6,7 +6,7 @@
 * disj clients - heartbeat?
 
 
-# 0.6.5-SNAPSHOT
+# 0.6.5 (2025-11-30)
 
 - removed validate.clj
 - vertual thread
