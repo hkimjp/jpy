@@ -12,8 +12,9 @@
    (into
     [:div.flex.gap-x-4]
     (for [[e _ datetime] (->> (list-answers author) (sort-by first))]
-      [:a.underline {:hx-get (str "/answers/answer/" e)
-                     :hx-target "#answer"} (mm-dd datetime)]))
+      [:a.hover:underline {:hx-get (str "/answers/answer/" e)
+                           :hx-target "#answer"}
+       (mm-dd datetime)]))
    [:div#answer.my-4]])
 
 (defn index [{{:keys [identity]} :session}]

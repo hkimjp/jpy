@@ -2,7 +2,15 @@
 
 # Unreleased
 
-development environment, wrap-reload?
+* change scoreboard `smiles` weekly
+* disj clients - heartbeat?
+
+
+# 0.6.5 (2025-11-30)
+
+- removed validate.clj
+- vertual thread
+- show number of current clients on admin page
 
 # 0.6.4-hotfix
 

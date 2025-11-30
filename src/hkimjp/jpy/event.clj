@@ -31,6 +31,9 @@
   (tel/log! {:level :info :id "broadcast!" :msg message})
   (broadcast-message-to-connected-clients! message))
 
+(defn number-of-clients []
+  (count @clients))
+
 (comment
   ;; Open a terminal and connect
   ;; http :8080/event
