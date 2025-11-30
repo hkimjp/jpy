@@ -8,7 +8,7 @@
 
 # 0.6.5-SNAPSHOT
 
-- remoted validate.clj
+- removed validate.clj
 - vertual thread
 - show number of current clients on admin page
 
