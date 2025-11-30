@@ -4,7 +4,7 @@
 
 * change scoreboard `smiles` weekly
 * disj clients - heartbeat?
-
+* reset(clear) clients from admin page?
 
 # 0.6.5 (2025-11-30)
 
