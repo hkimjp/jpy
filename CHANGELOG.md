@@ -8,6 +8,16 @@
 # 0.6.6 (2025-12-01)
 
 - /admin/reset - evet/reset-client!
+- nginx
+
+```
+    location / {
+        proxy_http_version         1.1;
+        proxy_buffering            off;
+    include                    proxy_params;
+        proxy_pass                 http://127.0.0.1:8600;
+    }
+```
 
 # 0.6.5 (2025-11-30)
 
