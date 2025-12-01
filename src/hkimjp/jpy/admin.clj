@@ -11,9 +11,10 @@
    [hkimjp.jpy.view :refer [page]]))
 
 (defn number-of-clients-section []
-  [:div
+  [:div.flex.gap-x-4
    [:div.font-bold "number of clients"]
-   [:div.mx-4 (number-of-clients)]])
+   [:div.border-1.px-2 (number-of-clients)]
+   [:div {:class btn} [:a {:href "/admin/reset"} "reset clients"]]])
 
 (defn new-problem-section []
   [:div

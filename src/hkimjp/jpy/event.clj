@@ -6,6 +6,13 @@
 
 (defonce clients (atom #{}))
 
+(defn reset-clients! [_]
+  (tel/log! :info "reset-clients!")
+  (reset! clients #{})
+  {:status 302
+   :headers {"Location" "/admin"}
+   :body ""})
+
 (defn format-event [body]
   (str "data: " body "\n\n"))
 

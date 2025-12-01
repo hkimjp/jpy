@@ -3,8 +3,11 @@
 # Unreleased
 
 * change scoreboard `smiles` weekly
-* disj clients - heartbeat?
-* reset(clear) clients from admin page?
+
+
+# 0.6.6-SNAPSHOT
+
+- /admin/reset - evet/reset-client!
 
 # 0.6.5 (2025-11-30)
 

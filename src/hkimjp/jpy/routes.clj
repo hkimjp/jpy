@@ -15,15 +15,16 @@
 
 (defn under-construction
   [{{:keys [identity]} :session :as request}]
-  (println "identity: " identity)
-  (error-page [:div (str "under construction " (:uri request))]))
+  (error-page [:div (str "under construction " (:uri request)
+                         "identity " identity)]))
 
 (def routes
   [["/"       {:get login :post login!}]
    ["/logout" logout!]
    ["/help"   {:get help}]
    ["/admin"  {:middleware [m/wrap-admin]}
-    [""       {:get admin/admin}]]
+    [""       {:get admin/admin}]
+    ["/reset" {:get event/reset-clients!}]]
    ["/workspace"  {:middleware [m/wrap-users]}
     [""           {:get workspace/index}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
