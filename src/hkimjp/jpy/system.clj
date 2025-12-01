@@ -1,39 +1,51 @@
 (ns hkimjp.jpy.system
   (:require
    [environ.core :refer [env]]
-   [ring.adapter.jetty :as jetty]
-   [taoensso.telemere :as t]
-   [hkimjp.jpy.routes :as routes]
-   [hkimjp.datascript :as ds]))
+   [org.httpkit.server :as hk]
+   [ring.middleware.reload :refer [wrap-reload]]
+   [taoensso.telemere :as tel]
+   [hkimjp.jpy.routes :refer [root-handler]]
+   [hkimjp.datascript :as ds])
+  (:import (java.util.concurrent Executors)))
 
 (defonce server (atom nil))
 
-(defn start-jetty
-  []
-  (let [port (parse-long (or (env :port) "3000"))
-        handler (if (some? (env :develop))
-                  #'routes/root-handler
-                  routes/root-handler)]
-    (reset! server (jetty/run-jetty handler {:port port :join? false}))
-    (t/log! :info (str "server started at port " port))))
+(defn start-server []
+  (when-not @server
+    (let [port (parse-long (or (env :port) "3000"))
+          handler (if (env :develop)
+                    (do
+                      (tel/log! :debug "wrap-reload #'root-handler")
+                      (wrap-reload #'root-handler))
+                    root-handler)]
+      (reset! server
+              (hk/run-server
+               handler {:port port
+                        ;; virtual thread
+                        :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
+      (tel/log! :info (str "server started at port " port)))))
 
 (defn stop-server []
-  (when @server
-    (.stop @server)
-    (t/log! :info "server stopped.")))
+  (when (some? @server)
+    (@server)
+    (reset! server nil)))
 
 (defn start-system []
-  (t/log! {:level :info
-           :id "start-system"
-           :msg (env :develop)
-           :data {:datascript (env :datascript)}})
+  (tel/log! {:level :info
+             :id "start-system"
+             :msg (env :develop)
+             :data {:datascript (env :datascript)}})
   (try
     (ds/start-or-restore {:url (env :datascript)})
-    (start-jetty)
+    (start-server)
     (catch Exception e
-      (t/log! :fatal (.getMessage e))
+      (tel/log! :fatal (.getMessage e))
       (System/exit 0))))
 
 (defn stop-system []
   (stop-server)
   (ds/stop))
+
+(defn restart-system []
+  (stop-system)
+  (start-system))

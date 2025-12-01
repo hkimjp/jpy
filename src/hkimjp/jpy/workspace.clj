@@ -1,76 +1,37 @@
 (ns hkimjp.jpy.workspace
   (:require
    [hiccup2.core :as h]
-   [java-time.api :as jt]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.telemere :as tel]
-   [hkimjp.datascript :as ds]
-   [hkimjp.jpy.util :refer [btn user]]
-   [hkimjp.jpy.view :refer [page error-page hx redirect]]))
-
-(defn answer [{{:keys [e]} :path-params}]
-  (tel/log! {:level :info :id "answer" :msg e})
-  (hx [:pre (:answer (ds/pl (parse-long e)))]))
-
-(def list-answers-q
-  '[:find ?e ?num
-    :in $ ?author
-    :where
-    [?e :login ?author]
-    [?e :p/id ?num]])
-
-; (ds/qq list-answers-q "hkimura")
+   [hkimjp.jpy.util :refer [list-answers mm-dd current-problem btn]]
+   [hkimjp.jpy.view :refer [page]]))
 
 (defn answers-section [author]
-  [:div
+  [:div.my-4
    [:div.font-bold "answers"]
    (into
     [:div.flex.gap-x-4]
-    (for [[e num] (->> (ds/qq list-answers-q author) (sort-by first))]
-      [:a.underline {:hx-get (format "/workspace/answer/%d" e)
-                     :hx-target "#answer"} num]))
+    (for [[e _ datetime] (->> (list-answers author) (sort-by first))]
+      [:a.hover:underline {:hx-get (str "/answers/answer/" e)
+                           :hx-target "#answer"}
+       (mm-dd datetime)]))
    [:div#answer.my-4]])
 
-; (answers-section "hkimura")
-
-(def ^:private current-problem
-  '[:find [?id ?problem]
-    :where
-    [?e :current ?id]
-    [?id :problem ?problem]])
-
-; (ds/qq current-problem)
-(defn index [request]
-  (let [author (user request)
-        [id problem] (ds/qq current-problem)]
+(defn index [{{:keys [identity]} :session}]
+  (let [{:keys [id problem]} (current-problem)]
     (tel/log! {:level :info :id "index" :data {:id id :problem problem}})
     (page
      [:div.m-4
       [:div.text-2xl.font-medium "workspace"]
-      [:div.flex.gap-x-4 [:div id] [:div problem]]
-      [:form {:method "post"}
-       (h/raw (anti-forgery-field))
-       [:input {:type "hidden" :name "login" :value author}]
-       [:input {:type "hidden" :name "id" :value id}]
-       [:textarea {:class "w-full h-64 border-1 p-2"
-                   :name "answer"
-                   :placeholder "your answer, please."}]
-       [:button {:class btn} "submit"]]
-      [:br]
-      (answers-section author)])))
+      [:div.my-4
+       [:div {:hx-ext "sse" :sse-connect "/event" :sse-swap "message"}
+        problem]
+       [:form {:method "post" :action "/answers/upload"}
+        (h/raw (anti-forgery-field))
+        [:input {:type "hidden" :name "login" :value identity}]
+        [:textarea {:class "w-full h-64 border-1 p-2"
+                    :name "answer"
+                    :placeholder "your answer, please."}]
+        [:button {:class btn} "submit"]]]
+      (answers-section identity)])))
 
-; (index {})
-
-;; shoule be in answer.clj?
-(defn upload! [{{:keys [login id answer]} :params :as request}]
-  (tel/log! {:level :info
-             :id "upload!"
-             :data (dissoc (:params request) :__anti-forgery-token)})
-  (try
-    (ds/put! {:login login
-              :p/id (parse-long id)
-              :answer answer
-              :datetime (jt/local-date-time)})
-    (redirect "/workspace")
-    (catch Exception e
-      (error-page (.getMessage e)))))

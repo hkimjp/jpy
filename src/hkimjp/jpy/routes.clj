@@ -2,8 +2,9 @@
   (:require
    [reitit.ring :as ring]
    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-   #_[taoensso.telemere :as t]
    [hkimjp.jpy.admin :as admin]
+   [hkimjp.jpy.answers :as answers]
+   [hkimjp.jpy.event :as event]
    [hkimjp.jpy.help :refer [help]]
    [hkimjp.jpy.login :refer [login login! logout!]]
    [hkimjp.jpy.middleware :as m]
@@ -12,49 +13,32 @@
    [hkimjp.jpy.view :refer [error-page]]
    [hkimjp.jpy.workspace :as workspace]))
 
+(defn under-construction
+  [{{:keys [identity]} :session :as request}]
+  (error-page [:div (str "under construction " (:uri request)
+                         "identity " identity)]))
+
 (def routes
-  [["/"      {:get login :post login!}]
+  [["/"       {:get login :post login!}]
    ["/logout" logout!]
    ["/help"   {:get help}]
-   ["/admin" {:middleware [m/wrap-admin]}
-    [""           {:get admin/admin}]
-    ; ["/update/:e"  {:get admin/edit :post admin/upsert!}]
-    ; ["/list-all"   {:get admin/list-all}]
-    ; ["/delete"     {:post admin/delete!}]
-    ]
-   ["/workspace" {:middleware [m/wrap-users]}
-    ["" {:get workspace/index :post workspace/upload!}]
-    ["/answer/:e" {:get workspace/answer}]]
+   ["/admin"  {:middleware [m/wrap-admin]}
+    [""       {:get admin/admin}]
+    ["/reset" {:get event/reset-clients!}]]
+   ["/workspace"  {:middleware [m/wrap-users]}
+    [""           {:get workspace/index}]]
    ["/scoreboard" {:middleware [m/wrap-users]}
-    ["" {:get scoreboard/index}]]
-   ["/problems"
-    ["/create" {:post {:middleware [m/wrap-admin]
-                       :handler problems/create!}}]
-    ["/current" {:post {:middleware [m/wrap-admin]
-                        :handler problems/current!}}]]
-   ["/answer"]
-   ["/hx"]])
-
-#_(defn root-handler
-    "
-     "
-    [{:keys [request-method uri] :as request}]
-    (t/log! {:level :debug
-             :data {:request-method request-method :uri uri}})
-    (let [handler
-          (ring/ring-handler
-           (ring/router routes)
-           (ring/routes
-            (ring/create-resource-handler {:path "/"})
-            (ring/create-default-handler
-             {:not-found
-              (constantly (error-page [:p "not found, check uri"]))
-              :method-not-allowed
-              (constantly (error-page [:p "not allowed"]))
-              :not-acceptable
-              (constantly (error-page [:p "not acceptable"]))}))
-           {:middleware [[wrap-defaults site-defaults]]})]
-      (handler request)))
+    [""           {:get scoreboard/index}]]
+   ["/problems" {:middleware [m/wrap-admin]}
+    ["/create"  {:post {:handler problems/create!}}]
+    ["/current" {:post {:handler problems/current!}}]]
+   ["/answers" {:middleware [m/wrap-users]}
+    ["/answer/:e" {:get answers/answer-hx}]
+    ["/upload" {:post answers/upload!}]]
+   ["/event"
+    [""           {:get  {:handler event/event}}]
+    ["/broadcast" {:post {:handler event/broadcast!}}]]
+   ["/hx" under-construction]])
 
 (def root-handler
   (ring/ring-handler
@@ -73,5 +57,3 @@
 ; (root-handler {:request-method :get, :uri "/"})
 ; (root-handler {:request-method :get, :uri "/not"})
 ; (root-handler {:request-method :get, :uri "/favicon.ico"})
-
-

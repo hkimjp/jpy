@@ -2,10 +2,58 @@
 
 # Unreleased
 
-- initialize in production
-- share `get /problems` between /admin and /workspace
-* SSE - session
+* change scoreboard `smiles` weekly
 
+
+# 0.6.6 (2025-12-01)
+
+- /admin/reset - evet/reset-client!
+
+# 0.6.5 (2025-11-30)
+
+- removed validate.clj
+- vertual thread
+- show number of current clients on admin page
+
+# 0.6.4-hotfix
+
+- can not deploy to app.melt
+- fixed `Justfile`
+
+# 0.6.3 (2025-11-27)
+
+- scoreboard
+- resources/users.{json,txt}
+- refactored workspace.clj
+- added system/restart-system - (stop-system) (start-system) is better than clj-reload(?)
+- updated system/start-server, system/stop-server - only when available, doing the jobs.
+
+# 0.6.2 (2025-11-27)
+
+- admin - no use `true`
+- changed answers list: showed eid -> showed 'yy-mm'
+- show uploaded timestamp
+- changed: ranamed `answers/answer` -> `answers/answer-hx`
+
+# 0.6.1 (2025-11-27)
+
+- can upload answers
+- show initial problem
+- broadcast current problem
+- added resources/public/assets/js/htmx-ext-sse.js
+- destructuring middleware.clj/wrap-users, wrap-admin
+
+    * was: (let [user (get-in request [:session :identity])])
+    * now: [{{:keys [identity]} :session :as request}]
+
+# 0.6.0 (2025-11-24)
+
+- jar 45MB->40MB
+- `org.httpkit.client` - replaced hato, added `charredcom.cnuernber/charred`
+- `org.httpkit.server` - replaced jetty
+- ring-devel - copied contents of `system.clj` into `user.clj`
+- added storage/fetch.sh - copied from konpy2
+- added systemd
 
 # 0.5.1 (2025-11-18)
 

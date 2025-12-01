@@ -1,7 +1,7 @@
 # problems
 :valid true|false
 :problem text
-
+:issued mm/dd
 
 # answers
 :author string
