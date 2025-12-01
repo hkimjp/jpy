@@ -5,7 +5,7 @@
 * change scoreboard `smiles` weekly
 
 
-# 0.6.6-SNAPSHOT
+# 0.6.6 (2025-12-01)
 
 - /admin/reset - evet/reset-client!
 
