@@ -7,7 +7,13 @@
 
 # 0.6.7-SNAPSHOT
 
-* ruff - need some info to allow non python answers.
+- add ruff validation - only wakes up when a problem starts with "(def"
+
+```
+ruff -q format --check <file.py>
+```
+
+- simpler timestamp format
 
 # 0.6.6 (2025-12-01)
 

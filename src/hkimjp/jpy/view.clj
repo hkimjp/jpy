@@ -10,7 +10,7 @@
 
 (defn navbar []
   [:div.flex.bg-orange-600.items-baseline.gap-x-4
-   [:div.text-2xl.font-medium.text-white "J.PY"]
+   [:div.text-2xl.font-medium.text-white "JPY"]
    [:div {:class menu} [:a {:href "/workspace"}  "workspace"]]
    [:div {:class menu} [:a {:href "/scoreboard"} "scoreboard"]]
    [:div {:class menu} [:a {:href "/logout"}     "logout"]]
@@ -40,7 +40,7 @@
     [:script {:type "text/javascript"
               :src  "/assets/js/htmx-ext-sse.js"
               :defer true}]
-    [:title "J.PY"]]
+    [:title "JPY"]]
    [:body {:hx-boost "true"}
     [:div
      (navbar)
