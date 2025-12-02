@@ -5,6 +5,10 @@
 * change scoreboard `smiles` weekly
 
 
+# 0.6.7-SNAPSHOT
+
+* ruff - need some info to allow non python answers.
+
 # 0.6.6 (2025-12-01)
 
 - /admin/reset - evet/reset-client!

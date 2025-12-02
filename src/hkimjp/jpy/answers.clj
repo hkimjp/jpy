@@ -4,6 +4,7 @@
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :as util]
+   [hkimjp.jpy.validate :refer [validate]]
    [hkimjp.jpy.view :refer [error-page redirect hx]]))
 
 (defn answer-hx
