@@ -5,7 +5,7 @@
 * change scoreboard `smiles` weekly
 
 
-# 0.6.7-SNAPSHOT
+# 0.6.7 (2025-12-02)
 
 - add ruff validation - only wakes up when a problem starts with "(def"
 
