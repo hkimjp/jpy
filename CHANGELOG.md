@@ -5,9 +5,29 @@
 * change scoreboard `smiles` weekly
 
 
+# 0.6.7 (2025-12-02)
+
+- add ruff validation - only wakes up when a problem starts with "(def"
+
+```
+ruff -q format --check <file.py>
+```
+
+- simpler timestamp format
+
 # 0.6.6 (2025-12-01)
 
 - /admin/reset - evet/reset-client!
+- nginx
+
+```
+    location / {
+        proxy_http_version         1.1;
+        proxy_buffering            off;
+    include                    proxy_params;
+        proxy_pass                 http://127.0.0.1:8600;
+    }
+```
 
 # 0.6.5 (2025-11-30)
 
