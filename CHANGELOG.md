@@ -4,6 +4,14 @@
 
 * change scoreboard `smiles` weekly
 
+# 0.6.8-SNAPSHOT
+
+- updated dependencies
+
+| :file    | :name                 | :current | :latest |
+|----------|-----------------------|----------|---------|
+| deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
+|          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
 # 0.6.7 (2025-12-02)
 
