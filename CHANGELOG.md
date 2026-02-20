@@ -6,6 +6,13 @@
 
 # 0.6.8-SNAPSHOT
 
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.30   | 0.5.31  |
+|          | com.cnuernber/charred                        | 1.037    | 1.038   |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.6    | 0.7.7   |
+|          | io.github.tonsky/clojure-plus                | 1.7.1    | 1.7.2   |
+
 - updated dependencies
 
 | :file    | :name                 | :current | :latest |
