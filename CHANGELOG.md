@@ -3,8 +3,21 @@
 # Unreleased
 
 * change scoreboard `smiles` weekly
+* RUFF enable/disabke interactively
+* recongize markdown/python code
+* namespace for hx
+
+## HTMX
+
+* htmx@2.0.8
+* htmx-ext-sse@2.2.4
+
 
 # 0.6.8-SNAPSHOT
+
+- RUFF = /run/current-system/sw/bin/ruff in `.env`
+
+- updated dependencies
 
 | :file    | :name                                        | :current | :latest |
 |----------|----------------------------------------------|----------|---------|
