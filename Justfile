@@ -27,10 +27,9 @@ run:
 test:
     clojure -M:dev -m kaocha.runner
 
-
 # temporaly
 up:
-    java --enable-native-access=ALL-UNNAMED -jar jpy.jar
+    java --enable-native-access=ALL-UNNAMED -jar jpy.jar > log/jpy.log 2>log/jpy_error.log &
 
 # temporaly, too
 down:
@@ -41,7 +40,7 @@ build:
     clojure -T:build ci
 
 deploy dest: minify build
-    ssh {{dest}} 'mkdir -p jpy jpy/storage'
+    ssh {{ dest }} 'mkdir -p jpy jpy/storage'
     scp target/io.github.hkimjp/jpy-*.jar {{ dest }}:jpy/jpy.jar
     scp Justfile {{ dest }}:jpy/
     ssh {{ dest }} 'cd jpy && just down && just up' &
