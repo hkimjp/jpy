@@ -17,9 +17,11 @@
 * htmx@2.0.8
 * htmx-ext-sse@2.2.4
 
+# 0.7.1 (2026-03-13)
+
+- improved Justfile
 
 # 0.7.0 (2026-03-13)
-
 
 - updated reitit-ring
 
@@ -27,8 +29,7 @@
 |----------|---------------------|----------|---------|
 | deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
 
-- just stage
-
+- working `just stage`
 
 # 0.7.0 (2026-03-13)
 

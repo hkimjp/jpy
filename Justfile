@@ -21,7 +21,6 @@ dev:
     just watch &
     just nrepl
 
-
 run:
     clojure -M:run-m
 
@@ -31,19 +30,21 @@ test:
 
 # temporaly
 up:
-    java --enable-native-access=ALL-UNNAMED -jar jpy.jar &
+    java --enable-native-access=ALL-UNNAMED -jar jpy.jar
 
-# not yet
-# down:
+# temporaly, too
+down:
+    #!/usr/bin/env bash
+    kill `lsof -ti:2601`
 
 build:
     clojure -T:build ci
 
-deploy dest: # minify build
+deploy dest: minify build
     ssh {{dest}} 'mkdir -p jpy jpy/storage'
     scp target/io.github.hkimjp/jpy-*.jar {{ dest }}:jpy/jpy.jar
     scp Justfile {{ dest }}:jpy/
-    ssh {{ dest }} 'cd jpy && just up'
+    ssh {{ dest }} 'cd jpy && just down && just up' &
 
 stage:
     just deploy ${STAGE}
