@@ -32,6 +32,6 @@ workspace の answers の下に、回答した日時のリンクがあるので�
 
 ## License
 
-Copyright © 2025 Hkim
+Copyright © 2025,2026 Hkim
 
 Distributed under the Eclipse Public License version 1.0.

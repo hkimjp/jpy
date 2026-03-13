@@ -3,7 +3,52 @@
 # Unreleased
 
 * change scoreboard `smiles` weekly
+* RUFF enable/disabke interactively
+* recongize markdown/python code
+* namespace for hx
+* container with Python?
+    python + jvm?
+* その人の回答はその日のタグ（？）に。
+* & が効いてない。
 
+
+## HTMX
+
+* htmx@2.0.8
+* htmx-ext-sse@2.2.4
+
+
+# 0.7.0 (2026-03-13)
+
+
+- updated reitit-ring
+
+| :file    | :name               | :current | :latest |
+|----------|---------------------|----------|---------|
+| deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
+
+- just stage
+
+
+# 0.7.0 (2026-03-13)
+
+- RUFF = /run/current-system/sw/bin/ruff in `.env`
+
+- updated dependencies
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.30   | 0.5.31  |
+|          | com.cnuernber/charred                        | 1.037    | 1.038   |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.6    | 0.7.7   |
+|          | io.github.tonsky/clojure-plus                | 1.7.1    | 1.7.2   |
+
+- updated dependencies
+
+| :file    | :name                 | :current | :latest |
+|----------|-----------------------|----------|---------|
+| deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
+|          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
 # 0.6.7 (2025-12-02)
 
