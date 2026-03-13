@@ -18,7 +18,7 @@
 * htmx-ext-sse@2.2.4
 
 
-# 0.7.0-SNAPSHOT
+# 0.7.0 (2026-03-13)
 
 
 - updated reitit-ring
@@ -30,7 +30,7 @@
 - just stage
 
 
-# 0.6.8-SNAPSHOT
+# 0.7.0 (2026-03-13)
 
 - RUFF = /run/current-system/sw/bin/ruff in `.env`
 
