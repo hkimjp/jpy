@@ -29,19 +29,14 @@
 
   ;;clojure -M:nrepl
   :nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
-   :main-opts  ["-m" "nrepl.cmdline"
-                                        ; "-b" "0.0.0.0" "-p" 5555
-                ]}
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}; not 1.6.0
+   :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus
   :plus
   {:extra-deps {io.github.tonsky/clojure-plus {:mvn/version "1.7.2"}}
    :exec-fn    clojure+.core.server/start-server
-   :exec-args  {                        ; :name "socket repl(plus)"
-                                        ; :address "0.0.0.0"
-                                        ; :port 5555
-                }}
+   :exec-args  {:name "socket repl(plus)"}}
 
   :run-m
   {:main-opts ["-m" "hkimjp.jpy"]}
