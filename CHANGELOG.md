@@ -6,11 +6,28 @@
 * RUFF enable/disabke interactively
 * recongize markdown/python code
 * namespace for hx
+* container with Python?
+    python + jvm?
+* その人の回答はその日のタグ（？）に。
+* & が効いてない。
+
 
 ## HTMX
 
 * htmx@2.0.8
 * htmx-ext-sse@2.2.4
+
+
+# 0.7.0-SNAPSHOT
+
+
+- updated reitit-ring
+
+| :file    | :name               | :current | :latest |
+|----------|---------------------|----------|---------|
+| deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
+
+- just stage
 
 
 # 0.6.8-SNAPSHOT
