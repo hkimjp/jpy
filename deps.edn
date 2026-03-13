@@ -13,7 +13,7 @@
   ring/ring-devel                {:mvn/version "1.15.3"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
   http-kit/http-kit              {:mvn/version "2.9.0-beta3"}
-  metosin/reitit-ring            {:mvn/version "0.10.0"}
+  metosin/reitit-ring            {:mvn/version "0.10.1"}
   hiccup/hiccup                  {:mvn/version "2.0.0"}
   timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
   io.github.hkimjp/datascript-storage-javatime
