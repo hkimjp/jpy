@@ -9,13 +9,16 @@
 * container with Python?
     python + jvm?
 * その人の回答はその日のタグ（？）に。
-* & が効いてない。
 
 
-## HTMX
+# 0.7.2-SNAPSHOT
 
-* htmx@2.0.8
-* htmx-ext-sse@2.2.4
+- **FIXME**
+
+```
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+error: Recipe `down` failed with exit code 2
+```
 
 # 0.7.1 (2026-03-13)
 
@@ -30,9 +33,6 @@
 | deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
 
 - working `just stage`
-
-# 0.7.0 (2026-03-13)
-
 - RUFF = /run/current-system/sw/bin/ruff in `.env`
 
 - updated dependencies
@@ -52,6 +52,11 @@
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
 # 0.6.7 (2025-12-02)
+
+## HTMX
+
+* htmx@2.0.8
+* htmx-ext-sse@2.2.4
 
 - add ruff validation - only wakes up when a problem starts with "(def"
 
