@@ -3,7 +3,7 @@
   (:require [clojure.tools.build.api :as b]))
 
 (def lib 'io.github.hkimjp/jpy)
-(def version "0.7.2")
+(def version "0.7.3")
 (def main 'hkimjp.jpy.main)
 (def class-dir "target/classes")
 
