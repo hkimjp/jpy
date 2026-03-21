@@ -9,6 +9,11 @@
 * container with Python - python:3.14-slim-trixie + openjdk-25-jre-headless?
 * その人の回答はその日のタグ（？）に。
 
+
+# 0.7.3
+
+
+
 # 0.7.2 (2026-03-13)
 
 - (temporarily) fixed log redirection

@@ -33,5 +33,5 @@
 /log
 /storage/*
 !/storage/.keep
-
+.ruff_cache
 
