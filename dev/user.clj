@@ -20,7 +20,6 @@
 ;---------------------------
 ; clj-reload
 ; hooks do not work?
-
 (defn before-ns-unload []
   (println "called before-ns-unload"))
 
@@ -34,10 +33,10 @@
 
 ; (reload/reload)
 
-(defn reload []
-  (stop-system)
-  (reload/reload)
-  (start-system))
+; (defn reload []
+;   (stop-system)
+;   (reload/reload)
+;   (start-system))
 
 ; (reload)
 
