@@ -1,20 +1,12 @@
 (ns hkimjp.jpy.system
   (:require
-   [charred.api :as charred]
    [environ.core :refer [env]]
-   [org.httpkit.client :as client]
    [org.httpkit.server :as hk]
    [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.routes :refer [root-handler]]
    [hkimjp.datascript :as ds])
   (:import (java.util.concurrent Executors)))
-
-(def users (-> @(client/get (env :users))
-               :body
-               (charred/read-json)))
-
-users
 
 (defonce server (atom nil))
 

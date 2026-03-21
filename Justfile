@@ -21,7 +21,7 @@ dev:
     just watch &
     just plus
 
-stop:
+kill:
     tailwindcss-kill
     kill `lsof -i:${PORT} -t`
 
