@@ -38,12 +38,12 @@
    :exec-args  {:name "socket repl(plus)"}}
 
   :run-m
-  {:main-opts ["-m" "hkimjp.jpy"]}
+  {:main-opts ["-m" "hkimjp.jpy.main"]}
 
-  :run-x
-  {:ns-default hkimjp.jpy
-   :exec-fn greet
-   :exec-args {:name "Clojure"}}
+  ; :run-x
+  ; {:ns-default hkimjp.jpy
+  ;  :exec-fn greet
+  ;  :exec-args {:name "Clojure"}}
 
   :build
   {:deps {io.github.clojure/tools.build {:mvn/version "0.10.13"}}
