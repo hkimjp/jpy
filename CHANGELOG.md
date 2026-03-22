@@ -11,7 +11,7 @@
 * link answers from scoreboard's 🙂
 
 
-# 0.8.0-SNAPSHOT
+# 0.8.0 (2026-03-22)
 
 - docker container
 
