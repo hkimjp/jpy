@@ -26,20 +26,11 @@ kill:
     kill `lsof -i:${PORT} -t`
 
 run:
+    just minify
     clojure -M:run-m
 
 test:
     clojure -M:dev -m kaocha.runner
-
-# temporary
-# up:
-#     java --enable-native-access=ALL-UNNAMED -jar jpy.jar > log/jpy.log 2>log/jpy_error.log &
-
-# down:
-#     #!/usr/bin/env bash
-#     if [[ `lsof -t -i:${PORT}` ]]; then
-#         kill `lsof -ti:${PORT}`
-#     fi
 
 build:
     clojure -T:build ci
@@ -47,7 +38,7 @@ build:
 deploy dest: minify build
     ssh {{ dest }} 'mkdir -p jpy jpy/storage'
     scp target/io.github.hkimjp/jpy-*.jar {{ dest }}:jpy/jpy.jar
-    scp Justfile {{ dest }}:jpy/
+    scp Justfile compose.yaml {{ dest }}:jpy/
     ssh {{ dest }} 'cd jpy && just down && just up'
 
 stage:

@@ -6,14 +6,17 @@
 * RUFF enable/disable interactively
 * recongize markdown/python code
 * namespace for hx
-* container with Python - python:3.14-slim-trixie + openjdk-25-jre-headless?
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
 
+# 0.8.1-SNAPSHOT
+
+- production system started at `tiger.melt`
+ 
 # 0.8.0 (2026-03-22)
 
-- docker container
+- docker container - python:3.14-slim-trixie + openjdk-25-jre-headless
 
 # 0.7.3
 
