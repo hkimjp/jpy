@@ -7,20 +7,27 @@
 * recongize markdown/python code
 * namespace for hx
 * container with Python - python:3.14-slim-trixie + openjdk-25-jre-headless?
-* その人の回答はその日のタグ（？）に。
+* gather answers by date.
+* link answers from scoreboard's 🙂
 
+
+# 0.8.0-SNAPSHOT
+
+- docker container
 
 # 0.7.3
 
+- fixed - error in `just down` does not stop succeeding `just up`
 - scoreboard/users
 
 # 0.7.2 (2026-03-13)
 
-- (temporarily) fixed log redirection
+- (temporarily) fixed logging by redirection
 
 # 0.7.1 (2026-03-13)
 
 ## FIXME
+
 - just stop
 
       kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]

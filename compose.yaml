@@ -1,0 +1,12 @@
+services:
+  jpy:
+    image: eclipse-temurin:25-jre
+    env_file: .env
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "127.0.0.1:${PORT}:${PORT}"
+    entrypoint: >
+      sh -c "java -jar jpy.jar"
+    restart: unless-stopped

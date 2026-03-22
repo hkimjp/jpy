@@ -28,7 +28,7 @@
 
   ;;clojure -M:nrepl
   :nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}; not 1.6.0
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}} ; 1.5.2 is OK, 1.6.0 NOT.
    :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus

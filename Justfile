@@ -32,13 +32,14 @@ test:
     clojure -M:dev -m kaocha.runner
 
 # temporary
-up:
-    java --enable-native-access=ALL-UNNAMED -jar jpy.jar > log/jpy.log 2>log/jpy_error.log &
+# up:
+#     java --enable-native-access=ALL-UNNAMED -jar jpy.jar > log/jpy.log 2>log/jpy_error.log &
 
-# temporary, too
-down:
-    #!/usr/bin/env bash
-    kill `lsof -ti:${PORT}`
+# down:
+#     #!/usr/bin/env bash
+#     if [[ `lsof -t -i:${PORT}` ]]; then
+#         kill `lsof -ti:${PORT}`
+#     fi
 
 build:
     clojure -T:build ci
@@ -57,3 +58,10 @@ prod:
 
 clean:
     rm -rf target
+    fd -I \.bak$ --exec rm
+
+up:
+    docker compose up -d
+
+down:
+    docker compose down
