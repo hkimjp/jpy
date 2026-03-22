@@ -10,7 +10,7 @@
 * link answers from scoreboard's 🙂
 
 
-# 0.8.1-SNAPSHOT
+# 0.8.1 (2026-03-23)
 
 - production system started at `tiger.melt`
  
