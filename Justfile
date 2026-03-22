@@ -19,8 +19,11 @@ nrepl:
 
 dev:
     just watch &
-    just nrepl
+    just plus
 
+kill:
+    tailwindcss-kill
+    kill `lsof -i:${PORT} -t`
 
 run:
     clojure -M:run-m
@@ -28,22 +31,24 @@ run:
 test:
     clojure -M:dev -m kaocha.runner
 
+# temporary
+# up:
+#     java --enable-native-access=ALL-UNNAMED -jar jpy.jar > log/jpy.log 2>log/jpy_error.log &
 
-# temporaly
-up:
-    java --enable-native-access=ALL-UNNAMED -jar jpy.jar &
-
-# not yet
 # down:
+#     #!/usr/bin/env bash
+#     if [[ `lsof -t -i:${PORT}` ]]; then
+#         kill `lsof -ti:${PORT}`
+#     fi
 
 build:
     clojure -T:build ci
 
-deploy dest: # minify build
-    ssh {{dest}} 'mkdir -p jpy jpy/storage'
+deploy dest: minify build
+    ssh {{ dest }} 'mkdir -p jpy jpy/storage'
     scp target/io.github.hkimjp/jpy-*.jar {{ dest }}:jpy/jpy.jar
     scp Justfile {{ dest }}:jpy/
-    ssh {{ dest }} 'cd jpy && just up'
+    ssh {{ dest }} 'cd jpy && just down && just up'
 
 stage:
     just deploy ${STAGE}
@@ -53,3 +58,10 @@ prod:
 
 clean:
     rm -rf target
+    fd -I \.bak$ --exec rm
+
+up:
+    docker compose up -d
+
+down:
+    docker compose down

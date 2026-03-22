@@ -1,25 +1,50 @@
-# On Class Python
+# JPY --- On Class Python
 
 # Unreleased
 
 * change scoreboard `smiles` weekly
-* RUFF enable/disabke interactively
+* RUFF enable/disable interactively
 * recongize markdown/python code
 * namespace for hx
-* container with Python?
-    python + jvm?
-* その人の回答はその日のタグ（？）に。
-* & が効いてない。
+* container with Python - python:3.14-slim-trixie + openjdk-25-jre-headless?
+* gather answers by date.
+* link answers from scoreboard's 🙂
 
 
-## HTMX
+# 0.8.0 (2026-03-22)
 
-* htmx@2.0.8
-* htmx-ext-sse@2.2.4
+- docker container
 
+# 0.7.3
+
+- fixed - error in `just down` does not stop succeeding `just up`
+- scoreboard/users
+
+# 0.7.2 (2026-03-13)
+
+- (temporarily) fixed logging by redirection
+
+# 0.7.1 (2026-03-13)
+
+## FIXME
+
+- just stop
+
+      kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+      error: Recipe `down` failed with exit code 2
+
+- log
+  use redirect simply?
+
+- timestamp
+  2026-03-13 07:33:01 is wrong. it must be 2026-03-13 19:33:01
+  am/pm?
+
+# 0.7.1 (2026-03-13)
+
+- improved Justfile
 
 # 0.7.0 (2026-03-13)
-
 
 - updated reitit-ring
 
@@ -27,11 +52,7 @@
 |----------|---------------------|----------|---------|
 | deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
 
-- just stage
-
-
-# 0.7.0 (2026-03-13)
-
+- working `just stage`
 - RUFF = /run/current-system/sw/bin/ruff in `.env`
 
 - updated dependencies
@@ -51,6 +72,11 @@
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
 # 0.6.7 (2025-12-02)
+
+## HTMX
+
+* htmx@2.0.8
+* htmx-ext-sse@2.2.4
 
 - add ruff validation - only wakes up when a problem starts with "(def"
 
