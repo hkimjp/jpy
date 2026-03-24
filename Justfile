@@ -56,3 +56,6 @@ up:
 
 down:
     docker compose down
+
+docker-build:
+    docker build -t hkim0331/jpy:3 .
