@@ -1,8 +1,7 @@
 # hkimjp/jpy
 
-授業時間 Python.
-
-座ってるだけだと暇だろ。そして、何にもならんだろ。授業中の活性を高める。
+授業時間 Python。授業中の活性を高める。座ってるだけだと暇、そして何にもならん。
+Server Side Event を使ったプログラムの練習を兼ねる。
 
 ## Installation
 
@@ -32,6 +31,6 @@ workspace の answers の下に、回答した日時のリンクがあるので�
 
 ## License
 
-Copyright © 2025 Hkim
+Copyright © 2025,2026 Hkim
 
 Distributed under the Eclipse Public License version 1.0.

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux
+set -euo pipefail
 
-gsed -i "/^(def version/c\
+sed -i "/^(def version/c\
 (def version \"$1\")" src/hkimjp/jpy/view.clj

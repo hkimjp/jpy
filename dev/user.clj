@@ -1,13 +1,26 @@
 (ns user
   (:require
    [clj-reload.core :as reload]
-   [clojure.java.io :as io]
-   [charred.api :as charred]
-   [environ.core :refer [env]]
+   ; [clojure.java.io :as io]
+   ; [charred.api :as charred]
+   ; [environ.core :refer [env]]
    [taoensso.telemere :as tel]
-   [hkimjp.datascript :as ds]
-   [hkimjp.jpy.util :as util]
+   ; [hkimjp.datascript :as ds]
+   ; [hkimjp.jpy.util :as util]
    [hkimjp.jpy.system :refer [start-system stop-system restart-system]]))
+
+(comment
+  (def server (atom nil))
+
+  (defn start-server []
+    (when-not @server
+      (reset! server
+              (hk/run-server
+               (wrap-reload #'root-handler)
+               {:port (parse-long (or (env :port) "3000"))
+                :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
+      (tel/log! :info (str "server started at port " port))))
+  :rcf)
 
 ;--------------------------
 (tel/set-min-level! :debug)
@@ -20,7 +33,6 @@
 ;---------------------------
 ; clj-reload
 ; hooks do not work?
-
 (defn before-ns-unload []
   (println "called before-ns-unload"))
 
@@ -34,10 +46,10 @@
 
 ; (reload/reload)
 
-(defn reload []
-  (stop-system)
-  (reload/reload)
-  (start-system))
+; (defn reload []
+;   (stop-system)
+;   (reload/reload)
+;   (start-system))
 
 ; (reload)
 

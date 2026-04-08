@@ -1,9 +1,92 @@
-# On Class Python
+# JPY --- On Class Python
 
 # Unreleased
 
 * change scoreboard `smiles` weekly
+* RUFF enable/disable interactively
+* recongize markdown/python code
+* namespace for hx
+* gather answers by date.
+* link answers from scoreboard's 🙂
 
+# 0.8.2-SNAPSHOT
+
+- added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
+- forgot to install `ruff`.
+- how to make `jpy` image:
+
+```
+1. docker run python:3.14-slim-trixie
+2. docker exec -it <container> bash
+3. apt install openjdk-25-jre-headress
+4. apt-get -y autoremove; apt-get -y clean; rm -rf /var/lib/apt/lists/*
+5. docker stop <container>
+6. docker commit <container> hkim0331/jpy:1
+```
+
+# 0.8.1 (2026-03-23)
+
+- production system started at `tiger.melt`
+ 
+# 0.8.0 (2026-03-22)
+
+- docker container - python:3.14-slim-trixie + openjdk-25-jre-headless
+
+# 0.7.3
+
+- fixed - error in `just down` does not stop succeeding `just up`
+- scoreboard/users
+
+# 0.7.2 (2026-03-13)
+
+- (temporarily) fixed logging by redirection
+
+# 0.7.1 (2026-03-13)
+
+## FIXME
+
+- just stop
+
+      kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+      error: Recipe `down` failed with exit code 2
+
+- log
+  use redirect simply?
+
+- timestamp
+  2026-03-13 07:33:01 is wrong. it must be 2026-03-13 19:33:01
+  am/pm?
+
+# 0.7.1 (2026-03-13)
+
+- improved Justfile
+
+# 0.7.0 (2026-03-13)
+
+- updated reitit-ring
+
+| :file    | :name               | :current | :latest |
+|----------|---------------------|----------|---------|
+| deps.edn | metosin/reitit-ring | 0.10.0   | 0.10.1  |
+
+- working `just stage`
+- RUFF = /run/current-system/sw/bin/ruff in `.env`
+
+- updated dependencies
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.30   | 0.5.31  |
+|          | com.cnuernber/charred                        | 1.037    | 1.038   |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.6    | 0.7.7   |
+|          | io.github.tonsky/clojure-plus                | 1.7.1    | 1.7.2   |
+
+- updated dependencies
+
+| :file    | :name                 | :current | :latest |
+|----------|-----------------------|----------|---------|
+| deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
+|          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
 # 0.7.0-SNAPSHOT
 
@@ -21,6 +104,11 @@
 |          | org.clojure/test.check                       | 1.1.2    | 1.1.3   |
 
 # 0.6.7 (2025-12-02)
+
+## HTMX
+
+* htmx@2.0.8
+* htmx-ext-sse@2.2.4
 
 - add ruff validation - only wakes up when a problem starts with "(def"
 

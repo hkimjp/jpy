@@ -5,10 +5,10 @@
   babashka/fs                    {:mvn/version "0.5.32"}
   buddy/buddy-hashers            {:mvn/version "2.0.167"}
   clojure.java-time/clojure.java-time {:mvn/version "1.4.3"}
-  environ/environ                {:mvn/version "1.2.0"}
   com.taoensso/telemere          {:mvn/version "1.2.1"}
   com.cnuernber/charred          {:mvn/version "1.038"}
-  ; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
+  environ/environ                {:mvn/version "1.2.0"}
+  ;; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
   ring/ring-core                 {:mvn/version "1.15.3"}
   ring/ring-devel                {:mvn/version "1.15.3"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
@@ -16,8 +16,7 @@
   metosin/reitit-ring            {:mvn/version "0.10.1"}
   hiccup/hiccup                  {:mvn/version "2.0.0"}
   timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
-  io.github.hkimjp/datascript-storage-javatime
-  {:git/tag "0.7.9" :git/sha "6c49ad9"}}
+  io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.8" :git/sha "aad430b"}}
 
  :aliases
  {:dev
@@ -29,27 +28,22 @@
 
   ;;clojure -M:nrepl
   :nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
-   :main-opts  ["-m" "nrepl.cmdline"
-                ; "-b" "0.0.0.0" "-p" 5555
-                ]}
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}} ; 1.5.2 is OK, 1.6.0 NOT.
+   :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus
   :plus
   {:extra-deps {io.github.tonsky/clojure-plus {:mvn/version "1.7.2"}}
    :exec-fn    clojure+.core.server/start-server
-   :exec-args  {; :name "socket repl(plus)"
-                ; :address "0.0.0.0"
-                ; :port 5555
-                }}
+   :exec-args  {:name "socket repl(plus)"}}
 
   :run-m
-  {:main-opts ["-m" "hkimjp.jpy"]}
+  {:main-opts ["-m" "hkimjp.jpy.main"]}
 
-  :run-x
-  {:ns-default hkimjp.jpy
-   :exec-fn greet
-   :exec-args {:name "Clojure"}}
+  ; :run-x
+  ; {:ns-default hkimjp.jpy
+  ;  :exec-fn greet
+  ;  :exec-args {:name "Clojure"}}
 
   :build
   {:deps {io.github.clojure/tools.build {:mvn/version "0.10.13"}}

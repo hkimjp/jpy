@@ -25,10 +25,11 @@
       (-> (resp/redirect "/")
           (assoc :session {} :flash "admin only")))))
 
-(defn wrap-hx [handler]
-  (fn [req]
-    (-> (handler req)
-        h/html
-        str
-        resp/response
-        (resp/content-type "text/html"))))
+; no use?
+; (defn wrap-hx [handler]
+;   (fn [req]
+;     (-> (handler req)
+;         h/html
+;         str
+;         resp/response
+;         (resp/content-type "text/html"))))

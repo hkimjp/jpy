@@ -1,17 +1,13 @@
 (ns hkimjp.jpy.util
   (:require
-   ; [environ.core :refer [env]]
    [java-time.api :as jt]
    [hkimjp.datascript :as ds]))
 
-; pseudo class
-
+; html classes
 (def btn "mx-1 px-1 text-white bg-sky-500 hover:bg-sky-700 active:bg-red-500 rounded")
-
 (def input-box "px-1 border-1 rounded")
 
 ; queries
-
 (defn current-problem []
   (ds/qq '[:find [?e ?id ?problem]
            :keys e   id   problem
