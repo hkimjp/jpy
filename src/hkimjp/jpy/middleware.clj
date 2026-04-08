@@ -1,7 +1,7 @@
 (ns hkimjp.jpy.middleware
   (:require
    [environ.core :refer [env]]
-   [hiccup2.core :as h]
+   ; [hiccup2.core :as h]
    [ring.util.response :as resp]
    [taoensso.telemere :as t]))
 

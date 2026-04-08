@@ -9,26 +9,12 @@
    ; [hkimjp.jpy.util :as util]
    [hkimjp.jpy.system :refer [start-system stop-system restart-system]]))
 
-(comment
-  (def server (atom nil))
-
-  (defn start-server []
-    (when-not @server
-      (reset! server
-              (hk/run-server
-               (wrap-reload #'root-handler)
-               {:port (parse-long (or (env :port) "3000"))
-                :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
-      (tel/log! :info (str "server started at port " port))))
-  :rcf)
-
 ;--------------------------
 (tel/set-min-level! :debug)
 
 (restart-system)
 
 ; (start-system)
-; (stop-system)
 
 ;---------------------------
 ; clj-reload
@@ -44,12 +30,10 @@
   :dirs ["src" "test"]
   :no-reload '#{user}})
 
-; (reload/reload)
-
-; (defn reload []
-;   (stop-system)
-;   (reload/reload)
-;   (start-system))
+(defn reload []
+  (stop-system)
+  (reload/reload)
+  (start-system))
 
 ; (reload)
 
