@@ -15,7 +15,7 @@
 |----------|----------------------------------------------|----------|---------|
 | deps.edn | io.github.hkimjp/datascript-storage-javatime | 0.7.8    | 0.7.9   |
 
-# 0.8.2-SNAPSHOT
+# 0.8.2 (2026-04-08)
 
 - added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
 - forgot to install `ruff`.
@@ -93,6 +93,21 @@
 |----------|-----------------------|----------|---------|
 | deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
+
+# 0.7.0-SNAPSHOT
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.30   | 0.5.32  |
+|          | com.cnuernber/charred                        | 1.037    | 1.038   |
+|          | com.taoensso/telemere                        | 1.1.0    | 1.2.1   |
+|          | io.github.clojure/tools.build                | 0.10.11  | 0.10.13 |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.6    | 0.7.9   |
+|          | io.github.tonsky/clojure-plus                | 1.7.0    | 1.7.2   |
+|          | metosin/reitit-ring                          | 0.9.2    | 0.10.1  |
+|          | nrepl/nrepl                                  | 1.5.1    | 1.5.2   |
+|          | org.clojure/clojure                          | 1.12.3   | 1.12.4  |
+|          | org.clojure/test.check                       | 1.1.2    | 1.1.3   |
 
 # 0.6.7 (2025-12-02)
 
