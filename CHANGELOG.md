@@ -9,8 +9,14 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 * timezone UTC
-* enbug -- can not create new problems.
 
+
+# 0.8.4
+
+- fixed a bug - problems/create!
+
+    - id ((:tempids ret) -1) ; what is this?
+    + id (-> (:tempids ret) first second) ; get the latest id
 
 # 0.8.3 (2026-04-08)
 

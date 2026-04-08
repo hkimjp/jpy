@@ -20,7 +20,8 @@
   (try
     (let [ret (ds/put! {:valid true
                         :problem problem})
-          id ((:tempids ret) -1)]
+          id (-> (:tempids ret) first second)]
+      ; (tel/log! {:level :debug :msg "これは何？" :data (:tempids ret)})
       (update-current! id)
       (redirect "/admin"))
     (catch Exception e
