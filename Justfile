@@ -26,6 +26,9 @@ kill:
     tailwindcss-kill
     if [[ `lsof -i:${PORT}` ]]; then kill `lsof -i:${PORT} -t`; fi
 
+jar:
+    java -jar jpy.jar
+
 run:
     just minify
     clojure -M:run-m
@@ -51,6 +54,9 @@ prod:
 clean:
     rm -rf target
     fd -I \.bak$ --exec rm
+
+up-:
+    docker compose up
 
 up:
     docker compose up -d

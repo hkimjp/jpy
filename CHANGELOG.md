@@ -8,7 +8,13 @@
 * namespace for hx
 * gather answers by date.
 * link answers from scoreboard's 🙂
+* timezone UTC
 
+
+# 0.8.3-SNAPSHOT
+
+- improveed auth.clj
+- correct nginx setting. need `proxy_http_version 1.1`
 - updated libraries
 
 | :file    | :name                                        | :current | :latest |
