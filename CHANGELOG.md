@@ -11,7 +11,7 @@
 * timezone UTC
 
 
-# 0.8.3-SNAPSHOT
+# 0.8.3 (2026-04-08)
 
 - improveed auth.clj
 - correct nginx setting. need `proxy_http_version 1.1`
