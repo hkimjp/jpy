@@ -33,13 +33,6 @@
       [:button {:class btn} "LOGIN"]]]
     [:br]]))
 
-(comment
-  (-> (hk-client/get (str (env :auth) "tue3"))
-      deref
-      :body)
-
-  :rcf)
-
 (defn login!
   [{{:keys [login password]} :params}]
   (t/log! {:level :debug :id "login!" :msg (str login " " password)})
@@ -49,10 +42,12 @@
                  :body
                  (charred/read-json :key-fn keyword)
                  :password)]
-      (when (hashers/check password pw)
-        (t/log! :info (str "login success: " login)))
-      (-> (resp/redirect "/workspace")
-          (assoc-in [:session :identity] login)))
+      (if (hashers/check password pw)
+        (do
+          (t/log! :info (str "login success: " login))
+          (-> (resp/redirect "/workspace")
+              (assoc-in [:session :identity] login)))
+        (throw (Exception. ""))))
     (catch Exception e
       (t/log! :info (str "login failed: " login))
       (-> (resp/redirect "/")
