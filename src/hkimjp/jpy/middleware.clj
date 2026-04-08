@@ -1,13 +1,13 @@
 (ns hkimjp.jpy.middleware
   (:require
    [environ.core :refer [env]]
-   [hiccup2.core :as h]
+   ; [hiccup2.core :as h]
    [ring.util.response :as resp]
    [taoensso.telemere :as t]))
 
 (defn wrap-users [handler]
   (fn [{{:keys [identity]} :session :as request}]
-    (t/log! :debug (str "wrap-users " identity))
+    ;(t/log! :debug (str "wrap-users " identity))
     (if (some? identity)
       (do
         (t/log! :debug "found")
@@ -19,17 +19,10 @@
 
 (defn wrap-admin [handler]
   (fn [{{:keys [identity]} :session :as request}]
-    (t/log! :debug (str "wrap-admin " identity))
+    ;(t/log! :debug (str "wrap-admin " identity))
     (if (= (env :admin) identity)
       (handler request)
       (-> (resp/redirect "/")
           (assoc :session {} :flash "admin only")))))
 
-; no use?
-; (defn wrap-hx [handler]
-;   (fn [req]
-;     (-> (handler req)
-;         h/html
-;         str
-;         resp/response
-;         (resp/content-type "text/html"))))
+

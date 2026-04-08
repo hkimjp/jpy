@@ -18,12 +18,16 @@ nrepl:
     clj -M:dev:nrepl
 
 dev:
-    just watch &
+    just watch 2> /dev/null &
     just plus
 
 kill:
+    #!/usr/bin/env bash
     tailwindcss-kill
-    kill `lsof -i:${PORT} -t`
+    if [[ `lsof -i:${PORT}` ]]; then kill `lsof -i:${PORT} -t`; fi
+
+jar:
+    java -jar jpy.jar
 
 run:
     just minify
@@ -50,6 +54,9 @@ prod:
 clean:
     rm -rf target
     fd -I \.bak$ --exec rm
+
+up-:
+    docker compose up
 
 up:
     docker compose up -d

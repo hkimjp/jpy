@@ -36,20 +36,22 @@
 (defn login!
   [{{:keys [login password]} :params}]
   (t/log! {:level :debug :id "login!" :msg (str login " " password)})
-  (let [pw (-> (hk-client/get (str (env :auth) login))
-               deref
-               :body
-               charred/read-json
-               (get "password"))]
-    (if (hashers/check password pw)
-      (do
-        (t/log! :info (str "login success: " login))
-        (-> (resp/redirect "/workspace")
-            (assoc-in [:session :identity] login)))
-      (do
-        (t/log! :info (str "login failed: " login))
-        (-> (resp/redirect "/")
-            (assoc :session {} :flash "login failed"))))))
+  (try
+    (let [pw (-> (hk-client/get (str (env :auth) login))
+                 deref
+                 :body
+                 (charred/read-json :key-fn keyword)
+                 :password)]
+      (if (hashers/check password pw)
+        (do
+          (t/log! :info (str "login success: " login))
+          (-> (resp/redirect "/workspace")
+              (assoc-in [:session :identity] login)))
+        (throw (Exception. ""))))
+    (catch Exception e
+      (t/log! :info (str "login failed: " login))
+      (-> (resp/redirect "/")
+          (assoc :session {} :flash "login failed")))))
 
 (defn logout! [request]
   (t/log! {:level :info

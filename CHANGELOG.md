@@ -8,7 +8,13 @@
 * namespace for hx
 * gather answers by date.
 * link answers from scoreboard's 🙂
+* timezone UTC
 
+
+# 0.8.3 (2026-04-08)
+
+- improveed auth.clj
+- correct nginx setting. need `proxy_http_version 1.1`
 - updated libraries
 
 | :file    | :name                                        | :current | :latest |
@@ -93,6 +99,21 @@
 |----------|-----------------------|----------|---------|
 | deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
+
+# 0.7.0-SNAPSHOT
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.30   | 0.5.32  |
+|          | com.cnuernber/charred                        | 1.037    | 1.038   |
+|          | com.taoensso/telemere                        | 1.1.0    | 1.2.1   |
+|          | io.github.clojure/tools.build                | 0.10.11  | 0.10.13 |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.6    | 0.7.9   |
+|          | io.github.tonsky/clojure-plus                | 1.7.0    | 1.7.2   |
+|          | metosin/reitit-ring                          | 0.9.2    | 0.10.1  |
+|          | nrepl/nrepl                                  | 1.5.1    | 1.5.2   |
+|          | org.clojure/clojure                          | 1.12.3   | 1.12.4  |
+|          | org.clojure/test.check                       | 1.1.2    | 1.1.3   |
 
 # 0.6.7 (2025-12-02)
 
