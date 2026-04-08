@@ -9,6 +9,26 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
+- updated libraries
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | io.github.hkimjp/datascript-storage-javatime | 0.7.8    | 0.7.9   |
+
+# 0.8.2 (2026-04-08)
+
+- added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
+- forgot to install `ruff`.
+- how to make `jpy` image:
+
+```
+1. docker run python:3.14-slim-trixie
+2. docker exec -it <container> bash
+3. apt install openjdk-25-jre-headress
+4. apt-get -y autoremove; apt-get -y clean; rm -rf /var/lib/apt/lists/*
+5. docker stop <container>
+6. docker commit <container> hkim0331/jpy:1
+```
 
 # 0.8.1 (2026-03-23)
 

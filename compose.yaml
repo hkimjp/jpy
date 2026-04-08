@@ -1,6 +1,6 @@
 services:
   jpy:
-    image: eclipse-temurin:25-jre
+    image: hkim0331/jpy:3
     env_file: .env
     working_dir: /usr/src/app
     volumes:
