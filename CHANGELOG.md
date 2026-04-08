@@ -9,6 +9,12 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
+- updated libraries
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | io.github.hkimjp/datascript-storage-javatime | 0.7.8    | 0.7.9   |
+
 # 0.8.2-SNAPSHOT
 
 - added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
