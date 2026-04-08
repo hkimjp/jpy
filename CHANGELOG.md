@@ -1,6 +1,6 @@
 # JPY --- On Class Python
 
-# Unreleased
+## Unreleased
 
 * change scoreboard `smiles` weekly
 * RUFF enable/disable interactively
@@ -8,19 +8,25 @@
 * namespace for hx
 * gather answers by date.
 * link answers from scoreboard's 🙂
-* timezone UTC
+* display problem issued datetime (in admin page)
 
 
-# 0.8.4
+## 0.9.0-SNAPSHOT (2026-04-09)
+
+- fixed by using [:span] - list of problem issued date is too long horizontaly
+- timezone UTC - not UTC, it is 12 hour format time. fixed by "HH".
+
+## 0.8.4
 
 - fixed a bug - problems/create!
+
 
 ```diff
 - id ((:tempids ret) -1) ; what is this?
 + id (-> (:tempids ret) first second) ; get the latest id
 ```
 
-# 0.8.3 (2026-04-08)
+## 0.8.3 (2026-04-08)
 
 - improveed auth.clj
 - correct nginx setting. need `proxy_http_version 1.1`
@@ -30,7 +36,7 @@
 |----------|----------------------------------------------|----------|---------|
 | deps.edn | io.github.hkimjp/datascript-storage-javatime | 0.7.8    | 0.7.9   |
 
-# 0.8.2 (2026-04-08)
+## 0.8.2 (2026-04-08)
 
 - added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
 - forgot to install `ruff`.
@@ -45,24 +51,24 @@
 6. docker commit <container> hkim0331/jpy:1
 ```
 
-# 0.8.1 (2026-03-23)
+## 0.8.1 (2026-03-23)
 
 - production system started at `tiger.melt`
  
-# 0.8.0 (2026-03-22)
+## 0.8.0 (2026-03-22)
 
 - docker container - python:3.14-slim-trixie + openjdk-25-jre-headless
 
-# 0.7.3
+## 0.7.3
 
 - fixed - error in `just down` does not stop succeeding `just up`
 - scoreboard/users
 
-# 0.7.2 (2026-03-13)
+## 0.7.2 (2026-03-13)
 
 - (temporarily) fixed logging by redirection
 
-# 0.7.1 (2026-03-13)
+## 0.7.1 (2026-03-13)
 
 ## FIXME
 
@@ -78,11 +84,11 @@
   2026-03-13 07:33:01 is wrong. it must be 2026-03-13 19:33:01
   am/pm?
 
-# 0.7.1 (2026-03-13)
+## 0.7.1 (2026-03-13)
 
 - improved Justfile
 
-# 0.7.0 (2026-03-13)
+## 0.7.0 (2026-03-13)
 
 - updated reitit-ring
 
@@ -109,7 +115,7 @@
 | deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
-# 0.8.4 (2026-04-08)
+## 0.8.4 (2026-04-08)
 
 | :file    | :name                                        | :current | :latest |
 |----------|----------------------------------------------|----------|---------|
@@ -124,7 +130,7 @@
 |          | org.clojure/clojure                          | 1.12.3   | 1.12.4  |
 |          | org.clojure/test.check                       | 1.1.2    | 1.1.3   |
 
-# 0.6.7 (2025-12-02)
+## 0.6.7 (2025-12-02)
 
 ## HTMX
 
@@ -139,7 +145,7 @@ ruff -q format --check <file.py>
 
 - simpler timestamp format
 
-# 0.6.6 (2025-12-01)
+## 0.6.6 (2025-12-01)
 
 - /admin/reset - evet/reset-client!
 - nginx
@@ -153,18 +159,18 @@ ruff -q format --check <file.py>
     }
 ```
 
-# 0.6.5 (2025-11-30)
+## 0.6.5 (2025-11-30)
 
 - removed validate.clj
 - vertual thread
 - show number of current clients on admin page
 
-# 0.6.4-hotfix
+## 0.6.4-hotfix
 
 - can not deploy to app.melt
 - fixed `Justfile`
 
-# 0.6.3 (2025-11-27)
+## 0.6.3 (2025-11-27)
 
 - scoreboard
 - resources/users.{json,txt}
@@ -172,14 +178,14 @@ ruff -q format --check <file.py>
 - added system/restart-system - (stop-system) (start-system) is better than clj-reload(?)
 - updated system/start-server, system/stop-server - only when available, doing the jobs.
 
-# 0.6.2 (2025-11-27)
+## 0.6.2 (2025-11-27)
 
 - admin - no use `true`
 - changed answers list: showed eid -> showed 'yy-mm'
 - show uploaded timestamp
 - changed: ranamed `answers/answer` -> `answers/answer-hx`
 
-# 0.6.1 (2025-11-27)
+## 0.6.1 (2025-11-27)
 
 - can upload answers
 - show initial problem
@@ -190,7 +196,7 @@ ruff -q format --check <file.py>
     * was: (let [user (get-in request [:session :identity])])
     * now: [{{:keys [identity]} :session :as request}]
 
-# 0.6.0 (2025-11-24)
+## 0.6.0 (2025-11-24)
 
 - jar 45MB->40MB
 - `org.httpkit.client` - replaced hato, added `charredcom.cnuernber/charred`
@@ -199,45 +205,45 @@ ruff -q format --check <file.py>
 - added storage/fetch.sh - copied from konpy2
 - added systemd
 
-# 0.5.1 (2025-11-18)
+## 0.5.1 (2025-11-18)
 
 - changed: problem.clj -> problems.clj
 
-# 0.5.0 (2025-11-18)
+## 0.5.0 (2025-11-18)
 
 - refactor, no use `num`.
 
 
-# 0.4.1 (2025-11-17)
+## 0.4.1 (2025-11-17)
 
 - change `current`
 
-# 0.4.0 (2025-11-17)
+## 0.4.0 (2025-11-17)
 
 
-# 0.3.1 (2025-11-16)
+## 0.3.1 (2025-11-16)
 
 - learn reitit
 
-# 0.3.0 (2025-11-11)
+## 0.3.0 (2025-11-11)
 
 * display answers - share the functions?
 - bump-version-local.sh
 
-# 0.2.2 (2025-11-11)
+## 0.2.2 (2025-11-11)
 
 - redis? no, datascript.
 - workspace
 - admin
 
-# 0.2.1 (2025-11-10)
+## 0.2.1 (2025-11-10)
 
 - checked ignore list
 
-# 0.2.0 (2025-11-10)
+## 0.2.0 (2025-11-10)
 
 - early deployment. `https://jps.melt.kyutech.ac.jp`
 
-# 0.1.0 (2025-11-10)
+## 0.1.0 (2025-11-10)
 
 - project started

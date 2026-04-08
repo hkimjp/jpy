@@ -17,7 +17,7 @@
     (hx [:div
          [:p problem]
          [:pre.p-2 answer]
-         [:p (jt/format "YYYY-MM-dd hh:mm:ss" datetime)]])))
+         [:p (jt/format "YYYY-MM-dd HH:mm:ss" datetime)]])))
 
 (defn upload!
   [{{:keys [login answer]} :params}]
@@ -34,8 +34,8 @@
                 :datetime (jt/local-date-time)})
       (redirect "/workspace")
       (catch Exception e
-        (tel/log! {:level :error
-                   :id "upload!"
+        (tel/log! {:level :error :id "upload!"
                    :data {:login login :answer answer}})
         (error-page (.getMessage e))))))
+
 

@@ -9,12 +9,11 @@
 (defn answers-section [author]
   [:div.my-4
    [:div.font-bold "answers"]
-   (into
-    [:div.flex.gap-x-4]
+   [:div
     (for [[e _ datetime] (->> (list-answers author) (sort-by first))]
-      [:a.hover:underline {:hx-get (str "/answers/answer/" e)
-                           :hx-target "#answer"}
-       (mm-dd datetime)]))
+      [:span [:a.hover:underline {:hx-get (str "/answers/answer/" e)
+                                  :hx-target "#answer"}
+              (mm-dd datetime)] " "])]
    [:div#answer.my-4]])
 
 (defn index [{{:keys [identity]} :session}]
