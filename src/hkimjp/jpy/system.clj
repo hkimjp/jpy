@@ -8,7 +8,7 @@
    [hkimjp.datascript :as ds])
   (:import (java.util.concurrent Executors)))
 
-(def port (or (env :port) 3000))
+(def port (or (env :port) "3000"))
 
 (defonce server (atom nil))
 
@@ -19,7 +19,7 @@
                 root-handler)]
       (reset! server
               (hk/run-server
-               app {:port port
+               app {:port (parse-long port)
                     :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
       (tel/log! :info (str "server started at port " port)))))
 
