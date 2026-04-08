@@ -15,7 +15,7 @@
 |----------|----------------------------------------------|----------|---------|
 | deps.edn | io.github.hkimjp/datascript-storage-javatime | 0.7.8    | 0.7.9   |
 
-# 0.8.2-SNAPSHOT
+# 0.8.2 (2026-04-08)
 
 - added `Dockerfile`. changed my mind not to use `docker commit`, but `docker build`.
 - forgot to install `ruff`.
