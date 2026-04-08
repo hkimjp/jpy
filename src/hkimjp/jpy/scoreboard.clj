@@ -4,12 +4,12 @@
    ; [clojure.edn :as edn]
    ; [clojure.java.io :as io]
    [environ.core :refer [env]]
-   [org.httpkit.client :as client]
+   [org.httpkit.client :as hk-client]
    [hkimjp.jpy.util :refer [score]]
    [hkimjp.jpy.view :refer [page]]))
 
 (defn users []
-  (sort (mapv :login (-> @(client/get (env :users))
+  (sort (mapv :login (-> @(hk-client/get (env :users))
                          :body
                          (charred/read-json :key-fn keyword)))))
 
