@@ -8,13 +8,14 @@
 * namespace for hx
 * gather answers by date.
 * link answers from scoreboard's 🙂
-* display problem issued datetime (in admin page)
 
 
 ## 0.9.0-SNAPSHOT (2026-04-09)
 
 - fixed by using [:span] - list of problem issued date is too long horizontaly
 - timezone UTC - not UTC, it is 12 hour format time. fixed by "HH".
+- timezone - `TZ = Asia/Tokyo` in `.env`
+- display value of `TZ` in admin page
 
 ## 0.8.4
 
