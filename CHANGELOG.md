@@ -11,6 +11,13 @@
 * timezone UTC
 
 
+# 0.8.4
+
+- fixed a bug - problems/create!
+
+    - id ((:tempids ret) -1) ; what is this?
+    + id (-> (:tempids ret) first second) ; get the latest id
+
 # 0.8.3 (2026-04-08)
 
 - improveed auth.clj
@@ -100,7 +107,7 @@
 | deps.edn | com.taoensso/telemere | 1.1.0    | 1.2.0   |
 |          | org.clojure/clojure   | 1.12.3   | 1.12.4  |
 
-# 0.7.0-SNAPSHOT
+# 0.8.4 (2026-04-08)
 
 | :file    | :name                                        | :current | :latest |
 |----------|----------------------------------------------|----------|---------|
