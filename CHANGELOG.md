@@ -9,6 +9,12 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
+
+## 0.9.2-SNAPSHOT
+
+* docker hub?
+
+
 ## 0.9.1 (2026-04-13)
 
 - initialized problems.
