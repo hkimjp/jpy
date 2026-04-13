@@ -11,7 +11,7 @@
 
 ## 0.9.1 (2026-04-13)
 
-init problems
+- initialize problems.
 
 
 ## 0.9.0 (2026-04-13)
