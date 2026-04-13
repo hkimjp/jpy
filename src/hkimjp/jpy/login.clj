@@ -11,7 +11,9 @@
    [hkimjp.jpy.util :refer [user btn]]
    [hkimjp.jpy.view :refer [page]]))
 
-(def l22 (or (env :auth) "https://l22.melt.kyutech.ac.jp"))
+(when-not (env :auth)
+  (t/log! :error "AUTH not defined")
+  (System/exit 1))
 
 (defn login
   [request]
@@ -34,30 +36,22 @@
 (defn login!
   [{{:keys [login password]} :params}]
   (t/log! {:level :debug :id "login!" :msg (str login " " password)})
-  (if (empty? (env :auth))
-    (do
-      (t/log! :info (str "no auth mode: " login))
-      (-> (resp/redirect "/workspace")
-          (assoc-in [:session :identity] login)))
-    (try
-      (let [pw (-> (hk-client/get (str l22 "/api/user/" login))
-                   deref
-                   :body
-                   charred/read-json
-                   (get "password"))]
-        (if (hashers/check password pw)
-          (do
-            (t/log! :info (str "login success: " login))
-            (-> (resp/redirect "/workspace")
-                (assoc-in [:session :identity] login)))
-          (do
-            (t/log! :info (str "login failed: " login))
-            (-> (resp/redirect "/")
-                (assoc :session {} :flash "login failed")))))
-      (catch Exception e
-        (t/log! :warn (.getMessage e))
-        (-> (resp/redirect "/")
-            (assoc :session {} :flash "enter login/password"))))))
+  (try
+    (let [pw (-> (hk-client/get (str (env :auth) login))
+                 deref
+                 :body
+                 (charred/read-json :key-fn keyword)
+                 :password)]
+      (if (hashers/check password pw)
+        (do
+          (t/log! :info (str "login success: " login))
+          (-> (resp/redirect "/workspace")
+              (assoc-in [:session :identity] login)))
+        (throw (Exception. ""))))
+    (catch Exception e
+      (t/log! :info (str "login failed: " login))
+      (-> (resp/redirect "/")
+          (assoc :session {} :flash "login failed")))))
 
 (defn logout! [request]
   (t/log! {:level :info

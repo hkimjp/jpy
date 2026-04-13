@@ -1,12 +1,12 @@
 (ns user
   (:require
    [clj-reload.core :as reload]
-   [clojure.java.io :as io]
-   [charred.api :as charred]
-   [environ.core :refer [env]]
+   ; [clojure.java.io :as io]
+   ; [charred.api :as charred]
+   ; [environ.core :refer [env]]
    [taoensso.telemere :as tel]
-   [hkimjp.datascript :as ds]
-   [hkimjp.jpy.util :as util]
+   ; [hkimjp.datascript :as ds]
+   ; [hkimjp.jpy.util :as util]
    [hkimjp.jpy.system :refer [start-system stop-system restart-system]]))
 
 ;--------------------------
@@ -15,12 +15,10 @@
 (restart-system)
 
 ; (start-system)
-; (stop-system)
 
 ;---------------------------
 ; clj-reload
 ; hooks do not work?
-
 (defn before-ns-unload []
   (println "called before-ns-unload"))
 
@@ -31,8 +29,6 @@
  {:output :verbose
   :dirs ["src" "test"]
   :no-reload '#{user}})
-
-; (reload/reload)
 
 (defn reload []
   (stop-system)

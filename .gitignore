@@ -33,5 +33,6 @@
 /log
 /storage/*
 !/storage/.keep
-
+.ruff_cache
+.repl-port
 

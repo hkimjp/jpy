@@ -4,7 +4,7 @@
    [ring.util.response :as resp]
    [taoensso.telemere :as t]))
 
-(def version "0.6.7")
+(def version "0.8.4")
 
 (def ^:private menu "text-xl font-medium text-white px-1 hover:bg-orange-500")
 
@@ -57,10 +57,12 @@
 (defn error-page
   [content]
   (t/log! :debug (str "error-page " content))
-  (-> (str (h/html (h/raw "<!DOCTYPE html>")
-                   (base [:div
-                          [:h1.text-red-600 "Error"]
-                          content])))
+  (-> (str
+       (h/html
+        (h/raw "<!DOCTYPE html>")
+        (base [:div.m-4
+               [:h1.text-red-600 "Error"]
+               content])))
       resp/response
       (resp/header "Content-Type" "text/html")))
 

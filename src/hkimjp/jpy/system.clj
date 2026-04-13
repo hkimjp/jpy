@@ -8,21 +8,19 @@
    [hkimjp.datascript :as ds])
   (:import (java.util.concurrent Executors)))
 
+(def port (or (env :port) "3000"))
+
 (defonce server (atom nil))
 
 (defn start-server []
   (when-not @server
-    (let [port (parse-long (or (env :port) "3000"))
-          handler (if (env :develop)
-                    (do
-                      (tel/log! :debug "wrap-reload #'root-handler")
-                      (wrap-reload #'root-handler))
-                    root-handler)]
+    (let [app (if (env :develop)
+                (wrap-reload #'root-handler)
+                root-handler)]
       (reset! server
               (hk/run-server
-               handler {:port port
-                        ;; virtual thread
-                        :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
+               app {:port (parse-long port)
+                    :worker-pool (Executors/newVirtualThreadPerTaskExecutor)}))
       (tel/log! :info (str "server started at port " port)))))
 
 (defn stop-server []

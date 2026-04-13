@@ -19,19 +19,20 @@
 (defn send! [ch message]
   (hk/send! ch
             {:status  200
-             :headers {"Content-Type"  "text/event-stream"
-                       "Cache-Control" "no-cache, no-store"}
+             :headers {"Content-Type"      "text/event-stream"
+                       "Cache-Control"     "no-cache,no-store"}
              :body    (format-event message)}
             false))
 
 (defn event [req]
-  (tel/log! :info "event called")
+  (tel/log! {:level :info :id "event"})
   (hk/as-channel req
                  {:on-open  (fn [ch]   (swap! clients conj ch))
-                  :on-close (fn [ch _]
-                              (swap! clients disj ch))}))
+                  :on-close (fn [ch _] (swap! clients disj ch))}))
 
 (defn broadcast-message-to-connected-clients! [message]
+  (tel/log! {:level :info :id "boradcast-..." :msg message
+             :data (count @clients)})
   (run! (fn [ch] (send! ch message)) @clients))
 
 (defn broadcast! [{{:keys [message]} :params}]
