@@ -9,10 +9,9 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
-## 0.9.1-SNAPSHOT
+## 0.9.1 (2026-04-13)
 
-init problems
-
+- initialized problems.
 
 ## 0.9.0 (2026-04-13)
 
