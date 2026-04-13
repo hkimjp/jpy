@@ -9,8 +9,12 @@
 * gather answers by date.
 * link answers from scoreboard's 🙂
 
+## 0.9.1-SNAPSHOT
 
-## 0.9.0 (2026-04-13) (2026-04-09)
+init problems
+
+
+## 0.9.0 (2026-04-13)
 
 - fixed by using [:span] - list of problem issued date is too long horizontaly
 - timezone UTC - not UTC, it is 12 hour format time. fixed by "HH".
