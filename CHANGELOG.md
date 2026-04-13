@@ -10,9 +10,11 @@
 * link answers from scoreboard's 🙂
 
 
-## 0.9.2-SNAPSHOT
+## 0.9.2 (2026-04-13)
 
-* docker hub?
+- `just docker-build` on `app.melt:jpy`.
+- copied the initialized `jpy.sqlite`.
+- forgot `bump-version.sh`? - must exec from top directory.
 
 
 ## 0.9.1 (2026-04-13)
