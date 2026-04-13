@@ -3,59 +3,80 @@
    [buddy.hashers :as hashers]
    [charred.api :as charred]
    [environ.core :refer [env]]
-   [org.httpkit.client :as hk-client]
    [hiccup2.core :as h]
+   [org.httpkit.client :as http]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [ring.util.response :as resp]
-   [taoensso.telemere :as t]
-   [hkimjp.jpy.util :refer [user btn]]
+   [taoensso.telemere :as tel]
    [hkimjp.jpy.view :refer [page]]))
 
 (when-not (env :auth)
-  (t/log! :error "AUTH not defined")
+  (tel/log! :error "AUTH not defined")
   (System/exit 1))
 
-(defn login
-  [request]
-  (page
-   [:div.mx-4
-    [:div.font-bold.p-2 "LOGIN" (when (env :develop) " (DEVELOP)")]
-    (when-let [flash (:flash request)]
-      [:div {:class "text-red-500"} flash])
-    [:div.p-1
-     [:form {:method "post"}
-      (h/raw (anti-forgery-field))
-      [:input.border-1.px-1.rounded
-       {:name "login" :placeholder "account" :autocomplete "username"}]
-      [:span.mx-1 ""]
-      [:input.border-1.px-1.rounded
-       {:name "password" :type "password" :placeholder "password" :autocomplete "current-password"}]
-      [:button {:class btn} "LOGIN"]]]
-    [:br]]))
+(def btn "mx-1 px-1 text-white bg-sky-500 hover:bg-sky-700 active:bg-red-500 rounded")
+(def input-box "px-1 border-1 rounded")
+(def section "text-2xl font-bold p-2")
+(def subsection "text-xl font-bold")
+(def warn "text-red-500")
 
-(defn login!
-  [{{:keys [login password]} :params}]
-  (t/log! {:level :debug :id "login!" :msg (str login " " password)})
-  (try
-    (let [pw (-> (hk-client/get (str (env :auth) login))
-                 deref
-                 :body
-                 (charred/read-json :key-fn keyword)
-                 :password)]
-      (if (hashers/check password pw)
-        (do
-          (t/log! :info (str "login success: " login))
-          (-> (resp/redirect "/workspace")
-              (assoc-in [:session :identity] login)))
-        (throw (Exception. ""))))
-    (catch Exception e
-      (t/log! :info (str "login failed: " login))
+(defn login [req]
+  (page
+   [:div.m-4
+    [:div {:class section} "LOGIN"]
+    [:div {:class warn} (:flash req)]
+    [:form {:method :post}
+     (h/raw (anti-forgery-field))
+     [:input {:name "url" :type "hidden" :value "/workspace"}]
+     [:input {:class        input-box
+              :name         "user"
+              :placeholder  "account"
+              :autocomplete "username"}]
+     [:input {:class        input-box
+              :name         "password"
+              :type         "password"
+              :placeholder  "password"
+              :autocomplete "current-password"}]
+     [:button {:class btn} "LOGIN"]]]))
+
+; (defn login [req]
+;   (page
+;    [:div.content
+;     [:div "LOGIN"]
+;     [:div (:flash req)]
+;     [:form {:method :post}
+;      (h/raw (anti-forgery-field))
+;      [:input {:name "url" :type "hidden" :value "/hello"}]
+;      [:label "name"] [:input {:name "user"}]
+;      [:label "password"] [:input {:name "password" :type "password"}]
+;      [:br]
+;      [:button.button "submit"]]]))
+
+(defn fetch [user]
+  (let [auth (str (or (System/getenv "AUTH") "http://l22/api/user/") user)]
+    (try
+      (-> (http/get auth)
+          deref
+          :body
+          (charred/read-json :key-fn keyword)
+          :password)
+      (catch Exception _ nil))))
+
+(defn login! [{{:keys [user password url]} :params :as req}]
+  (tel/log! {:level :info :id "login!"
+             :data (dissoc (:params req) :__anti-forgery-token)})
+  (tel/log! :debug (str "fetch user" (fetch user)))
+  (if (hashers/check password (fetch user))
+    (do
+      (tel/log! :info (str "login success: " user))
+      (-> (resp/redirect url)
+          (assoc-in [:session :identity] user)))
+    (do
+      (tel/log! :warn (str "login failed: " user))
       (-> (resp/redirect "/")
           (assoc :session {} :flash "login failed")))))
 
-(defn logout! [request]
-  (t/log! {:level :info
-           :id "logout!"
-           :msg (user request)})
+(defn logout! [_request]
+  (tel/log! {:level :info :id "logout!"})
   (-> (resp/redirect "/")
-      (assoc :session {})))
+      (assoc :session {} :flash "please login")))

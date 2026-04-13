@@ -16,6 +16,7 @@
 - timezone UTC - not UTC, it is 12 hour format time. fixed by "HH".
 - timezone - `TZ = Asia/Tokyo` in `.env`
 - display value of `TZ` in admin page
+- replaced `login.clj` by `hkimjp/auth-module`
 
 ## 0.8.4
 
