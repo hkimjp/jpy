@@ -37,7 +37,7 @@ test:
 build:
     clojure -T:build ci
 
-deploy dest: minify build
+deploy dest: #minify build
     ssh {{ dest }} 'mkdir -p jpy jpy/storage'
     scp target/io.github.hkimjp/jpy-*.jar {{ dest }}:jpy/jpy.jar
     scp Justfile Dockerfile compose.yaml {{ dest }}:jpy/

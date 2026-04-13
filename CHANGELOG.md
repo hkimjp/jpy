@@ -8,6 +8,9 @@
 * namespace for hx
 * gather answers by date.
 * link answers from scoreboard's 🙂
+* edit problems
+* markdown preview
+
 
 
 ## 0.9.2 (2026-04-13)
