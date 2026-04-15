@@ -10,7 +10,7 @@
 * link answers from scoreboard's 🙂
 * edit problems
 * markdown preview
-
+* submissions are available in lecture time only.
 
 
 ## 0.9.2 (2026-04-13)
