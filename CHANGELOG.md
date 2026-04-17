@@ -7,17 +7,16 @@
 * recongize markdown/python code
 * namespace for hx
 * gather answers by date.
-* link answers from scoreboard's 🙂
 * edit problems
 * markdown preview
-* supress logs from datascript
-* box round rectangle
-* answerable time
-* submissions are available in lecture time only.
+* answerable time - submissions available in lecture time only.
 
 
-## 0.10.0-SNAPSHOT
+## 0.10.0-SNAPSHOT (2026-04-17)
 
+
+- supress logs from libraries - (tel/set-ns-filter! {:disallow "hkimjp.*"})
+- links from smile marks to his/her answers
 - renamed `utils/score` as `utils/submits`
 - updated libraries
 
