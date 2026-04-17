@@ -8,15 +8,17 @@
    [hkimjp.jpy.util :refer [score]]
    [hkimjp.jpy.view :refer [page]]))
 
+;; Accept:application/edn
 (defn users []
   (sort (mapv :login (-> @(hk-client/get (env :users))
                          :body
                          (charred/read-json :key-fn keyword)))))
 
+;; different smiles week by week
 (def smile (constantly "😀"))
 
 (defn- submits [author]
-  (map (fn [x] (-> x first smile)) (score author)))
+  (map #(-> % first smile) (score author)))
 
 (defn index [{{:keys [identity]} :session}]
   (page
@@ -27,4 +29,4 @@
        (if (= identity user)
          [:div {:class "w-24"} [:span.text-white.bg-red-500 user]]
          [:div {:class "w-24"} user])
-       [:div (submits user)]])]))
+       [:div (submits user)]])])) ;

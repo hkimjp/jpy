@@ -9,8 +9,8 @@
   com.cnuernber/charred          {:mvn/version "1.038"}
   environ/environ                {:mvn/version "1.2.0"}
   ;; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
-  ring/ring-core                 {:mvn/version "1.15.3"}
-  ring/ring-devel                {:mvn/version "1.15.3"}
+  ring/ring-core                 {:mvn/version "1.15.4"}
+  ring/ring-devel                {:mvn/version "1.15.4"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
   http-kit/http-kit              {:mvn/version "2.9.0-beta3"}
   metosin/reitit-ring            {:mvn/version "0.10.1"}

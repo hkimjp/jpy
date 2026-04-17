@@ -11,6 +11,7 @@
 
 ;--------------------------
 (tel/set-min-level! :debug)
+(tel/set-ns-filter! {:disallow "hkimjp.*"}) ; ?how to :allow
 
 (restart-system)
 

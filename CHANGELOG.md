@@ -10,8 +10,19 @@
 * link answers from scoreboard's 🙂
 * edit problems
 * markdown preview
+* supress logs from datascript
+* box round rectangle
+* answerable time
 
 
+## 0.10.0-SNAPSHOT
+
+- updated libraries
+
+| :file    | :name           | :current | :latest |
+|----------|-----------------|----------|---------|
+| deps.edn | ring/ring-core  | 1.15.3   | 1.15.4  |
+|          | ring/ring-devel | 1.15.3   | 1.15.4  |
 
 ## 0.9.2 (2026-04-13)
 
