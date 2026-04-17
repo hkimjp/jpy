@@ -13,6 +13,7 @@
 * supress logs from datascript
 * box round rectangle
 * answerable time
+* submissions are available in lecture time only.
 
 
 ## 0.10.0-SNAPSHOT
