@@ -18,6 +18,7 @@
 
 ## 0.10.0-SNAPSHOT
 
+- renamed `utils/score` as `utils/submits`
 - updated libraries
 
 | :file    | :name           | :current | :latest |

@@ -8,52 +8,40 @@
   com.taoensso/telemere          {:mvn/version "1.2.1"}
   com.cnuernber/charred          {:mvn/version "1.038"}
   environ/environ                {:mvn/version "1.2.0"}
-  ;; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
+  ; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
   ring/ring-core                 {:mvn/version "1.15.4"}
   ring/ring-devel                {:mvn/version "1.15.4"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
   http-kit/http-kit              {:mvn/version "2.9.0-beta3"}
   metosin/reitit-ring            {:mvn/version "0.10.1"}
   hiccup/hiccup                  {:mvn/version "2.0.0"}
-  timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
+  ; timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
   io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.9" :git/sha "6c49ad9"}}
 
  :aliases
- {:dev
-  {:extra-paths ["dev"]
-   :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "1.0.0"}}
-   :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
-                 "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
-                 "--enable-native-access=ALL-UNNAMED"]}
+ {:dev {:extra-paths ["dev"]
+        :extra-deps  {io.github.tonsky/clj-reload {:mvn/version "1.0.0"}}
+        :jvm-opts    ["--add-opens=java.base/java.nio=ALL-UNNAMED"
+                      "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
+                      "--enable-native-access=ALL-UNNAMED"]}
 
   ;;clojure -M:nrepl
-  :nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}} ; 1.5.2 is OK, 1.6.0 NOT.
-   :main-opts  ["-m" "nrepl.cmdline"]}
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}} ; 1.5.2 is OK, 1.6.0 NOT.
+          :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus
-  :plus
-  {:extra-deps {io.github.tonsky/clojure-plus {:mvn/version "1.7.2"}}
-   :exec-fn    clojure+.core.server/start-server
-   :exec-args  {:name "socket repl(plus)"}}
+  :plus {:extra-deps {io.github.tonsky/clojure-plus {:mvn/version "1.7.2"}}
+         :exec-fn    clojure+.core.server/start-server
+         :exec-args  {:name "socket repl(plus)"}}
 
-  :run-m
-  {:main-opts ["-m" "hkimjp.jpy.main"]}
+  :run-m {:main-opts ["-m" "hkimjp.jpy.main"]}
 
-  ; :run-x
-  ; {:ns-default hkimjp.jpy
-  ;  :exec-fn greet
-  ;  :exec-args {:name "Clojure"}}
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.13"}}
+          :ns-default build}
 
-  :build
-  {:deps {io.github.clojure/tools.build {:mvn/version "0.10.13"}}
-   :ns-default build}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.3"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}
 
-  :test
-  {:extra-paths ["test"]
-   :extra-deps {org.clojure/test.check {:mvn/version "1.1.3"}
-                io.github.cognitect-labs/test-runner
-                {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}
-
-  :neil
-  {:project {:name hkimjp/scratch}}}}
+  :neil {:project {:name hkimjp/jpy}}}}
