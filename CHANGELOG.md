@@ -13,7 +13,7 @@
 * do not accept empty answers
 
 
-## 0.10.0-SNAPSHOT (2026-04-17)
+## 0.10.0 (2026-04-19) (2026-04-17)
 
 - supress logs from libraries - (tel/set-ns-filter! {:disallow "hkimjp.*"})
 - links from smile marks to his/her answers
