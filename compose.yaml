@@ -10,3 +10,8 @@ services:
     entrypoint: >
       sh -c "java -jar jpy.jar"
     restart: unless-stopped
+
+  redis:
+    image: redis:8
+    env_file: .env
+    restart: unless-stopped

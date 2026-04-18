@@ -30,8 +30,8 @@
            :where
            [?e :problem ?problem]]))
 
-(defn score [user]
-  (ds/qq '[:find ?datetime
+(defn submits [user]
+  (ds/qq '[:find ?e ?datetime
            :in $ ?author
            :where
            [?e :login ?author]
