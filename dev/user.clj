@@ -11,7 +11,9 @@
 
 ;--------------------------
 (tel/set-min-level! :debug)
-(tel/set-ns-filter! {:disallow "hkimjp.*"}) ; ?how to :allow
+
+; FIXME: can not allow
+(tel/set-ns-filter! {:allow "hkimjp.jpy.*" :disallow "hkimjp.*"}) ; ?how to :allow
 
 (restart-system)
 
@@ -39,11 +41,3 @@
 ; (reload)
 
 ;-------------------
-(comment
-  1 情報基礎はどんなふうに授業が進み、成績はどうつくか？
-  2 過去の授業、日本語、スペースや @入りのアカウントでどんな事件があったか？
-  3 OneDriveってなんですの？
-  4 「OneDrive 配下のデスクトップ」ってどんな意味？その危険性は？
-  5 授業資料のページのURLはなんですか？ブックマークした？
-  6 hkimuraのオフィスの部屋番号は？オフィスを出てみんなの質問を図書館で待ち受ける曜日は？
-  :rcf)

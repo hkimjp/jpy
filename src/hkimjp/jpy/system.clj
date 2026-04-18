@@ -5,7 +5,8 @@
    [ring.middleware.reload :refer [wrap-reload]]
    [taoensso.telemere :as tel]
    [hkimjp.jpy.routes :refer [root-handler]]
-   [hkimjp.datascript :as ds])
+   [hkimjp.datascript :as ds]
+   [hkimjp.carmine :as c])
   (:import (java.util.concurrent Executors)))
 
 (def port (or (env :port) "3000"))
@@ -34,6 +35,7 @@
              :msg (env :develop)
              :data {:datascript (env :datascript)}})
   (try
+    (c/create-conn "redis://redis")
     (ds/start-or-restore {:url (env :datascript)})
     (start-server)
     (catch Exception e

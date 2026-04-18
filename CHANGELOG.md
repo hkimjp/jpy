@@ -10,10 +10,10 @@
 * edit problems
 * markdown preview
 * answerable time - submissions available in lecture time only.
+* do not accept empty answers
 
 
 ## 0.10.0-SNAPSHOT (2026-04-17)
-
 
 - supress logs from libraries - (tel/set-ns-filter! {:disallow "hkimjp.*"})
 - links from smile marks to his/her answers
@@ -24,6 +24,42 @@
 |----------|-----------------|----------|---------|
 | deps.edn | ring/ring-core  | 1.15.3   | 1.15.4  |
 |          | ring/ring-devel | 1.15.3   | 1.15.4  |
+
+
+- redis cache (before smiles)
+
+````
+❯ wrk http://jpy/scoreboard
+Running 10s test @ http://jpy/scoreboard
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     3.33ms    2.60ms  38.82ms   88.25%
+    Req/Sec     1.68k     0.97k    3.49k    58.50%
+  33455 requests in 10.01s, 19.02MB read
+Requests/sec:   3342.42
+Transfer/sec:      1.90MB
+```
+
+1.5 times faster with cache
+
+```
+(defmacro cache-page [uri handler args]
+  `(if-let [cached# (c/get ~uri)]
+     cached#
+     (let [result# (~handler ~args)]
+       (c/setex ~uri 60 result#)
+       result#)))
+
+❯ wrk http://jpy/scoreboard
+unning 10s test @ http://jpy/scoreboard
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.07ms    2.01ms  31.78ms   92.15%
+    Req/Sec     2.90k     0.96k    3.58k    85.15%
+  58308 requests in 10.11s, 33.16MB read
+Requests/sec:   5770.11
+Transfer/sec:      3.28MB
+```
 
 ## 0.9.2 (2026-04-13)
 
