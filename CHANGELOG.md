@@ -8,6 +8,12 @@
 * edit problems
 * validation - ruff? doctest?
 
+## 0.12.1
+
+- in DEVELOP mode, in-time? restriction disabled.
+- DEVELOP mode in staging.
+- no use above. Adjusting `END_TIME?` is enogh.
+
 ## 0.12.0 (2026-04-19)
 
 - markdown preview - nextjournal markdown + css `div.answer` class.
