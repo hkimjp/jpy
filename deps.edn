@@ -8,7 +8,7 @@
   com.taoensso/telemere          {:mvn/version "1.2.1"}
   com.cnuernber/charred          {:mvn/version "1.038"}
   environ/environ                {:mvn/version "1.2.0"}
-  ; io.github.nextjournal/markdown {:mvn/version "0.7.196"}
+  io.github.nextjournal/markdown {:mvn/version "0.7.196"}
   ring/ring-core                 {:mvn/version "1.15.4"}
   ring/ring-devel                {:mvn/version "1.15.4"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
@@ -16,6 +16,7 @@
   metosin/reitit-ring            {:mvn/version "0.10.1"}
   hiccup/hiccup                  {:mvn/version "2.0.0"}
   timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
+  ;
   io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.9" :git/sha "6c49ad9"}
   io.github.hkimjp/carmine-farm  {:git/tag "0.4.0" :git/sha "8da271b"}}
 
@@ -26,8 +27,9 @@
                       "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
                       "--enable-native-access=ALL-UNNAMED"]}
 
-  ;;clojure -M:nrepl
-  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}} ; 1.5.2 is OK, 1.6.0 NOT.
+  ;; clojure -M:nrepl
+  ;; Clojure Sublimed can not talk to nrepl > "1.5.2".
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
           :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus

@@ -2,13 +2,18 @@
   (:require
    [clojure.string :as str]
    [environ.core :refer [env]]
+   [hiccup2.core :as h]
    [java-time.api :as jt]
+   [nextjournal.markdown :as md]
    [taoensso.telemere :as tel]
    [hkimjp.datascript :as ds]
    [hkimjp.jpy.util :as util]
    [hkimjp.jpy.validate :refer [validate]]
    [hkimjp.jpy.view :refer [error-page redirect hx]]
-   [clojure.core :as c]))
+   #_[clojure.core :as c]))
+
+(defn- markdown [answer]
+  [:div.answer (-> answer md/parse md/->hiccup h/html)])
 
 (defn answer-hx
   "called from answers-section, returns hx response"
@@ -18,10 +23,13 @@
         {:keys [problem]} (ds/pl id)]
     (hx [:div
          [:p problem]
-         [:pre.p-2 answer]
+         (if (str/starts-with? answer "def")
+           [:pre.p-2 answer]
+           (markdown answer))
+
          [:p (jt/format "YYYY-MM-dd HH:mm:ss" datetime)]])))
 
-(defn ->sec
+(defn- ->sec
   [hhmm]
   (let [[h m] (str/split hhmm #":")]
     (+ (* (parse-long h) 60) (parse-long m))))
