@@ -9,11 +9,15 @@
 * gather answers by date.
 * edit problems
 * markdown preview
-* answerable time - submissions available in lecture time only.
-* do not accept empty answers
 
 
-## 0.10.0 (2026-04-19) (2026-04-17)
+# 0.11.0-SNAPSHOT
+
+- answerable time - submissions available in lecture time only.
+- do not accept empty answers - with `hx-boost "true"`, JS validation did not take effects.
+- weekly smiles
+
+## 0.10.0 (2026-04-19)
 
 - supress logs from libraries - (tel/set-ns-filter! {:disallow "hkimjp.*"})
 - links from smile marks to his/her answers
@@ -24,7 +28,6 @@
 |----------|-----------------|----------|---------|
 | deps.edn | ring/ring-core  | 1.15.3   | 1.15.4  |
 |          | ring/ring-devel | 1.15.3   | 1.15.4  |
-
 
 - redis cache (before smiles)
 
