@@ -21,15 +21,18 @@
          [:pre.p-2 answer]
          [:p (jt/format "YYYY-MM-dd HH:mm:ss" datetime)]])))
 
+(defn ->sec
+  [hhmm]
+  (let [[h m] (str/split hhmm #":")]
+    (+ (* (parse-long h) 60) (parse-long m))))
+
 (defn- in-time?
   "judge current time is in answerable time"
   []
-  (when-not (<=　(env :start-time) (jt/format "HH:mm" （jt/local-time)) (env :end-time))
-  (throw (ex-info "not in time" {})))
-
-(comment
-  (jt/local-time)
-  :rcf)
+  (when-not (<= (->sec (env :start-time))
+                (->sec (jt/format "HH:mm" (jt/local-time)))
+                (->sec (env :end-time)))
+    (throw (Exception. "not in time"))))
 
 (defn upload!
   [{{:keys [login answer]} :params}]
@@ -48,5 +51,6 @@
       (redirect "/workspace")
       (catch Exception e
         (tel/log! {:level :error :id "upload!"
-                   :data {:login login :answer answer}})
+                   :data {:login login :answer answer
+                          :e e}})
         (error-page (.getMessage e))))))

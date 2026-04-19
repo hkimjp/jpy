@@ -14,7 +14,8 @@
 # 0.11.0-SNAPSHOT
 
 - answerable time - submissions available in lecture time only.
-- do not accept empty answers - with `hx-boost "true"`, JS validation did not take effects.
+- do not accept empty answers - with `hx-boost "true"`, JS validation did not
+take effects.
 - weekly smiles
 
 ## 0.10.0 (2026-04-19)
