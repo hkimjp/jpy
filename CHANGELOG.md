@@ -8,7 +8,7 @@
 * edit problems
 * validation - ruff? doctest?
 
-## 0.12.0-SNAPSHOT
+## 0.12.0 (2026-04-19)
 
 - markdown preview - nextjournal markdown + css `div.answer` class.
 
