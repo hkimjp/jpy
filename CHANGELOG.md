@@ -11,7 +11,7 @@
 * markdown preview
 
 
-# 0.11.0-SNAPSHOT
+# 0.11.0 (2026-04-19)
 
 - answerable time - submissions available in lecture time only.
 - do not accept empty answers - with `hx-boost "true"`, JS validation did not
