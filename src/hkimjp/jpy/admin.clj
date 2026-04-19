@@ -42,7 +42,8 @@
   [:div.my-4
    [:div.font-bold "Env Vars"]
    (for [e (-> [:develop :port :auth :admin :datascript :redis
-                :python-path :pytest-path :ruff-path :tz]
+                :python-path :pytest-path :ruff-path :tz
+                :start-time :end-time]
                sort)]
      [:div (-> e symbol str str/upper-case) ": " (env e)])])
 

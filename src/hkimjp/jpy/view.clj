@@ -40,8 +40,11 @@
     [:script {:type "text/javascript"
               :src  "/assets/js/htmx-ext-sse.js"
               :defer true}]
+    [:script {:type "text/javascript"
+              :src "/assets/js/validate-answer.js"
+              :defer true}]
     [:title "JPY"]]
-   [:body {:hx-boost "true"}
+   [:body {:hx-boost "false"}
     [:div
      (navbar)
      content
@@ -49,7 +52,7 @@
 
 (defn page
   [content]
-  (t/log! :debug (str "page"))
+  (t/log! :debug "page")
   (-> (str (h/html (h/raw "<!DOCTYPE html>") (base content)))
       resp/response
       (resp/header "Content-Type" "text/html")))
