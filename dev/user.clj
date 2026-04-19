@@ -11,9 +11,8 @@
 
 ;--------------------------
 (tel/set-min-level! :debug)
-
 ; FIXME: can not allow
-(tel/set-ns-filter! {:allow "hkimjp.jpy.*" :disallow "hkimjp.*"}) ; ?how to :allow
+(tel/set-ns-filter! {:allow "hkimjp.jpy.*"})
 
 (restart-system)
 

@@ -25,12 +25,13 @@
       [:div.my-4
        [:div {:hx-ext "sse" :sse-connect "/event" :sse-swap "message"}
         problem]
-       [:form {:method "post" :action "/answers/upload"}
+       [:form {:method "post" :action "/answers/upload"
+               :onsubmit "return validateAnswer()"}
         (h/raw (anti-forgery-field))
         [:input {:type "hidden" :name "login" :value identity}]
-        [:textarea {:class "w-full h-64 border-1 p-2"
+        [:textarea {:id "form-answer"
                     :name "answer"
+                    :class "w-full h-64 border-1 p-2"
                     :placeholder "your answer, please."}]
         [:button {:class btn} "submit"]]]
       (answers-section identity)])))
-

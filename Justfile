@@ -15,7 +15,7 @@ plus:
     clj -X:dev:plus
 
 nrepl:
-    clj -M:dev:nrepl
+    clj -M:dev:nrepl -i
 
 dev:
     just watch 2> /dev/null &
@@ -32,7 +32,6 @@ run:
 
 test:
     clojure -M:dev -m kaocha.runner
-
 
 build:
     clojure -T:build ci
