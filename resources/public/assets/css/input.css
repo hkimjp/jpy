@@ -47,4 +47,9 @@
   pre {
     background-color: #eee;
   }
+
+  div.answer {
+    background-color: #eee;
+    padding: 4px;
+  }
 }

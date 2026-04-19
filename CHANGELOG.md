@@ -2,16 +2,17 @@
 
 ## Unreleased
 
-* change scoreboard `smiles` weekly
 * RUFF enable/disable interactively
-* recongize markdown/python code
 * namespace for hx
 * gather answers by date.
 * edit problems
-* markdown preview
+* validation - ruff? doctest?
 
+## 0.12.0 (2026-04-19)
 
-# 0.11.0 (2026-04-19)
+- markdown preview - nextjournal markdown + css `div.answer` class.
+
+## 0.11.0 (2026-04-19)
 
 - answerable time - submissions available in lecture time only.
 - do not accept empty answers - with `hx-boost "true"`, JS validation did not
@@ -44,7 +45,7 @@ Requests/sec:   3342.42
 Transfer/sec:      1.90MB
 ```
 
-1.5 times faster with cache
+1.5 times faster with cache.
 
 ```
 (defmacro cache-page [uri handler args]
