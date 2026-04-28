@@ -31,12 +31,13 @@
            [?e :problem ?problem]]))
 
 (defn submits [user]
-  (ds/qq '[:find ?e ?datetime
-           :in $ ?author
-           :where
-           [?e :login ?author]
-           [?e :datetime ?datetime]]
-         user))
+  (->> (ds/qq '[:find ?e ?datetime
+                :in $ ?author
+                :where
+                [?e :login ?author]
+                [?e :datetime ?datetime]]
+              user)
+       (sort-by first)))
 
 ;
 (defn user [request]
