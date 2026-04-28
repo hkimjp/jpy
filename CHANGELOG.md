@@ -8,7 +8,7 @@
 * edit problems
 * validation - ruff? doctest?
 
-## 0.12.2
+## 0.12.2 (2026-04-28)
 
 - sort scoreboard score by `db/id`.
 
