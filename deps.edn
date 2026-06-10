@@ -1,14 +1,14 @@
 {:paths ["src" "resources"]
 
  :deps
- {org.clojure/clojure            {:mvn/version "1.12.4"}
-  babashka/fs                    {:mvn/version "0.5.32"}
+ {org.clojure/clojure            {:mvn/version "1.12.5"}
+  babashka/fs                    {:mvn/version "0.5.33"}
   buddy/buddy-hashers            {:mvn/version "2.0.167"}
   clojure.java-time/clojure.java-time {:mvn/version "1.4.3"}
   com.taoensso/telemere          {:mvn/version "1.2.1"}
   com.cnuernber/charred          {:mvn/version "1.038"}
   environ/environ                {:mvn/version "1.2.0"}
-  io.github.nextjournal/markdown {:mvn/version "0.7.196"}
+  io.github.nextjournal/markdown {:mvn/version "0.7.225"}
   ring/ring-core                 {:mvn/version "1.15.4"}
   ring/ring-devel                {:mvn/version "1.15.4"}
   ring/ring-defaults             {:mvn/version "0.7.0"}
@@ -18,7 +18,7 @@
   timeout-shell/timeout-shell    {:mvn/version "1.0.0"}
   ;
   io.github.hkimjp/datascript-storage-javatime {:git/tag "0.7.9" :git/sha "6c49ad9"}
-  io.github.hkimjp/carmine-farm  {:git/tag "0.4.0" :git/sha "8da271b"}}
+  io.github.hkimjp/carmine-farm  {:git/tag "0.5.1" :git/sha "71a9cf4"}}
 
  :aliases
  {:dev {:extra-paths ["dev"]
@@ -29,7 +29,7 @@
 
   ;; clojure -M:nrepl
   ;; Clojure Sublimed can not talk to nrepl > "1.5.2".
-  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}}
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0"}}
           :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; clolure -X:plus
@@ -39,7 +39,7 @@
 
   :run-m {:main-opts ["-m" "hkimjp.jpy.main"]}
 
-  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.13"}}
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.14"}}
           :ns-default build}
 
   :test {:extra-paths ["test"]
