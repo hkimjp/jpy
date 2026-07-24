@@ -37,9 +37,6 @@
         f (create-tempfile-with (str answer "\n"))
         ret (timeout-sh
              timeout
-             ;; 0.13.*
-             ;; (ruff-path "format" "--diff" (str (fs/file f)))
-             ;; 0.14.7
              ruff-path "-q" "format" "--check" (str (fs/file f)))]
     (t/log! :debug (str "ruff result: " ret))
     (if-not (zero? (:exit ret))
