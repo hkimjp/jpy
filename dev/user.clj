@@ -11,8 +11,9 @@
 
 ;--------------------------
 (tel/set-min-level! :debug)
-; FIXME: can not allow
-(tel/set-ns-filter! {:allow "hkimjp.jpy.*"})
+
+; FIXME: how to set filter?
+; (tel/set-ns-filter! {:disallow "hkimjp.datascript.*" :allow "*"})
 
 (restart-system)
 
@@ -22,21 +23,23 @@
 ; clj-reload
 ; hooks do not work?
 (defn before-ns-unload []
-  (println "called before-ns-unload"))
+  (tel/log! :debug "called before-ns-unload"))
+
+(before-ns-unload)
 
 (defn after-ns-reload []
-  (println "called after-ns-reload"))
+  (tel/log! :debug "called after-ns-reload"))
 
 (reload/init
  {:output :verbose
   :dirs ["src" "test"]
   :no-reload '#{user}})
 
-(defn reload []
+(defn reload! []
   (stop-system)
   (reload/reload)
   (start-system))
 
-; (reload)
+; (reload!)
 
 ;-------------------

@@ -9,7 +9,7 @@
 * validation - ruff? doctest?
 
 
-## 0.13.0-SNAPSHOT
+## 0.13.0-SNAPSHOT (2026-07-24)
 
 - changed - the url of l22 (l22.home)
 - updated libraries

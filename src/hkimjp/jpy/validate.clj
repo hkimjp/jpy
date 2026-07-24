@@ -42,7 +42,7 @@
              ;; 0.14.7
              ruff-path "-q" "format" "--check" (str (fs/file f)))]
     (t/log! :debug (str "ruff result: " ret))
-    (if (zero? (:exit ret))
+    (if-not (zero? (:exit ret))
       (fs/delete f)
       (throw (Exception. "using VScode/Ruff?")))))
 

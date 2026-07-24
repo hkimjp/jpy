@@ -51,7 +51,8 @@
       (in-time?)
       (when (str/starts-with? answer "def")
         (tel/log! :debug "validation started")
-        (validate login answer "" nil))
+        ;(validate login answer "" nil)
+        (validate login answer))
       (ds/put! {:login login
                 :p/id id
                 :answer answer
