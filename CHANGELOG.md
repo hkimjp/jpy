@@ -8,6 +8,20 @@
 * edit problems
 * validation - ruff? doctest?
 
+- updated libaries
+
+| :file    | :name                          | :current | :latest |
+|----------|--------------------------------|----------|---------|
+| deps.edn | babashka/fs                    | 0.5.32   | 0.5.33  |
+|          | io.github.clojure/tools.build  | 0.10.13  | 0.10.14 |
+|          | io.github.hkimjp/carmine-farm  | 0.4.0    | 0.5.1   |
+|          | io.github.nextjournal/markdown | 0.7.196  | 0.7.225 |
+|          | nrepl/nrepl                    | 1.5.2    | 1.7.0   |
+|          | org.clojure/clojure            | 1.12.4   | 1.12.5  |
+
+## 0.12.2 (2026-04-28)
+
+- sort scoreboard score by `db/id`.
 
 ## 0.12.1
 
