@@ -31,8 +31,8 @@
 
 (defn start-system []
   (tel/log! {:level :info
-             :id "start-system"
-             :msg (env :develop)
+             :id :start-system
+             :msg (str "env " (env :develop))
              :data {:datascript (env :datascript)}})
   (try
     (c/create-conn "redis://redis")

@@ -11,6 +11,7 @@
 
 ## 0.13.0-SNAPSHOT
 
+- changed - the url of l22 (l22.home)
 - updated libraries
 
 | :file    | :name                                        | :current | :latest |

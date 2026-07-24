@@ -15,7 +15,7 @@ plus:
     clj -X:dev:plus
 
 nrepl:
-    clj -M:dev:nrepl -i
+    clj -M:dev:nrepl
 
 dev:
     just watch 2> /dev/null &
