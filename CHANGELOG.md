@@ -8,7 +8,21 @@
 * edit problems
 * validation - ruff? doctest?
 
-- updated libaries
+
+## 0.13.0-SNAPSHOT
+
+- updated libraries
+
+| :file    | :name                                        | :current | :latest |
+|----------|----------------------------------------------|----------|---------|
+| deps.edn | babashka/fs                                  | 0.5.33   | 0.5.34  |
+|          | com.cnuernber/charred                        | 1.038    | 1.041   |
+|          | io.github.hkimjp/datascript-storage-javatime | 0.7.9    | 0.7.10  |
+|          | ring/ring-core                               | 1.15.4   | 1.15.5  |
+|          | ring/ring-defaults                           | 0.7.0    | 0.7.1   |
+|          | ring/ring-devel                              | 1.15.4   | 1.15.5  |
+
+- updated libraries
 
 | :file    | :name                          | :current | :latest |
 |----------|--------------------------------|----------|---------|
