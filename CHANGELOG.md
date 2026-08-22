@@ -9,7 +9,16 @@
 * validation - ruff? doctest?
 
 
-## 0.13.0-SNAPSHOT (2026-07-24)
+## 0.13.0-SNAPSHOT
+
+- updated libraries
+
+| :file    | :name                         | :current    | :latest     |
+|----------|-------------------------------|-------------|-------------|
+| deps.edn | com.cnuernber/charred         | 1.041       | 1.042       |
+|          | com.taoensso/telemere         | 1.2.1       | 1.4.0       |
+|          | http-kit/http-kit             | 2.9.0-beta3 | 2.9.0-beta4 |
+|          | io.github.hkimjp/carmine-farm | 0.5.1       | 0.5.114     |
 
 - changed - the url of l22 (l22.home)
 - updated libraries
